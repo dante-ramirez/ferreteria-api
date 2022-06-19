@@ -11,8 +11,8 @@ export class UnsupportedDatabaseDriver extends DatabaseError {
 }
 
 export class ItemNotFound extends DatabaseError {
-  constructor(missinngThing:string) {
-    super(`${missinngThing} was/were not found in database`);
+  constructor(missingThing:string) {
+    super(`${missingThing} was/were not found in database`);
   }
 }
 

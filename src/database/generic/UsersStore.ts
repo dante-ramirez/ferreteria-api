@@ -22,11 +22,11 @@ export default class UsersStore extends BaseStore {
   }
 
   async create(_user: User): Promise<User> { return this.user; }
-  // async getByID(_id: number): Promise<User> { return this.user; }
+  async getByID(_id: number): Promise<User> { return this.user; }
+  async getByEmail(_email: string): Promise<User> { return this.user; }
   // async get(_filters: _Filters, _pagination: _Pagina
   // tion): Promise<User[]> { return [this.user]; }
   // async delete(_id: number): Promise<boolean> { return true; }
-  // async update(_user: User): Promise<User> { return this.user; }
-  // async getByEmail(_email: string): Promise<User> { return this.user; }
+  async update(_user: User): Promise<User> { return this.user; }
   // async verifyById(_id: number): Promise<User> { return this.user; }
 }
