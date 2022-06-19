@@ -1,20 +1,20 @@
 import User from '../../entities/User';
 // import UserPack from '../../entities/UserPack';
-// import { ItemAlreadyExist, ItemNotFound } from '../errors';
+import { ItemAlreadyExist, ItemNotFound } from '../errors';
 // import UsersPacksStore from './UsersPacksStore';
 import UsersStore from '../generic/UsersStore';
 import {
   Pagination as _Pagination
   // UsersFilter as _Filters
 } from '../interfaces';
-// import {
-//   SQLDatabaseError,
-//   MissingField,
-//   InvalidDataType,
-//   NULL_VALUE_ERROR,
-//   INVALID_INPUT_SYNTAX_CODE,
-//   DUPLICATED_KEY_ERROR
-// } from './errors';
+import {
+  SQLDatabaseError,
+  MissingField,
+  InvalidDataType,
+  NULL_VALUE_ERROR,
+  INVALID_INPUT_SYNTAX_CODE,
+  DUPLICATED_KEY_ERROR
+} from './errors';
 
 export default class SQLUsersStore extends UsersStore {
   // constructor(connection: any, table: string) {
@@ -37,91 +37,88 @@ export default class SQLUsersStore extends UsersStore {
 
       return this.softFormatUser(newUser);
     } catch (error) {
-      // if ((error as any).code === NULL_VALUE_ERROR) {
-      //   throw new MissingField((error as any).column, this.table);
-      // }
+      if ((error as any).code === NULL_VALUE_ERROR) {
+        throw new MissingField((error as any).column, this.table);
+      }
 
-      // if ((error as any).code === INVALID_INPUT_SYNTAX_CODE) {
-      //   throw new InvalidDataType(error);
-      // }
+      if ((error as any).code === INVALID_INPUT_SYNTAX_CODE) {
+        throw new InvalidDataType(error);
+      }
 
-      // if ((error as any).code === DUPLICATED_KEY_ERROR) {
-      //   throw new ItemAlreadyExist(user);
-      // }
-      // throw new SQLDatabaseError(error);
-      throw error;
+      if ((error as any).code === DUPLICATED_KEY_ERROR) {
+        throw new ItemAlreadyExist(user);
+      }
+      throw new SQLDatabaseError(error);
     }
   }
 
-  // async update(user: User): Promise<User> {
-  //   try {
-  //     const timestamp = new Date();
-  //     const [userUpdate] = await this.connection(this.table)
-  //       .where('id', user.id)
-  //       .update({
-  //         name: user.name,
-  //         last_name: user.lastName,
-  //         email: user.email,
-  //         phone: user.phone,
-  //         password: user.password,
-  //         mercado_pago_id: user.mercadoPagoId,
-  //         updated_at: timestamp
-  //       })
-  //       .returning('*');
+  async update(user: User): Promise<User> {
+    try {
+      const timestamp = new Date();
+      const [userUpdate] = await this.connection(this.table)
+        .where('id', user.id)
+        .update({
+          name: user.name,
+          last_name: user.lastName,
+          email: user.email,
+          password: user.password,
+          updated_at: timestamp
+        })
+        .returning('*');
 
-  //     return this.formatUser(userUpdate);
-  //   } catch (error) {
-  //     if ((error as any).code === NULL_VALUE_ERROR) {
-  //       throw new MissingField((error as any).column, this.table);
-  //     }
+      return this.softFormatUser(userUpdate);
+    } catch (error) {
+      if ((error as any).code === NULL_VALUE_ERROR) {
+        throw new MissingField((error as any).column, this.table);
+      }
 
-  //     if ((error as any).code === INVALID_INPUT_SYNTAX_CODE) {
-  //       throw new InvalidDataType(error);
-  //     }
+      if ((error as any).code === INVALID_INPUT_SYNTAX_CODE) {
+        throw new InvalidDataType(error);
+      }
 
-  //     throw new SQLDatabaseError(error);
-  //   }
-  // }
+      throw new SQLDatabaseError(error);
+    }
+  }
 
-  // async getByID(id: number): Promise<User> {
-  //   let user: any;
+  async getByID(id: number): Promise<User> {
+    let user: any;
 
-  //   try {
-  //     [user] = await this.connection(this.table)
-  //       .select('*')
-  //       .where('id', id);
-  //   } catch (error) {
-  //     if ((error as any).code === INVALID_INPUT_SYNTAX_CODE) {
-  //       throw new ItemNotFound(`user with id ${id} `);
-  //     }
+    try {
+      [user] = await this.connection(this.table)
+        .select('*')
+        .where('id', id);
+    } catch (error) {
+      if ((error as any).code === INVALID_INPUT_SYNTAX_CODE) {
+        throw new ItemNotFound(`user with id ${id} `);
+      }
 
-  //     throw new SQLDatabaseError(error);
-  //   }
+      throw new SQLDatabaseError(error);
+    }
 
-  //   if (!user) {
-  //     throw new ItemNotFound(`user with id ${id} `);
-  //   }
+    if (!user) {
+      throw new ItemNotFound(`user with id ${id} `);
+    }
 
-  //   return this.formatUser(user);
-  // }
+    return this.softFormatUser(user);
+  }
 
-  // async getByEmail(email: string): Promise<User> {
-  //   let user: any;
+  async getByEmail(email: string): Promise<User> {
+    let user: any;
 
-  //   try {
-  //     [user] = await this.connection(this.table)
-  //       .select('*')
-  //       .where('email', email);
-  //   } catch (error) {
-  //     throw new SQLDatabaseError(error);
-  //   }
+    try {
+      [user] = await this.connection(this.table)
+        .select('*')
+        .where('email', email);
+    } catch (error) {
+      throw new SQLDatabaseError(error);
+    }
 
-  //   if (!user) {
-  //     throw new ItemNotFound(`user with email ${email}`);
-  //   }
+    if (!user) {
+      throw new ItemNotFound(`user with email ${email}`);
+    }
 
-  //   return this.formatUser(user);
-  // }
+    return this.softFormatUser(user);
+  }
 
   // async get(filters: _Filters, pagination: _Pagination): Promise<User[]> {
   //   let users: any[] = [];

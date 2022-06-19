@@ -1,8 +1,8 @@
 import schemaValidator from '../../../../middlewares/jsonSchemaValidator';
-// import authorization from '../../../../middlewares/authorization';
+import authorization from '../../../../middlewares/authorization';
 
-import createUser from './createUser';
-// import update from './update';
+import createUser from './create';
+import update from './update';
 // import updatePassword from './updatePassword';
 // import restorePassword from './restorePassword';
 // import verifyAccount from './verifyAccount';
@@ -13,7 +13,7 @@ import createUser from './createUser';
 // import deleteCard from './deleteCard';
 
 import createUserSchema from '../../schemas/public/users/create';
-// import updateSchema from '../../schemas/public/users/update';
+import updateSchema from '../../schemas/public/users/update';
 // import updatePasswordSchema from '../../schemas/public/users/updatePassword';
 
 const express = require('express');
@@ -38,12 +38,12 @@ usersRouter.post(
 //   updatePassword
 // );
 
-// usersRouter.put(
-//   '/',
-//   authorization(['client']),
-//   schemaValidator(updateSchema),
-//   update
-// );
+usersRouter.put(
+  '/',
+  authorization(['client']),
+  schemaValidator(updateSchema),
+  update
+);
 
 // usersRouter.get(
 //   '/account/verified',

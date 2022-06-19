@@ -2,10 +2,10 @@ import _Request from '../../../../definitions/request';
 import { ItemAlreadyExist } from '../../../../database/errors';
 import User from '../../../../entities/User';
 // import UserPack from '../../../../entities/UserPack';
-// import passwordHelper from '../../../../helpers/passwords';
+import passwordHelper from '../../../../helpers/passwords';
 // import mailingService from '../../../../mailing-service';
 // import jwt from '../../../../entities/jwt';
-// import logger from '../../../../helpers/logger';
+import logger from '../../../../helpers/logger';
 
 export default async function (req: _Request, res: any) {
   const {
@@ -24,8 +24,7 @@ export default async function (req: _Request, res: any) {
     name,
     lastName,
     email.toLowerCase(),
-    password,
-    // passwordHelper.hash(password),
+    passwordHelper.hash(password),
     'client',
     false,
     false
@@ -54,9 +53,8 @@ export default async function (req: _Request, res: any) {
       statusCode = 400;
       errorCode = 'USER_ALREADY_EXIST';
     }
-    // eslint-disable-next-line no-console
-    console.log(error);
-    // logger.log(error);
+
+    logger.log(error);
     return res.status(statusCode).send({ code: errorCode });
   }
 
