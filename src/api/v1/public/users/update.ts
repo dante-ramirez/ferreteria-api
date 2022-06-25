@@ -2,6 +2,7 @@ import { ItemNotFound } from '../../../../database/errors';
 import _User from '../../../../entities/User';
 import _Request from '../../../../definitions/request';
 import logger from '../../../../helpers/logger';
+import passwordHelper from '../../../../helpers/passwords';
 
 export default async function (req:_Request, res:any) {
   const {
@@ -12,7 +13,7 @@ export default async function (req:_Request, res:any) {
   const {
     name,
     lastName,
-    email
+    password
   } = body;
 
   let userToUpdate: _User;
@@ -22,7 +23,7 @@ export default async function (req:_Request, res:any) {
 
     userToUpdate.name = name;
     userToUpdate.lastName = lastName;
-    userToUpdate.email = email.toLowerCase();
+    userToUpdate.password = passwordHelper.hash(password);
 
     await database.users.update(userToUpdate);
   } catch (error) {

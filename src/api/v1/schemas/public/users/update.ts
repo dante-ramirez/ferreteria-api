@@ -1,6 +1,6 @@
 export default {
   type: 'object',
-  required: ['name', 'lastName', 'email'],
+  required: ['name', 'lastName', 'password'],
   properties: {
     name: {
       type: 'string',
@@ -10,7 +10,7 @@ export default {
       type: 'string',
       minLength: 1
     },
-    email: {
+    password: {
       type: 'string',
       minLength: 1
     }
