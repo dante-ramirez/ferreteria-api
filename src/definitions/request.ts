@@ -1,7 +1,7 @@
 /* eslint-disable semi */
 /* eslint-disable no-extra-semi */
 import _usersStore from '../database/generic/UsersStore';
-import _departmentsStore from '../database/generic/Department';
+import _departmentsStore from '../database/generic/DepartmentsStore';
 // import _productsStore from '../database/generic/ProductsStore';
 // import _packsStore from '../database/generic/PacksStore';
 import { userRole as _userRole } from '../entities/User';

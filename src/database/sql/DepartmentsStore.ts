@@ -1,6 +1,6 @@
 import Department from '../../entities/departments';
 import { ItemAlreadyExist, ItemNotFound } from '../errors';
-import Departments from '../generic/Department';
+import DepartmentsStore from '../generic/DepartmentsStore';
 import {
   Pagination as _Pagination
   // UsersFilter as _Filters
@@ -14,7 +14,7 @@ import {
   DUPLICATED_KEY_ERROR
 } from './errors';
 
-export default class SQLDepartmentsStore extends Departments {
+export default class SQLDepartmentsStore extends DepartmentsStore {
   // constructor(connection: any, table: string) {
   //   super(connection, table);
   //   // this.packs = new UsersPacksStore(connection, 'users_packs');

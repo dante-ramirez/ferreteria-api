@@ -1,15 +1,15 @@
 import UsersStore from './UsersStore';
-// import ProductsStore from './ProductsStore';
+import DepartmentsStore from './DepartmentsStore';
 // import PacksStore from './PacksStore';
 
 class SQLDatabase {
   public users: UsersStore;
-  // public products: ProductsStore;
+  public departments: DepartmentsStore;
   // public packs: PacksStore;
 
   constructor(connection: any) {
     this.users = new UsersStore(connection, 'users');
-    // this.products = new ProductsStore(connection, 'products');
+    this.departments = new DepartmentsStore(connection, 'department');
     // this.packs = new PacksStore(connection, 'packs');
   }
 }

@@ -5,7 +5,7 @@ import {
   // UsersFilter as _Filters
 } from '../interfaces';
 
-export default class Departments extends BaseStore {
+export default class DepartmentsStore extends BaseStore {
   protected connection: any;
   private department: Department;
 
