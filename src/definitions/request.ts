@@ -1,13 +1,16 @@
 /* eslint-disable semi */
 /* eslint-disable no-extra-semi */
 import _usersStore from '../database/generic/UsersStore';
+import _departmentsStore from '../database/generic/Department';
 // import _productsStore from '../database/generic/ProductsStore';
 // import _packsStore from '../database/generic/PacksStore';
 import { userRole as _userRole } from '../entities/User';
+// import { departmentRole as _departmentRole } from '../entities/departments';
 
 export default interface Request {
   database: {
-    users: _usersStore
+    users: _usersStore,
+    departments: _departmentsStore
     // products: _productsStore
     // packs: _packsStore
   },
