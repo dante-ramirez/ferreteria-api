@@ -1,15 +1,22 @@
 import UsersStore from './UsersStore';
-// import ProductsStore from './ProductsStore';
+import DepartmentsStore from './DepartmentsStore';
+import CategoriesStore from './CategoriesStore';
+import BrandsStore from './BrandsStore';
 // import PacksStore from './PacksStore';
 
 class SQLDatabase {
   public users: UsersStore;
-  // public products: ProductsStore;
+  public departments: DepartmentsStore;
+  public categories: CategoriesStore;
+  public brands: BrandsStore;
+
   // public packs: PacksStore;
 
   constructor(connection: any) {
     this.users = new UsersStore(connection, 'users');
-    // this.products = new ProductsStore(connection, 'products');
+    this.departments = new DepartmentsStore(connection, 'department');
+    this.categories = new CategoriesStore(connection, 'category');
+    this.brands = new BrandsStore(connection, 'brand');
     // this.packs = new PacksStore(connection, 'packs');
   }
 }

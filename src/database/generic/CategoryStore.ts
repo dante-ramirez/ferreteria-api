@@ -1,0 +1,21 @@
+import BaseStore from './BaseStore';
+import Category from '../../entities/categories';
+import {
+  Pagination as _Pagination
+  // UsersFilter as _Filters
+} from '../interfaces';
+
+export default class CategoriesStore extends BaseStore {
+  protected connection: any;
+  private category: Category;
+
+  constructor(connection: any, table: string) {
+    super(connection, table);
+    this.category = new Category(0, '', 0);
+  }
+
+  async create(_department: Category): Promise<Category> { return this.category; }
+  async getByID(_id: number): Promise<Category> { return this.category; }
+  async getByName(_name: string): Promise<Category> { return this.category; }
+  async update(_department: Category): Promise<Category> { return this.category; }
+}
