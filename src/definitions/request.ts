@@ -5,8 +5,6 @@ import _departmentsStore from '../database/generic/DepartmentsStore';
 import _categoriesStore from '../database/generic/CategoryStore';
 import _brandsStore from '../database/generic/BrandStore';
 
-// import _productsStore from '../database/generic/ProductsStore';
-// import _packsStore from '../database/generic/PacksStore';
 import { userRole as _userRole } from '../entities/User';
 // import { departmentRole as _departmentRole } from '../entities/departments';
 

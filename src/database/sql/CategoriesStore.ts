@@ -1,4 +1,4 @@
-import Category from '../../entities/categories';
+import Category from '../../entities/Category';
 import { ItemAlreadyExist, ItemNotFound } from '../errors';
 import CategoriesStore from '../generic/CategoryStore';
 import {

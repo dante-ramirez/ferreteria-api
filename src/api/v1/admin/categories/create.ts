@@ -1,6 +1,6 @@
 import _Request from '../../../../definitions/request';
 import { ItemAlreadyExist } from '../../../../database/errors';
-import Category from '../../../../entities/categories';
+import Category from '../../../../entities/Category';
 import logger from '../../../../helpers/logger';
 
 export default async function (req: _Request, res: any) {

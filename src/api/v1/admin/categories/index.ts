@@ -13,13 +13,14 @@ const categoryRouter = express.Router();
 
 categoryRouter.post(
   '/',
+  authorization(['administrator']),
   schemaValidator(createCategorySchema),
   createCategory
 );
 
 categoryRouter.put(
   '/:id',
-  authorization(['client']),
+  authorization(['administrator']),
   schemaValidator(updateSchema),
   update
 );

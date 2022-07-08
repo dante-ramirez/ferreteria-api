@@ -1,5 +1,5 @@
 import BaseStore from './BaseStore';
-import Department from '../../entities/departments';
+import Department from '../../entities/Department';
 import {
   Pagination as _Pagination
   // UsersFilter as _Filters

@@ -3,7 +3,7 @@ import knexfile from '../../knexfile';
 import SQLDatabase from './sql/database';
 
 export default class DatabaseFactory {
-  async getDatbase() {
+  async getDatabase() {
     return new SQLDatabase(Knex(knexfile));
   }
 }

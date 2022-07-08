@@ -16,7 +16,7 @@ export default async function () {
   let database;
 
   try {
-    database = await new DatabaseFactory().getDatbase();
+    database = await new DatabaseFactory().getDatabase();
   } catch (error) {
     throw error;
   }

@@ -1,6 +1,6 @@
 import _Request from '../../../../definitions/request';
 import { ItemAlreadyExist } from '../../../../database/errors';
-import Brand from '../../../../entities/brands';
+import Brand from '../../../../entities/Brand';
 import logger from '../../../../helpers/logger';
 
 export default async function (req: _Request, res: any) {

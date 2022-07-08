@@ -1,7 +1,3 @@
-// import _UserPack from './UserPack';
-
-export type userRole = 'administrator' | 'client';
-
 export default class Department {
   id: number;
   name: string;

@@ -1,5 +1,5 @@
 import { ItemNotFound } from '../../../../database/errors';
-import _Department from '../../../../entities/departments';
+import _Department from '../../../../entities/Department';
 import _Request from '../../../../definitions/request';
 import logger from '../../../../helpers/logger';
 
@@ -14,6 +14,7 @@ export default async function (req:_Request, res:any) {
     discount
   } = body;
   const { id } = params;
+
   let departmentToUpdate: _Department;
 
   try {

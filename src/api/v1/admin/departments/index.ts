@@ -13,13 +13,14 @@ const departmentRouter = express.Router();
 
 departmentRouter.post(
   '/',
+  authorization(['administrator']),
   schemaValidator(createDepartmentSchema),
   createDepartment
 );
 
 departmentRouter.put(
   '/:id',
-  authorization(['client']),
+  authorization(['administrator']),
   schemaValidator(updateSchema),
   update
 );

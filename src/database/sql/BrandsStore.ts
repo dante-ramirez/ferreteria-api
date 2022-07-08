@@ -1,4 +1,4 @@
-import Brand from '../../entities/brands';
+import Brand from '../../entities/Brand';
 import { ItemAlreadyExist, ItemNotFound } from '../errors';
 import BrandsStore from '../generic/BrandStore';
 import {
