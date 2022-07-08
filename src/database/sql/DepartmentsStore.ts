@@ -1,4 +1,4 @@
-import Department from '../../entities/departments';
+import Department from '../../entities/Department';
 import { ItemAlreadyExist, ItemNotFound } from '../errors';
 import DepartmentsStore from '../generic/DepartmentsStore';
 import {

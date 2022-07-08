@@ -1,5 +1,5 @@
 import { ItemNotFound } from '../../../../database/errors';
-import _Category from '../../../../entities/categories';
+import _Category from '../../../../entities/Category';
 import _Request from '../../../../definitions/request';
 import logger from '../../../../helpers/logger';
 
@@ -14,6 +14,7 @@ export default async function (req:_Request, res:any) {
     discount
   } = body;
   const { id } = params;
+
   let categoryToUpdate: _Category;
 
   try {

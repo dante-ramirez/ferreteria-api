@@ -1,6 +1,6 @@
 import _Request from '../../../../definitions/request';
 import { ItemAlreadyExist } from '../../../../database/errors';
-import Department from '../../../../entities/departments';
+import Department from '../../../../entities/Department';
 import logger from '../../../../helpers/logger';
 
 export default async function (req: _Request, res: any) {
@@ -27,7 +27,7 @@ export default async function (req: _Request, res: any) {
 
     if (error instanceof ItemAlreadyExist) {
       statusCode = 400;
-      errorCode = 'USER_ALREADY_EXIST';
+      errorCode = 'DEPARTMENT_ALREADY_EXIST';
     }
 
     logger.log(error);

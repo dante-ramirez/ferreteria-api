@@ -4,7 +4,7 @@ export class SQLDatabaseError extends DatabaseError {}
 export class InvalidDataType extends SQLDatabaseError {}
 export class MissingField extends SQLDatabaseError {
   constructor(columnError: string, table: string) {
-    super(`Error triying to insert on table ${table} on column ${columnError}`);
+    super(`Error trying to insert on table ${table} on column ${columnError}`);
   }
 }
 

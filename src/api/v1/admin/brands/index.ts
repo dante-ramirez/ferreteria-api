@@ -13,13 +13,14 @@ const brandRouter = express.Router();
 
 brandRouter.post(
   '/',
+  authorization(['administrator']),
   schemaValidator(createBrandSchema),
   createCategory
 );
 
 brandRouter.put(
   '/:id',
-  authorization(['client']),
+  authorization(['administrator']),
   schemaValidator(updateSchema),
   update
 );
