@@ -14,8 +14,8 @@ export default class CategoriesStore extends BaseStore {
     this.category = new Category(0, '', 0);
   }
 
-  async create(_department: Category): Promise<Category> { return this.category; }
+  async create(_category: Category): Promise<Category> { return this.category; }
   async getByID(_id: number): Promise<Category> { return this.category; }
   async getByName(_name: string): Promise<Category> { return this.category; }
-  async update(_department: Category): Promise<Category> { return this.category; }
+  async update(_category: Category): Promise<Category> { return this.category; }
 }

@@ -1,6 +1,6 @@
 import Brand from '../../entities/Brand';
 import { ItemAlreadyExist, ItemNotFound } from '../errors';
-import BrandsStore from '../generic/BrandStore';
+import BrandsStore from '../generic/BrandsStore';
 import {
   Pagination as _Pagination
   // UsersFilter as _Filters

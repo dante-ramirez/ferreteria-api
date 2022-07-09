@@ -2,8 +2,9 @@
 /* eslint-disable no-extra-semi */
 import _usersStore from '../database/generic/UsersStore';
 import _departmentsStore from '../database/generic/DepartmentsStore';
-import _categoriesStore from '../database/generic/CategoryStore';
-import _brandsStore from '../database/generic/BrandStore';
+import _categoriesStore from '../database/generic/CategoriesStore';
+import _brandsStore from '../database/generic/BrandsStore';
+import _walletsStore from '../database/generic/WalletsStore';
 
 import { userRole as _userRole } from '../entities/User';
 // import { departmentRole as _departmentRole } from '../entities/departments';
@@ -14,7 +15,7 @@ export default interface Request {
     departments: _departmentsStore,
     categories: _categoriesStore,
     brands: _brandsStore
-    // products: _productsStore
+    wallet: _walletsStore
     // packs: _packsStore
   },
   user: {

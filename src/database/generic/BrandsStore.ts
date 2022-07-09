@@ -14,8 +14,8 @@ export default class BrandsStore extends BaseStore {
     this.brand = new Brand(0, '', 0);
   }
 
-  async create(_department: Brand): Promise<Brand> { return this.brand; }
+  async create(_brand: Brand): Promise<Brand> { return this.brand; }
   async getByID(_id: number): Promise<Brand> { return this.brand; }
   async getByName(_name: string): Promise<Brand> { return this.brand; }
-  async update(_department: Brand): Promise<Brand> { return this.brand; }
+  async update(_brand: Brand): Promise<Brand> { return this.brand; }
 }
