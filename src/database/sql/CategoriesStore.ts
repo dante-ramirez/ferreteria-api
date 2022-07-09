@@ -1,6 +1,6 @@
 import Category from '../../entities/Category';
 import { ItemAlreadyExist, ItemNotFound } from '../errors';
-import CategoriesStore from '../generic/CategoryStore';
+import CategoriesStore from '../generic/CategoriesStore';
 import {
   Pagination as _Pagination
   // UsersFilter as _Filters

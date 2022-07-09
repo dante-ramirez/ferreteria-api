@@ -8,7 +8,7 @@ export default {
     },
     discount: {
       type: 'number',
-      minLength: 1
+      minimum: 0
     }
   }
 };
