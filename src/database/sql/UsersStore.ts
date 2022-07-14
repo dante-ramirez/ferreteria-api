@@ -4,8 +4,8 @@ import { ItemAlreadyExist, ItemNotFound } from '../errors';
 // import UsersPacksStore from './UsersPacksStore';
 import UsersStore from '../generic/UsersStore';
 import {
-  Pagination as _Pagination
-  // UsersFilter as _Filters
+  Pagination as _Pagination,
+  UsersFilter as _Filters
 } from '../interfaces';
 import {
   SQLDatabaseError,
@@ -55,7 +55,7 @@ export default class SQLUsersStore extends UsersStore {
   async update(user: User): Promise<User> {
     try {
       const timestamp = new Date();
-      const [userUpdate] = await this.connection(this.table)
+      const [userUpdated] = await this.connection(this.table)
         .where('id', user.id)
         .update({
           name: user.name,
@@ -66,7 +66,7 @@ export default class SQLUsersStore extends UsersStore {
         })
         .returning('*');
 
-      return this.softFormatUser(userUpdate);
+      return this.softFormatUser(userUpdated);
     } catch (error) {
       if ((error as any).code === NULL_VALUE_ERROR) {
         throw new MissingField((error as any).column, this.table);
@@ -120,25 +120,50 @@ export default class SQLUsersStore extends UsersStore {
     return this.softFormatUser(user);
   }
 
-  // async get(filters: _Filters, pagination: _Pagination): Promise<User[]> {
-  //   let users: any[] = [];
-  //   let query = this.connection(this.table).select('*');
+  async get(filters: _Filters, pagination: _Pagination): Promise<User[]> {
+    let users: any[] = [];
+    let query = this.connection(this.table).select('*');
 
-  //   query = this.applyFilters(query, filters);
-  //   query = this.applyPagination(query, pagination);
+    query = this.applyFilters(query, filters);
+    query = this.applyPagination(query, pagination);
 
-  //   try {
-  //     users = await query;
-  //   } catch (error) {
-  //     throw new SQLDatabaseError(error);
-  //   }
+    try {
+      users = await query;
+    } catch (error) {
+      throw new SQLDatabaseError(error);
+    }
 
-  //   if (!users.length) {
-  //     throw new ItemNotFound(this.table);
-  //   }
+    if (!users.length) {
+      throw new ItemNotFound(this.table);
+    }
 
-  //   return users.map((user: any) => this.softFormatUser(user));
-  // }
+    return users.map((user: any) => this.softFormatUser(user));
+  }
+
+  async suspend(id: number): Promise<User> {
+    try {
+      const timestamp = new Date();
+      const [user] = await this.connection(this.table)
+        .where('id', id)
+        .update({
+          suspended: true,
+          updated_at: timestamp
+        })
+        .returning('*');
+
+      return this.softFormatUser(user);
+    } catch (error) {
+      if ((error as any).code === NULL_VALUE_ERROR) {
+        throw new MissingField((error as any).column, this.table);
+      }
+
+      if ((error as any).code === INVALID_INPUT_SYNTAX_CODE) {
+        throw new InvalidDataType(error);
+      }
+
+      throw new SQLDatabaseError(error);
+    }
+  }
 
   // async delete(id: number): Promise<boolean> {
   //   try {

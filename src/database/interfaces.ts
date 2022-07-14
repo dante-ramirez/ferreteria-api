@@ -1,4 +1,4 @@
-interface _Filter {
+interface Filter {
   value: any,
   type: 'like' | 'match'
 }
@@ -8,10 +8,10 @@ export interface Pagination {
   offset: number
 }
 
-// export interface UsersFilter {
-//   name: Filter,
-//   lastName: Filter
-// }
+export interface UsersFilter {
+  name: Filter,
+  lastName: Filter
+}
 
 // export interface ProductsFilter {
 //   description: Filter,

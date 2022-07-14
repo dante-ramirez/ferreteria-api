@@ -1,7 +1,7 @@
 import schemaValidator from '../../../../middlewares/jsonSchemaValidator';
 import authorization from '../../../../middlewares/authorization';
 
-import createCategory from './create';
+import create from './create';
 import update from './update';
 
 import createCategorySchema from '../../schemas/admin/categories/create';
@@ -9,20 +9,20 @@ import updateSchema from '../../schemas/admin/categories/update';
 
 const express = require('express');
 
-const categoryRouter = express.Router();
+const categoriesRouter = express.Router();
 
-categoryRouter.post(
+categoriesRouter.post(
   '/',
   authorization(['administrator']),
   schemaValidator(createCategorySchema),
-  createCategory
+  create
 );
 
-categoryRouter.put(
+categoriesRouter.put(
   '/:id',
   authorization(['administrator']),
   schemaValidator(updateSchema),
   update
 );
 
-export default categoryRouter;
+export default categoriesRouter;

@@ -1,7 +1,7 @@
 import schemaValidator from '../../../../middlewares/jsonSchemaValidator';
 import authorization from '../../../../middlewares/authorization';
 
-import createUser from './create';
+import create from './create';
 import update from './update';
 // import updatePassword from './updatePassword';
 // import restorePassword from './restorePassword';
@@ -23,7 +23,7 @@ const usersRouter = express.Router();
 usersRouter.post(
   '/',
   schemaValidator(createUserSchema),
-  createUser
+  create
 );
 
 // usersRouter.post(

@@ -112,6 +112,18 @@ export default class SQLDepartmentsStore extends BrandsStore {
     return this.softFormatBrand(brand);
   }
 
+  async delete(id: number): Promise<boolean> {
+    try {
+      await this.connection(this.table)
+        .where('id', id)
+        .del();
+
+      return true;
+    } catch (error) {
+      throw new SQLDatabaseError(error);
+    }
+  }
+
   private softFormatBrand(brand: any): Brand {
     return new Brand(
       Number(brand.id),

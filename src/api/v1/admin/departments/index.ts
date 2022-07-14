@@ -1,7 +1,7 @@
 import schemaValidator from '../../../../middlewares/jsonSchemaValidator';
 import authorization from '../../../../middlewares/authorization';
 
-import createDepartment from './create';
+import create from './create';
 import update from './update';
 
 import createDepartmentSchema from '../../schemas/admin/departments/create';
@@ -9,20 +9,20 @@ import updateSchema from '../../schemas/admin/departments/update';
 
 const express = require('express');
 
-const departmentRouter = express.Router();
+const departmentsRouter = express.Router();
 
-departmentRouter.post(
+departmentsRouter.post(
   '/',
   authorization(['administrator']),
   schemaValidator(createDepartmentSchema),
-  createDepartment
+  create
 );
 
-departmentRouter.put(
+departmentsRouter.put(
   '/:id',
   authorization(['administrator']),
   schemaValidator(updateSchema),
   update
 );
 
-export default departmentRouter;
+export default departmentsRouter;
