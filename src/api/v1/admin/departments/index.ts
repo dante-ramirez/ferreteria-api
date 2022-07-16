@@ -3,6 +3,9 @@ import authorization from '../../../../middlewares/authorization';
 
 import create from './create';
 import update from './update';
+import deleteDepartment from './delete';
+import getDepartment from './getDepartment';
+import getDepartments from './getDepartments';
 
 import createDepartmentSchema from '../../schemas/admin/departments/create';
 import updateSchema from '../../schemas/admin/departments/update';
@@ -23,6 +26,24 @@ departmentsRouter.put(
   authorization(['administrator']),
   schemaValidator(updateSchema),
   update
+);
+
+departmentsRouter.delete(
+  '/:departmentId',
+  authorization(['administrator']),
+  deleteDepartment
+);
+
+departmentsRouter.get(
+  '/:departmentId',
+  authorization(['administrator']),
+  getDepartment
+);
+
+departmentsRouter.get(
+  '/',
+  authorization(['administrator']),
+  getDepartments
 );
 
 export default departmentsRouter;

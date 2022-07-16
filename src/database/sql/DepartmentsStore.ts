@@ -2,8 +2,8 @@ import Department from '../../entities/Department';
 import { ItemAlreadyExist, ItemNotFound } from '../errors';
 import DepartmentsStore from '../generic/DepartmentsStore';
 import {
-  Pagination as _Pagination
-  // UsersFilter as _Filters
+  Pagination as _Pagination,
+  DepartmentsFilter as _Filters
 } from '../interfaces';
 import {
   SQLDatabaseError,
@@ -110,6 +110,37 @@ export default class SQLDepartmentsStore extends DepartmentsStore {
     }
 
     return this.softFormatDepartment(department);
+  }
+
+  async delete(id: number): Promise<boolean> {
+    try {
+      await this.connection(this.table)
+        .where('id', id)
+        .del();
+
+      return true;
+    } catch (error) {
+      throw new SQLDatabaseError(error);
+    }
+  }
+
+  async get(filters: _Filters, pagination: _Pagination): Promise<Department[]> {
+    let departments: any[] = [];
+    let query = this.connection(this.table).select('*');
+
+    query = this.applyFilters(query, filters);
+    query = this.applyPagination(query, pagination);
+
+    try {
+      departments = await query;
+    } catch (error) {
+      throw new SQLDatabaseError(error);
+    }
+
+    if (!departments.length) {
+      throw new ItemNotFound(this.table);
+    }
+    return departments.map((department: any) => this.softFormatDepartment(department));
   }
 
   private softFormatDepartment(department: any): Department {

@@ -1,8 +1,8 @@
 import BaseStore from './BaseStore';
 import Brand from '../../entities/Brand';
 import {
-  Pagination as _Pagination
-  // UsersFilter as _Filters
+  Pagination as _Pagination,
+  BrandsFilter as _Filters
 } from '../interfaces';
 
 export default class BrandsStore extends BaseStore {
@@ -19,4 +19,5 @@ export default class BrandsStore extends BaseStore {
   async getByName(_name: string): Promise<Brand> { return this.brand; }
   async update(_brand: Brand): Promise<Brand> { return this.brand; }
   async delete(_id: number): Promise<boolean> { return true; }
+  async get(_filters: _Filters, _pagination: _Pagination): Promise<Brand[]> { return [this.brand]; }
 }

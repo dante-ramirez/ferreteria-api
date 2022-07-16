@@ -8,18 +8,18 @@ export default async function (req:_Request, res:any) {
     params
   } = req;
   const {
-    brandId
+    categoryId
   } = params;
 
   try {
-    await database.brands.delete(Number(brandId));
+    await database.categories.delete(Number(categoryId));
   } catch (error) {
     let statusCode = 500;
     let errorCode = 'UNEXPECTED_ERROR';
 
     if (error instanceof ItemNotFound) {
       statusCode = 404;
-      errorCode = 'BRAND_WAS_NOT_FOUND';
+      errorCode = 'CATEGORY_WAS_NOT_FOUND';
     }
 
     logger.log(error);

@@ -2,8 +2,8 @@ import Brand from '../../entities/Brand';
 import { ItemAlreadyExist, ItemNotFound } from '../errors';
 import BrandsStore from '../generic/BrandsStore';
 import {
-  Pagination as _Pagination
-  // UsersFilter as _Filters
+  Pagination as _Pagination,
+  BrandsFilter as _Filters
 } from '../interfaces';
 import {
   SQLDatabaseError,
@@ -122,6 +122,26 @@ export default class SQLDepartmentsStore extends BrandsStore {
     } catch (error) {
       throw new SQLDatabaseError(error);
     }
+  }
+
+  async get(filters: _Filters, pagination: _Pagination): Promise<Brand[]> {
+    let brands: any[] = [];
+    let query = this.connection(this.table).select('*');
+
+    query = this.applyFilters(query, filters);
+    query = this.applyPagination(query, pagination);
+
+    try {
+      brands = await query;
+    } catch (error) {
+      throw new SQLDatabaseError(error);
+    }
+
+    if (!brands.length) {
+      throw new ItemNotFound(this.table);
+    }
+
+    return brands.map((brand: any) => this.softFormatBrand(brand));
   }
 
   private softFormatBrand(brand: any): Brand {
