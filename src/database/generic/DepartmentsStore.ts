@@ -1,8 +1,8 @@
 import BaseStore from './BaseStore';
 import Department from '../../entities/Department';
 import {
-  Pagination as _Pagination
-  // UsersFilter as _Filters
+  Pagination as _Pagination,
+  DepartmentsFilter as _Filters
 } from '../interfaces';
 
 export default class DepartmentsStore extends BaseStore {
@@ -18,4 +18,7 @@ export default class DepartmentsStore extends BaseStore {
   async getByID(_id: number): Promise<Department> { return this.department; }
   async getByName(_name: string): Promise<Department> { return this.department; }
   async update(_department: Department): Promise<Department> { return this.department; }
+  async delete(_id: number): Promise<boolean> { return true; }
+  // eslint-disable-next-line max-len
+  async get(_filters: _Filters, _pagination: _Pagination): Promise<Department[]> { return [this.department]; }
 }

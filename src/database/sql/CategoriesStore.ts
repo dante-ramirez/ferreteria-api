@@ -2,8 +2,8 @@ import Category from '../../entities/Category';
 import { ItemAlreadyExist, ItemNotFound } from '../errors';
 import CategoriesStore from '../generic/CategoriesStore';
 import {
-  Pagination as _Pagination
-  // UsersFilter as _Filters
+  Pagination as _Pagination,
+  CategoriesFilter as _Filters
 } from '../interfaces';
 import {
   SQLDatabaseError,
@@ -110,6 +110,37 @@ export default class SQLDepartmentsStore extends CategoriesStore {
     }
 
     return this.softFormatCategory(category);
+  }
+
+  async delete(id: number): Promise<boolean> {
+    try {
+      await this.connection(this.table)
+        .where('id', id)
+        .del();
+
+      return true;
+    } catch (error) {
+      throw new SQLDatabaseError(error);
+    }
+  }
+
+  async get(filters: _Filters, pagination: _Pagination): Promise<Category[]> {
+    let categories: any[] = [];
+    let query = this.connection(this.table).select('*');
+
+    query = this.applyFilters(query, filters);
+    query = this.applyPagination(query, pagination);
+
+    try {
+      categories = await query;
+    } catch (error) {
+      throw new SQLDatabaseError(error);
+    }
+
+    if (!categories.length) {
+      throw new ItemNotFound(this.table);
+    }
+    return categories.map((category: any) => this.softFormatCategory(category));
   }
 
   private softFormatCategory(category: any): Category {
