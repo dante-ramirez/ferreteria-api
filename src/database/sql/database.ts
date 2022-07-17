@@ -1,21 +1,15 @@
 import UsersStore from './UsersStore';
-import DepartmentsStore from './DepartmentsStore';
-import CategoriesStore from './CategoriesStore';
-import BrandsStore from './BrandsStore';
+import OffersStore from './OffersStore';
 import WalletsStore from './WalletsStore';
 
 class SQLDatabase {
   public users: UsersStore;
-  public departments: DepartmentsStore;
-  public categories: CategoriesStore;
-  public brands: BrandsStore;
+  public offers: OffersStore;
   public wallet: WalletsStore;
 
   constructor(connection: any) {
     this.users = new UsersStore(connection, 'users');
-    this.departments = new DepartmentsStore(connection, 'department');
-    this.categories = new CategoriesStore(connection, 'category');
-    this.brands = new BrandsStore(connection, 'brand');
+    this.offers = new OffersStore(connection, 'offers');
     this.wallet = new WalletsStore(connection, 'wallet');
   }
 }

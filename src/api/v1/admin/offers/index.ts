@@ -3,47 +3,47 @@ import authorization from '../../../../middlewares/authorization';
 
 import create from './create';
 import update from './update';
-import deleteBrand from './delete';
-import getBrand from './getBrand';
-import getBrands from './getBrands';
+import deleteOffer from './delete';
+import getOffer from './getOffer';
+import getOffers from './getOffers';
 
-import createBrandSchema from '../../schemas/admin/brands/create';
-import updateSchema from '../../schemas/admin/brands/update';
+import createOfferSchema from '../../schemas/admin/offers/create';
+import updateSchema from '../../schemas/admin/offers/update';
 
 const express = require('express');
 
-const brandsRouter = express.Router();
+const offersRouter = express.Router();
 
-brandsRouter.post(
+offersRouter.post(
   '/',
   authorization(['administrator']),
-  schemaValidator(createBrandSchema),
+  schemaValidator(createOfferSchema),
   create
 );
 
-brandsRouter.put(
+offersRouter.put(
   '/:id',
   authorization(['administrator']),
   schemaValidator(updateSchema),
   update
 );
 
-brandsRouter.delete(
-  '/:brandId',
+offersRouter.delete(
+  '/:offerId',
   authorization(['administrator']),
-  deleteBrand
+  deleteOffer
 );
 
-brandsRouter.get(
-  '/:brandId',
+offersRouter.get(
+  '/:offerId',
   authorization(['administrator']),
-  getBrand
+  getOffer
 );
 
-brandsRouter.get(
+offersRouter.get(
   '/',
   authorization(['administrator']),
-  getBrands
+  getOffers
 );
 
-export default brandsRouter;
+export default offersRouter;

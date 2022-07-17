@@ -1,7 +1,7 @@
 import { ItemNotFound } from '../../../../database/errors';
-import { BrandsFilter as _BrandsFilter } from '../../../../database/interfaces';
+import { OffersFilter as _OffersFilter } from '../../../../database/interfaces';
 import _Request from '../../../../definitions/request';
-import _Brand from '../../../../entities/Brand';
+import _Offer from '../../../../entities/Offer';
 import logger from '../../../../helpers/logger';
 
 export default async function (req:_Request, res:any) {
@@ -15,11 +15,11 @@ export default async function (req:_Request, res:any) {
     currentPage = 0
   } = query;
 
-  let brands: _Brand[];
-  let brandsTotalCount: number = 0;
+  let offers: _Offer[];
+  let TotalCount: number = 0;
 
   try {
-    const filters: _BrandsFilter = {
+    const filters: _OffersFilter = {
       name: {
         value: name,
         type: 'like'
@@ -30,30 +30,30 @@ export default async function (req:_Request, res:any) {
       limit: perPage
     };
 
-    brands = await database.brands.get(filters, pagination);
-    brandsTotalCount = await database.brands.count(filters);
+    offers = await database.offers.get(filters, pagination);
+    TotalCount = await database.offers.count(filters);
   } catch (error) {
     let statusCode = 500;
     let errorCode = 'UNEXPECTED_ERROR';
 
     if (error instanceof ItemNotFound) {
       statusCode = 404;
-      errorCode = 'BRANDS_WERE_NOT_FOUND';
+      errorCode = 'OFFERS_WERE_NOT_FOUND';
     }
 
     logger.log(error);
     return res.status(statusCode).send({ code: errorCode });
   }
 
-  const brandsSerialized = brands.map((brand) => brand.serialize());
+  const offersSerialized = offers.map((offer) => offer.serialize());
   const paginationResult = {
     currentPage,
     perPage,
-    totalItems: brandsTotalCount
+    totalItems: TotalCount
   };
 
   return res.status(200).send({
-    items: brandsSerialized,
+    items: offersSerialized,
     pagination: paginationResult
   });
 }

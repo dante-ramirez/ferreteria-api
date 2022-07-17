@@ -1,6 +1,6 @@
 import _Request from '../../../../definitions/request';
 import { ItemAlreadyExist } from '../../../../database/errors';
-import Category from '../../../../entities/Category';
+import Offer from '../../../../entities/Offer';
 import logger from '../../../../helpers/logger';
 
 export default async function (req: _Request, res: any) {
@@ -10,29 +10,33 @@ export default async function (req: _Request, res: any) {
   } = req;
   const {
     name,
-    discount
+    discount,
+    type,
+    finish_at
   } = body;
 
-  let category = new Category(
+  let offer = new Offer(
     0,
     name,
-    discount
+    discount,
+    type,
+    finish_at
   );
 
   try {
-    category = await database.categories.create(category);
+    offer = await database.offers.create(offer);
   } catch (error) {
     let errorCode = 'UNEXPECTED_ERROR';
     let statusCode = 500;
 
     if (error instanceof ItemAlreadyExist) {
       statusCode = 400;
-      errorCode = 'CATEGORY_ALREADY_EXIST';
+      errorCode = 'OFFER_ALREADY_EXIST';
     }
 
     logger.log(error);
     return res.status(statusCode).send({ code: errorCode });
   }
 
-  return res.status(201).send(category.serialize());
+  return res.status(201).send(offer.serialize());
 }
