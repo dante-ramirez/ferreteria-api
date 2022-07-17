@@ -1,5 +1,5 @@
 import { ItemNotFound } from '../../../../database/errors';
-import _Brand from '../../../../entities/Brand';
+import _Offer from '../../../../entities/Offer';
 import _Request from '../../../../definitions/request';
 import logger from '../../../../helpers/logger';
 
@@ -11,30 +11,34 @@ export default async function (req:_Request, res:any) {
   } = req;
   const {
     name,
-    discount
+    discount,
+    type,
+    finishAt
   } = body;
   const { id } = params;
 
-  let brandToUpdate: _Brand;
+  let offerToUpdate: _Offer;
 
   try {
-    brandToUpdate = await database.brands.getByID(Number(id));
-    brandToUpdate.name = name;
-    brandToUpdate.discount = discount;
+    offerToUpdate = await database.offers.getByID(Number(id));
+    offerToUpdate.name = name;
+    offerToUpdate.discount = discount;
+    offerToUpdate.type = type;
+    offerToUpdate.finish_at = finishAt;
 
-    await database.brands.update(brandToUpdate);
+    await database.offers.update(offerToUpdate);
   } catch (error) {
     let errorCode = 'UNEXPECTED_ERROR';
     let statusCode = 500;
 
     if (error instanceof ItemNotFound) {
       statusCode = 404;
-      errorCode = 'BRAND_WAS_NOT_FOUND';
+      errorCode = 'OFFER_WAS_NOT_FOUND';
     }
 
     logger.log(error);
     return res.status(statusCode).send({ code: errorCode });
   }
 
-  return res.status(200).send(brandToUpdate.serialize());
+  return res.status(200).send(offerToUpdate.serialize());
 }
