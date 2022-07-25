@@ -3,6 +3,7 @@ import authorization from '../../../../middlewares/authorization';
 
 import create from './create';
 import update from './update';
+import getWallet from './getWallet';
 
 import createSchema from '../../schemas/public/wallets/create';
 import updateSchema from '../../schemas/public/wallets/update';
@@ -23,6 +24,12 @@ walletsRouter.put(
   authorization(['client']),
   schemaValidator(updateSchema),
   update
+);
+
+walletsRouter.get(
+  '/',
+  authorization(['administrator']),
+  getWallet
 );
 
 export default walletsRouter;
