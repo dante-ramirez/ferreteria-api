@@ -48,6 +48,7 @@
   }],
     "class-methods-use-this": "off",
     "no-useless-catch": "off",
-    "max-classes-per-file": "off"
+    "max-classes-per-file": "off",
+    "max-len": "off"
   }
 }
