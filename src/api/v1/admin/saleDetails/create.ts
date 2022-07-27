@@ -1,6 +1,7 @@
+/* eslint-disable camelcase */
 import _Request from '../../../../definitions/request';
 import { ItemAlreadyExist } from '../../../../database/errors';
-import Offer from '../../../../entities/Offer';
+import SaleDetail from '../../../../entities/saleDetail';
 import logger from '../../../../helpers/logger';
 
 export default async function (req: _Request, res: any) {
@@ -9,35 +10,34 @@ export default async function (req: _Request, res: any) {
     body
   } = req;
   const {
-    name,
-    discount,
-    type,
-    // eslint-disable-next-line camelcase
-    finish_at
+    amount,
+    sale_price,
+    sales_id,
+    product_id
   } = body;
 
-  let offer = new Offer(
+  let saleDetail = new SaleDetail(
     0,
-    name,
-    discount,
-    type,
-    finish_at
+    amount,
+    sale_price,
+    sales_id,
+    product_id
   );
 
   try {
-    offer = await database.offers.create(offer);
+    saleDetail = await database.saleDetail.create(saleDetail);
   } catch (error) {
     let errorCode = 'UNEXPECTED_ERROR';
     let statusCode = 500;
 
     if (error instanceof ItemAlreadyExist) {
       statusCode = 400;
-      errorCode = 'OFFER_ALREADY_EXIST';
+      errorCode = 'SALE_DETAIL_ALREADY_EXIST';
     }
 
     logger.log(error);
-    return res.status(statusCode).send({ code: errorCode });
+    return res.status(statusCode).send({ amount: errorCode });
   }
 
-  return res.status(201).send(offer.serialize());
+  return res.status(201).send(saleDetail.serialize());
 }

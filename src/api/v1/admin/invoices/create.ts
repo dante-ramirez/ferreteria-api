@@ -1,43 +1,38 @@
 import _Request from '../../../../definitions/request';
 import { ItemAlreadyExist } from '../../../../database/errors';
-import Offer from '../../../../entities/Offer';
+import Invoice from '../../../../entities/Invoice';
 import logger from '../../../../helpers/logger';
 
 export default async function (req: _Request, res: any) {
   const {
     database,
+    user,
     body
   } = req;
   const {
-    name,
-    discount,
-    type,
-    // eslint-disable-next-line camelcase
-    finish_at
+    path
   } = body;
 
-  let offer = new Offer(
+  let invoice = new Invoice(
     0,
-    name,
-    discount,
-    type,
-    finish_at
+    path,
+    user.id
   );
 
   try {
-    offer = await database.offers.create(offer);
+    invoice = await database.invoice.create(invoice);
   } catch (error) {
     let errorCode = 'UNEXPECTED_ERROR';
     let statusCode = 500;
 
     if (error instanceof ItemAlreadyExist) {
       statusCode = 400;
-      errorCode = 'OFFER_ALREADY_EXIST';
+      errorCode = 'INVOICE_ALREADY_EXIST';
     }
 
     logger.log(error);
     return res.status(statusCode).send({ code: errorCode });
   }
 
-  return res.status(201).send(offer.serialize());
+  return res.status(201).send(invoice.serialize());
 }

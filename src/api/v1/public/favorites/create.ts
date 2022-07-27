@@ -1,43 +1,39 @@
 import _Request from '../../../../definitions/request';
 import { ItemAlreadyExist } from '../../../../database/errors';
-import Offer from '../../../../entities/Offer';
+import Favorite from '../../../../entities/Favorite';
 import logger from '../../../../helpers/logger';
 
 export default async function (req: _Request, res: any) {
   const {
     database,
+    user,
     body
   } = req;
   const {
-    name,
-    discount,
-    type,
     // eslint-disable-next-line camelcase
-    finish_at
+    product_id
   } = body;
 
-  let offer = new Offer(
+  let favorite = new Favorite(
     0,
-    name,
-    discount,
-    type,
-    finish_at
+    user.id,
+    product_id
   );
 
   try {
-    offer = await database.offers.create(offer);
+    favorite = await database.favorite.create(favorite);
   } catch (error) {
     let errorCode = 'UNEXPECTED_ERROR';
     let statusCode = 500;
 
     if (error instanceof ItemAlreadyExist) {
       statusCode = 400;
-      errorCode = 'OFFER_ALREADY_EXIST';
+      errorCode = 'FAVORITE_ALREADY_EXIST';
     }
 
     logger.log(error);
     return res.status(statusCode).send({ code: errorCode });
   }
 
-  return res.status(201).send(offer.serialize());
+  return res.status(201).send(favorite.serialize());
 }
