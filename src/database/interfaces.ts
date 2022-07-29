@@ -13,6 +13,18 @@ export interface UsersFilter {
   lastName: Filter
 }
 
+export interface BrandsFilter {
+  name: Filter
+}
+
+export interface DepartmentsFilter {
+  name: Filter
+}
+
+export interface CategoriesFilter {
+  name: Filter
+}
+
 export interface OffersFilter {
   name: Filter
 }

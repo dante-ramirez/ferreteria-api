@@ -9,12 +9,16 @@ export async function up(knex: _Knex): Promise<void> {
       table.integer('stock').notNull();
       table.float('price').notNull();
       table.string('code').notNull();
+      table.float('discount').notNull();
       table.float('reward_points').notNull();
       table.string('model').notNull();
       table.string('path_image1');
       table.string('path_image2');
       table.string('path_image3');
       table.string('path_image4');
+      table.integer('department_id').references('department.id').notNull();
+      table.integer('category_id').references('category.id').notNull();
+      table.integer('brand_id').references('brand.id').notNull();
       table.integer('offers_id').references('offers.id').notNull();
       table.timestamp('created_at').defaultTo(knex.fn.now());
       table.timestamp('updated_at').defaultTo(knex.fn.now());
