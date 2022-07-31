@@ -4,6 +4,10 @@ import CategoriesStore from './CategoriesStore';
 import BrandsStore from './BrandsStore';
 import WalletsStore from './WalletsStore';
 import OffersStore from './OffersStore';
+import InvoicesStore from './InvoicesStore';
+import FavoritesStore from './FavoritesStore';
+import SalesStore from './SalesStore';
+import SaleDetailsStore from './SaleDetailsStore';
 
 class SQLDatabase {
   public users: UsersStore;
@@ -12,6 +16,10 @@ class SQLDatabase {
   public brands: BrandsStore;
   public wallet: WalletsStore;
   public offers: OffersStore;
+  public invoice: InvoicesStore;
+  public favorite: FavoritesStore;
+  public sale: SalesStore;
+  public saleDetail: SaleDetailsStore;
 
   constructor(connection: any) {
     this.users = new UsersStore(connection, 'users');
@@ -20,6 +28,10 @@ class SQLDatabase {
     this.brands = new BrandsStore(connection, 'brand');
     this.wallet = new WalletsStore(connection, 'wallet');
     this.offers = new OffersStore(connection, 'offers');
+    this.invoice = new InvoicesStore(connection, 'invoice');
+    this.favorite = new FavoritesStore(connection, 'favorites');
+    this.sale = new SalesStore(connection, 'sales');
+    this.saleDetail = new SaleDetailsStore(connection, 'sales_detail');
   }
 }
 

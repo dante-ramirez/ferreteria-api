@@ -29,6 +29,25 @@ export interface OffersFilter {
   name: Filter
 }
 
+export interface InvoicesFilter{
+  path: Filter
+}
+
+export interface FavoritesFilter{
+  user_id: Filter
+}
+
+export interface SalesFilter{
+  id: Filter,
+  date: Filter
+}
+
+export interface SaleDetailsFilter{
+  id: Filter,
+  sales_id: Filter,
+  product_id: Filter
+}
+
 // export interface ProductsFilter {
 //   description: Filter,
 //   userId: Filter
