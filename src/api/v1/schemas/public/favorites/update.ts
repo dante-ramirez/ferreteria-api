@@ -4,7 +4,7 @@ export default {
   properties: {
     product_id: {
       type: 'number',
-      minLength: 1
+      minimum: 0
     }
   }
 };
