@@ -19,6 +19,5 @@ export default class InvoicesStore extends BaseStore {
   async getByID(_id: number): Promise<Invoice> { return this.invoice; }
   async update(_invoice: Invoice): Promise<Invoice> { return this.invoice; }
   async delete(_id: number): Promise<boolean> { return true; }
-  // eslint-disable-next-line max-len
   async get(_filters: _Filters, _pagination: _Pagination): Promise<Invoice[]> { return [this.invoice]; }
 }

@@ -28,7 +28,7 @@ walletsRouter.put(
 
 walletsRouter.get(
   '/',
-  authorization(['administrator']),
+  authorization(['client']),
   getWallet
 );
 

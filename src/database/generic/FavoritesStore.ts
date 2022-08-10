@@ -19,6 +19,5 @@ export default class FavoritesStore extends BaseStore {
   async getByID(_id: number): Promise<Favorite> { return this.favorite; }
   async update(_favorite: Favorite): Promise<Favorite> { return this.favorite; }
   async delete(_id: number): Promise<boolean> { return true; }
-  // eslint-disable-next-line max-len
   async get(_filters: _Filters, _pagination: _Pagination): Promise<Favorite[]> { return [this.favorite]; }
 }

@@ -12,11 +12,11 @@ export default {
     },
     total: {
       type: 'number',
-      minLength: 1
+      minimum: 0
     },
     subtotal: {
       type: 'number',
-      minLength: 1
+      minimum: 0
     }
   }
 };

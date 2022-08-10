@@ -48,6 +48,13 @@ export interface SaleDetailsFilter{
   product_id: Filter
 }
 
+export interface ProductsFilter{
+  name: Filter,
+  description: Filter,
+  code: Filter,
+  model: Filter
+}
+
 // export interface ProductsFilter {
 //   description: Filter,
 //   userId: Filter

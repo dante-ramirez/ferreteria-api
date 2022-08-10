@@ -4,19 +4,19 @@ export default {
   properties: {
     amount: {
       type: 'number',
-      minLength: 1
+      minimum: 0
     },
     sale_price: {
       type: 'number',
-      minLength: 1
+      minimum: 0
     },
     sales_id: {
       type: 'number',
-      minLength: 1
+      minimum: 0
     },
     product_id: {
       type: 'number',
-      minLength: 1
+      minimum: 0
     }
   }
 };

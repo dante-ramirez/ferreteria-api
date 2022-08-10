@@ -4,6 +4,7 @@ import departmentRouter from './departments';
 import categoryRouter from './categories';
 import brandRouter from './brands';
 import invoicesRouter from './invoices';
+import productsRouter from './products';
 
 const express = require('express');
 
@@ -15,5 +16,6 @@ adminRouter.use('/departments', departmentRouter);
 adminRouter.use('/categories', categoryRouter);
 adminRouter.use('/brands', brandRouter);
 adminRouter.use('/invoices', invoicesRouter);
+adminRouter.use('/products', productsRouter);
 
 export default adminRouter;

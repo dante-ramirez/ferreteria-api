@@ -12,7 +12,7 @@ export default async function (req: _Request, res: any) {
     name,
     discount,
     type,
-    finish_at
+    finishAt
   } = body;
 
   let offer = new Offer(
@@ -20,7 +20,7 @@ export default async function (req: _Request, res: any) {
     name,
     discount,
     type,
-    finish_at
+    finishAt
   );
 
   try {
