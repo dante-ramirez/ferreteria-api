@@ -20,15 +20,15 @@ export default {
     secret: process.env.JWT_SECRET || 'secret',
     algorithm: process.env.JWT_ALGORITHM || 'HS512',
     durationInMinutes: Number(process.env.JWT_DURATION_IN_MINUTES) || 240
+  },
+  mailing: {
+    driver: process.env.MAILING_DRIVER || 'console',
+    senderAccount: process.env.MAILING_SENDER_ACCOUNT || 'sender@gmail.com',
+    smtpHost: process.env.MAILING_SMTP_HOST || 'smtp.gmail.com',
+    smtpPort: Number(process.env.MAILING_SMTP_PORT) || 465,
+    smtpUser: process.env.MAILING_SMTP_USER || '',
+    smtpPassword: process.env.MAILING_SMTP_PASSWORD || ''
   }
-  // mailing: {
-  //   driver: process.env.MAILING_DRIVER || 'console',
-  //   senderAccount: process.env.MAILING_SENDER_ACCOUNT || 'sender@bionyk.mx',
-  //   smtpHost: process.env.MAILING_SMTP_HOST || 'smtp.sendgrid.net',
-  //   smtpPort: Number(process.env.MAILING_SMTP_PORT) || 465,
-  //   smtpUser: process.env.MAILING_SMTP_USER || '',
-  //   smtpPassword: process.env.MAILING_SMTP_PASSWORD || ''
-  // },
   // payment: {
   //   driver: process.env.PAYMENT_DRIVER || 'memory',
   //   accessToken: process.env.MERCADO_PAGO_ACCESS_TOKEN || ''

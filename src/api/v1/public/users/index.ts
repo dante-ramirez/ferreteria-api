@@ -5,8 +5,8 @@ import create from './create';
 import update from './update';
 // import updatePassword from './updatePassword';
 // import restorePassword from './restorePassword';
-// import verifyAccount from './verifyAccount';
-// import sendAccountVerificationEmail from './sendAccountVerificationEmail';
+import verifyAccount from './verifyAccount';
+import sendAccountVerificationEmail from './sendAccountVerificationEmail';
 // import me from './me';
 // import createCard from './createCard';
 // import getCards from './getCards';
@@ -45,16 +45,16 @@ usersRouter.put(
   update
 );
 
-// usersRouter.get(
-//   '/account/verified',
-//   verifyAccount
-// );
+usersRouter.get(
+  '/account/verified',
+  verifyAccount
+);
 
-// usersRouter.post(
-//   '/account/verification-email',
-//   authorization(['client']),
-//   sendAccountVerificationEmail
-// );
+usersRouter.post(
+  '/account/verification-email',
+  authorization(['client']),
+  sendAccountVerificationEmail
+);
 
 // usersRouter.get(
 //   '/me',

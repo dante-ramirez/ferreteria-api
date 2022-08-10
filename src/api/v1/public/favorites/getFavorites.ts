@@ -1,4 +1,3 @@
-/* eslint-disable camelcase */
 import { ItemNotFound } from '../../../../database/errors';
 import { FavoritesFilter as _FavoritesFilter } from '../../../../database/interfaces';
 import _Request from '../../../../definitions/request';

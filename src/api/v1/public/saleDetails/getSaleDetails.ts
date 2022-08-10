@@ -1,4 +1,3 @@
-/* eslint-disable camelcase */
 import { ItemNotFound } from '../../../../database/errors';
 import { SaleDetailsFilter as _SaleDetailsFilter } from '../../../../database/interfaces';
 import _Request from '../../../../definitions/request';
@@ -12,8 +11,8 @@ export default async function (req:_Request, res:any) {
   } = req;
   const {
     id = 0,
-    sales_id = 0,
-    product_id = 0,
+    salesId = 0,
+    productId = 0,
     perPage = 0,
     currentPage = 0
   } = query;
@@ -28,11 +27,11 @@ export default async function (req:_Request, res:any) {
         type: 'like'
       },
       sales_id: {
-        value: sales_id,
+        value: salesId,
         type: 'like'
       },
       product_id: {
-        value: product_id,
+        value: productId,
         type: 'like'
       }
     };

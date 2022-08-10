@@ -1,4 +1,3 @@
-/* eslint-disable camelcase */
 export default class Sale {
   id: number;
   code: string;
@@ -13,14 +12,14 @@ export default class Sale {
     date: string,
     total: number,
     subtotal: number,
-    user_id: number
+    userId: number
   ) {
     this.id = id;
     this.code = code;
     this.date = date;
     this.total = total;
     this.subtotal = subtotal;
-    this.user_id = user_id;
+    this.user_id = userId;
   }
 
   serialize() {

@@ -1,4 +1,3 @@
-/* eslint-disable camelcase */
 export default class SaleDetail {
   id: number;
   amount: number;
@@ -8,15 +7,15 @@ export default class SaleDetail {
   constructor(
     id: number,
     amount: number,
-    sale_price: number,
-    sales_id: number,
-    product_id: number
+    salePrice: number,
+    salesId: number,
+    productId: number
   ) {
     this.id = id;
     this.amount = amount;
-    this.sale_price = sale_price;
-    this.sales_id = sales_id;
-    this.product_id = product_id;
+    this.sale_price = salePrice;
+    this.sales_id = salesId;
+    this.product_id = productId;
   }
   serialize() {
     return {

@@ -1,4 +1,3 @@
-/* eslint-disable camelcase */
 import _Request from '../../../../definitions/request';
 import { ItemAlreadyExist } from '../../../../database/errors';
 import SaleDetail from '../../../../entities/saleDetail';
@@ -11,17 +10,17 @@ export default async function (req: _Request, res: any) {
   } = req;
   const {
     amount,
-    sale_price,
-    sales_id,
-    product_id
+    salePrice,
+    salesId,
+    productId
   } = body;
 
   let saleDetail = new SaleDetail(
     0,
     amount,
-    sale_price,
-    sales_id,
-    product_id
+    salePrice,
+    salesId,
+    productId
   );
 
   try {
