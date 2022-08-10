@@ -10,14 +10,13 @@ export default async function (req: _Request, res: any) {
     body
   } = req;
   const {
-    // eslint-disable-next-line camelcase
-    product_id
+    productId
   } = body;
 
   let favorite = new Favorite(
     0,
     user.id,
-    product_id
+    productId
   );
 
   try {

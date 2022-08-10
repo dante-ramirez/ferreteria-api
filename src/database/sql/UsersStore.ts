@@ -177,37 +177,37 @@ export default class SQLUsersStore extends UsersStore {
   //   }
   // }
 
-  // async verifyById(id: number): Promise<User> {
-  //   let userUpdated: any;
+  async verifyById(id: number): Promise<User> {
+    let userUpdated: any;
 
-  //   try {
-  //     const timestamp = new Date();
+    try {
+      const timestamp = new Date();
 
-  //     [userUpdated] = await this.connection(this.table)
-  //       .where('id', id)
-  //       .update({
-  //         verified: true,
-  //         updated_at: timestamp
-  //       })
-  //       .returning('*');
-  //   } catch (error) {
-  //     if ((error as any).code === NULL_VALUE_ERROR) {
-  //       throw new MissingField((error as any).column, this.table);
-  //     }
+      [userUpdated] = await this.connection(this.table)
+        .where('id', id)
+        .update({
+          verified: true,
+          updated_at: timestamp
+        })
+        .returning('*');
+    } catch (error) {
+      if ((error as any).code === NULL_VALUE_ERROR) {
+        throw new MissingField((error as any).column, this.table);
+      }
 
-  //     if ((error as any).code === INVALID_INPUT_SYNTAX_CODE) {
-  //       throw new InvalidDataType(error);
-  //     }
+      if ((error as any).code === INVALID_INPUT_SYNTAX_CODE) {
+        throw new InvalidDataType(error);
+      }
 
-  //     throw new SQLDatabaseError(error);
-  //   }
+      throw new SQLDatabaseError(error);
+    }
 
-  //   if (!userUpdated) {
-  //     throw new ItemNotFound(`user with id ${id}`);
-  //   }
+    if (!userUpdated) {
+      throw new ItemNotFound(`user with id ${id}`);
+    }
 
-  //   return this.formatUser(userUpdated);
-  // }
+    return this.softFormatUser(userUpdated);
+  }
 
   // private async formatUser(user: any): Promise<User> {
   //   let pack: UserPack;

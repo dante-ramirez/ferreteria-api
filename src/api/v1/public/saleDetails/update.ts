@@ -1,4 +1,3 @@
-/* eslint-disable camelcase */
 import { ItemNotFound } from '../../../../database/errors';
 import _SaleDetail from '../../../../entities/saleDetail';
 import _Request from '../../../../definitions/request';
@@ -12,9 +11,9 @@ export default async function (req:_Request, res:any) {
   } = req;
   const {
     amount,
-    sale_price,
-    sales_id,
-    product_id
+    salePrice,
+    salesId,
+    productId
   } = body;
   const { id } = params;
 
@@ -23,9 +22,9 @@ export default async function (req:_Request, res:any) {
   try {
     saleDetailToUpdate = await database.saleDetail.getByID(Number(id));
     saleDetailToUpdate.amount = amount;
-    saleDetailToUpdate.sale_price = sale_price;
-    saleDetailToUpdate.sales_id = sales_id;
-    saleDetailToUpdate.product_id = product_id;
+    saleDetailToUpdate.sale_price = salePrice;
+    saleDetailToUpdate.sales_id = salesId;
+    saleDetailToUpdate.product_id = productId;
 
     await database.saleDetail.update(saleDetailToUpdate);
   } catch (error) {

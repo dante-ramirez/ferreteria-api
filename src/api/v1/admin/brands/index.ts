@@ -26,7 +26,6 @@ brandsRouter.put(
 );
 
 brandsRouter.delete(
-  '/:userId',
   '/:brandId',
   authorization(['administrator']),
   deleteBrand
