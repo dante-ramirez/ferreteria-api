@@ -1,10 +1,10 @@
-/* eslint-disable no-trailing-spaces */
-/* eslint-disable indent */
 export default {
   type: 'object',
-  required: ['name', 'description', 'stock', 'price', 'code', 'discount', 
-  'reward_points', 'model', 'path_image1', 'path_image2', 'path_image3', 
-  'path_image4', 'department_id', 'category_id', 'brand_id', 'offers_id'],
+  required: [
+    'name', 'description', 'stock', 'price', 'code', 'discount',
+    'reward_points', 'model', 'path_image1', 'path_image2', 'path_image3',
+    'path_image4', 'department_id', 'category_id', 'brand_id', 'offers_id'
+  ],
   properties: {
     name: {
       type: 'string',

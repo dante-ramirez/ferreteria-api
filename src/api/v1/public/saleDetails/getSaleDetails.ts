@@ -26,11 +26,11 @@ export default async function (req:_Request, res:any) {
         value: id,
         type: 'like'
       },
-      sales_id: {
+      salesId: {
         value: salesId,
         type: 'like'
       },
-      product_id: {
+      productId: {
         value: productId,
         type: 'like'
       }
@@ -40,8 +40,8 @@ export default async function (req:_Request, res:any) {
       limit: perPage
     };
 
-    saleDetails = await database.saleDetail.get(filters, pagination);
-    TotalCount = await database.saleDetail.count(filters);
+    saleDetails = await database.saleDetails.get(filters, pagination);
+    TotalCount = await database.saleDetails.count(filters);
   } catch (error) {
     let statusCode = 500;
     let errorCode = 'UNEXPECTED_ERROR';

@@ -15,7 +15,7 @@ export default class DepartmentsStore extends BaseStore {
   }
 
   async create(_department: Department): Promise<Department> { return this.department; }
-  async getByID(_id: number): Promise<Department> { return this.department; }
+  async getById(_id: number): Promise<Department> { return this.department; }
   async getByName(_name: string): Promise<Department> { return this.department; }
   async update(_department: Department): Promise<Department> { return this.department; }
   async delete(_id: number): Promise<boolean> { return true; }

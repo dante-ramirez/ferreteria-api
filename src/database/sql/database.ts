@@ -15,26 +15,26 @@ class SQLDatabase {
   public departments: DepartmentsStore;
   public categories: CategoriesStore;
   public brands: BrandsStore;
-  public wallet: WalletsStore;
+  public wallets: WalletsStore;
   public offers: OffersStore;
-  public invoice: InvoicesStore;
-  public favorite: FavoritesStore;
-  public sale: SalesStore;
-  public saleDetail: SaleDetailsStore;
-  public product: ProductsStore;
+  public invoices: InvoicesStore;
+  public favorites: FavoritesStore;
+  public sales: SalesStore;
+  public saleDetails: SaleDetailsStore;
+  public products: ProductsStore;
 
   constructor(connection: any) {
     this.users = new UsersStore(connection, 'users');
     this.departments = new DepartmentsStore(connection, 'department');
     this.categories = new CategoriesStore(connection, 'category');
     this.brands = new BrandsStore(connection, 'brand');
-    this.wallet = new WalletsStore(connection, 'wallet');
+    this.wallets = new WalletsStore(connection, 'wallet');
     this.offers = new OffersStore(connection, 'offers');
-    this.invoice = new InvoicesStore(connection, 'invoice');
-    this.favorite = new FavoritesStore(connection, 'favorites');
-    this.sale = new SalesStore(connection, 'sales');
-    this.saleDetail = new SaleDetailsStore(connection, 'sales_detail');
-    this.product = new ProductsStore(connection, 'products');
+    this.invoices = new InvoicesStore(connection, 'invoice');
+    this.favorites = new FavoritesStore(connection, 'favorites');
+    this.sales = new SalesStore(connection, 'sales');
+    this.saleDetails = new SaleDetailsStore(connection, 'sales_detail');
+    this.products = new ProductsStore(connection, 'products');
   }
 }
 

@@ -1,23 +1,25 @@
-export default class Favorite {
+import _Product from './Product';
+
+export default class FavoriteProduct {
   id: number;
   userId: number;
-  productId: number;
+  product: _Product;
 
   constructor(
     id: number,
     userId: number,
-    productId: number
+    product: _Product
   ) {
     this.id = id;
     this.userId = userId;
-    this.productId = productId;
+    this.product = product;
   }
 
   serialize() {
     return {
       id: this.id,
       userId: this.userId,
-      productId: this.productId
+      product: this.product.serialize()
     };
   }
 }

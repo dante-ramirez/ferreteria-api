@@ -15,7 +15,7 @@ export default async function (req:_Request, res:any) {
   let user: _User;
 
   try {
-    user = await database.users.getByID(Number(userId));
+    user = await database.users.getById(Number(userId));
   } catch (error) {
     let statusCode = 500;
     let errorCode = 'UNEXPECTED_ERROR';

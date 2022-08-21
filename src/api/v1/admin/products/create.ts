@@ -1,4 +1,3 @@
-/* eslint-disable camelcase */
 import _Request from '../../../../definitions/request';
 import { ItemAlreadyExist } from '../../../../database/errors';
 import Product from '../../../../entities/Product';
@@ -16,16 +15,16 @@ export default async function (req: _Request, res: any) {
     price,
     code,
     discount,
-    reward_points,
+    rewardPoints,
     model,
-    path_image1,
-    path_image2,
-    path_image3,
-    path_image4,
-    department_id,
-    category_id,
-    brand_id,
-    offers_id
+    pathImage1,
+    pathImage2,
+    pathImage3,
+    pathImage4,
+    departmentId,
+    categoryId,
+    brandId,
+    offersId
   } = body;
 
   let product = new Product(
@@ -36,20 +35,20 @@ export default async function (req: _Request, res: any) {
     price,
     code,
     discount,
-    reward_points,
+    rewardPoints,
     model,
-    path_image1,
-    path_image2,
-    path_image3,
-    path_image4,
-    department_id,
-    category_id,
-    brand_id,
-    offers_id
+    pathImage1,
+    pathImage2,
+    pathImage3,
+    pathImage4,
+    departmentId,
+    categoryId,
+    brandId,
+    offersId
   );
 
   try {
-    product = await database.product.create(product);
+    product = await database.products.create(product);
   } catch (error) {
     let errorCode = 'UNEXPECTED_ERROR';
     let statusCode = 500;

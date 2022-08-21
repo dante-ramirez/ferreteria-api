@@ -14,7 +14,7 @@ import {
   DUPLICATED_KEY_ERROR
 } from './errors';
 
-export default class SQLDepartmentsStore extends OffersStore {
+export default class SQLOffersStore extends OffersStore {
   // constructor(connection: any, table: string) {
   //   super(connection, table);
   //   // this.packs = new UsersPacksStore(connection, 'users_packs');
@@ -27,7 +27,7 @@ export default class SQLDepartmentsStore extends OffersStore {
           name: offer.name,
           discount: offer.discount,
           type: offer.type,
-          finish_at: offer.finish_at
+          finish_at: offer.finishAt
         })
         .returning('*');
 
@@ -57,7 +57,7 @@ export default class SQLDepartmentsStore extends OffersStore {
           name: offer.name,
           discount: offer.discount,
           type: offer.type,
-          finish_at: offer.finish_at,
+          finish_at: offer.finishAt,
           updated_at: timestamp
         })
         .returning('*');
@@ -76,7 +76,7 @@ export default class SQLDepartmentsStore extends OffersStore {
     }
   }
 
-  async getByID(id: number): Promise<Offer> {
+  async getById(id: number): Promise<Offer> {
     let offer: any;
 
     try {

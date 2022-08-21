@@ -15,8 +15,8 @@ export default async function (req:_Request, res:any) {
   let favoriteToDelete: _Favorite;
 
   try {
-    favoriteToDelete = await database.favorite.getByID(Number(favoriteId));
-    await database.favorite.delete(Number(favoriteToDelete.id));
+    favoriteToDelete = await database.favorites.getById(Number(favoriteId));
+    await database.favorites.delete(Number(favoriteToDelete.id));
   } catch (error) {
     let statusCode = 500;
     let errorCode = 'UNEXPECTED_ERROR';

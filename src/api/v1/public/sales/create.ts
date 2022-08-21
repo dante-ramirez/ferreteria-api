@@ -26,7 +26,7 @@ export default async function (req: _Request, res: any) {
   );
 
   try {
-    sale = await database.sale.create(sale);
+    sale = await database.sales.create(sale);
   } catch (error) {
     let errorCode = 'UNEXPECTED_ERROR';
     let statusCode = 500;

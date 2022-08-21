@@ -18,7 +18,7 @@ export default async function (req:_Request, res:any) {
   let departmentToUpdate: _Department;
 
   try {
-    departmentToUpdate = await database.departments.getByID(Number(id));
+    departmentToUpdate = await database.departments.getById(Number(id));
     departmentToUpdate.name = name;
     departmentToUpdate.discount = discount;
 

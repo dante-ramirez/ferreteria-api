@@ -35,8 +35,8 @@ export default async function (req:_Request, res:any) {
       limit: perPage
     };
 
-    sales = await database.sale.get(filters, pagination);
-    TotalCount = await database.sale.count(filters);
+    sales = await database.sales.get(filters, pagination);
+    TotalCount = await database.sales.count(filters);
   } catch (error) {
     let statusCode = 500;
     let errorCode = 'UNEXPECTED_ERROR';

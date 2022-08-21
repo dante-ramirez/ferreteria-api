@@ -15,7 +15,7 @@ export default async function (req:_Request, res:any) {
   let Category: _Category;
 
   try {
-    Category = await database.categories.getByID(Number(categoryId));
+    Category = await database.categories.getById(Number(categoryId));
   } catch (error) {
     let statusCode = 500;
     let errorCode = 'UNEXPECTED_ERROR';

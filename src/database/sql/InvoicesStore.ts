@@ -14,7 +14,7 @@ import {
   DUPLICATED_KEY_ERROR
 } from './errors';
 
-export default class SQLDepartmentsStore extends InvoicesStore {
+export default class SQLInvoicesStore extends InvoicesStore {
   // constructor(connection: any, table: string) {
   //   super(connection, table);
   //   // this.packs = new UsersPacksStore(connection, 'users_packs');
@@ -94,7 +94,7 @@ export default class SQLDepartmentsStore extends InvoicesStore {
     return this.softFormatInvoice(invoice);
   }
 
-  async getByID(id: number): Promise<Invoice> {
+  async getById(id: number): Promise<Invoice> {
     let invoice: any;
 
     try {

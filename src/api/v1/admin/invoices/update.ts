@@ -18,11 +18,11 @@ export default async function (req:_Request, res:any) {
   let invoice: _Invoice;
 
   try {
-    invoice = await database.invoice.getByID(Number(id));
+    invoice = await database.invoices.getById(Number(id));
     invoice.path = path;
     invoice.userId = user.id;
 
-    await database.invoice.update(invoice);
+    await database.invoices.update(invoice);
   } catch (error) {
     let errorCode = 'UNEXPECTED_ERROR';
     let statusCode = 500;

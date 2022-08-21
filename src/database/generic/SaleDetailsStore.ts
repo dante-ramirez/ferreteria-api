@@ -15,7 +15,7 @@ export default class SaleDetailsStore extends BaseStore {
   }
 
   async create(_saleDetail: SaleDetail): Promise<SaleDetail> { return this.saleDetail; }
-  async getByID(_id: number): Promise<SaleDetail> { return this.saleDetail; }
+  async getById(_id: number): Promise<SaleDetail> { return this.saleDetail; }
   async update(_saleDetail: SaleDetail): Promise<SaleDetail> { return this.saleDetail; }
   async delete(_id: number): Promise<boolean> { return true; }
   async get(_filters: _Filters, _pagination: _Pagination): Promise<SaleDetail[]> { return [this.saleDetail]; }

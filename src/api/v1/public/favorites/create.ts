@@ -20,7 +20,7 @@ export default async function (req: _Request, res: any) {
   );
 
   try {
-    favorite = await database.favorite.create(favorite);
+    favorite = await database.favorites.create(favorite);
   } catch (error) {
     let errorCode = 'UNEXPECTED_ERROR';
     let statusCode = 500;

@@ -1,7 +1,7 @@
 import { ItemNotFound } from '../../../../database/errors';
 import { FavoritesFilter as _FavoritesFilter } from '../../../../database/interfaces';
 import _Request from '../../../../definitions/request';
-import _Favorite from '../../../../entities/Favorite';
+import _FavoriteProduct from '../../../../entities/FavoriteProduct';
 import logger from '../../../../helpers/logger';
 
 export default async function (req:_Request, res:any) {
@@ -15,14 +15,14 @@ export default async function (req:_Request, res:any) {
     currentPage = 0
   } = query;
 
-  let favorites: _Favorite[];
+  let favorites: _FavoriteProduct[];
   let TotalCount: number = 0;
 
   try {
     const filters: _FavoritesFilter = {
-      user_id: {
+      userId: {
         value: user.id,
-        type: 'like'
+        type: 'match'
       }
     };
     const pagination = {
@@ -30,8 +30,8 @@ export default async function (req:_Request, res:any) {
       limit: perPage
     };
 
-    favorites = await database.favorite.get(filters, pagination);
-    TotalCount = await database.favorite.count(filters);
+    favorites = await database.favorites.get(filters, pagination);
+    TotalCount = await database.favorites.count(filters);
   } catch (error) {
     let statusCode = 500;
     let errorCode = 'UNEXPECTED_ERROR';

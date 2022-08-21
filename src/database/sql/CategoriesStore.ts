@@ -14,7 +14,7 @@ import {
   DUPLICATED_KEY_ERROR
 } from './errors';
 
-export default class SQLDepartmentsStore extends CategoriesStore {
+export default class SQLCategoriesStore extends CategoriesStore {
   // constructor(connection: any, table: string) {
   //   super(connection, table);
   //   // this.packs = new UsersPacksStore(connection, 'users_packs');
@@ -72,7 +72,7 @@ export default class SQLDepartmentsStore extends CategoriesStore {
     }
   }
 
-  async getByID(id: number): Promise<Category> {
+  async getById(id: number): Promise<Category> {
     let category: any;
 
     try {

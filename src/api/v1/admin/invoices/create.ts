@@ -20,7 +20,7 @@ export default async function (req: _Request, res: any) {
   );
 
   try {
-    invoice = await database.invoice.create(invoice);
+    invoice = await database.invoices.create(invoice);
   } catch (error) {
     let errorCode = 'UNEXPECTED_ERROR';
     let statusCode = 500;

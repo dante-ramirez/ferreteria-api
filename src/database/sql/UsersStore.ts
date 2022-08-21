@@ -80,7 +80,7 @@ export default class SQLUsersStore extends UsersStore {
     }
   }
 
-  async getByID(id: number): Promise<User> {
+  async getById(id: number): Promise<User> {
     let user: any;
 
     try {

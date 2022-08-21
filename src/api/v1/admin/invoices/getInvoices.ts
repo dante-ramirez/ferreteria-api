@@ -30,8 +30,8 @@ export default async function (req:_Request, res:any) {
       limit: perPage
     };
 
-    invoices = await database.invoice.get(filters, pagination);
-    TotalCount = await database.invoice.count(filters);
+    invoices = await database.invoices.get(filters, pagination);
+    TotalCount = await database.invoices.count(filters);
   } catch (error) {
     let statusCode = 500;
     let errorCode = 'UNEXPECTED_ERROR';

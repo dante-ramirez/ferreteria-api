@@ -1,4 +1,3 @@
-/* eslint-disable camelcase */
 export default class Product {
   id: number;
   name: string;
@@ -7,16 +6,17 @@ export default class Product {
   price: number;
   code: string;
   discount: number;
-  reward_points: number;
+  rewardPoints: number;
   model: string;
-  path_image1: string;
-  path_image2: string;
-  path_image3: string;
-  path_image4: string;
-  department_id: number;
-  category_id: number;
-  brand_id: number;
-  offers_id: number;
+  pathImage1: string;
+  pathImage2: string;
+  pathImage3: string;
+  pathImage4: string;
+  departmentId: number;
+  categoryId: number;
+  brandId: number;
+  offersId: number;
+
   constructor(
     id: number,
     name: string,
@@ -25,16 +25,16 @@ export default class Product {
     price: number,
     code: string,
     discount: number,
-    reward_points: number,
+    rewardPoints: number,
     model: string,
-    path_image1: string,
-    path_image2: string,
-    path_image3: string,
-    path_image4: string,
-    department_id: number,
-    category_id: number,
-    brand_id: number,
-    offers_id: number
+    pathImage1: string,
+    pathImage2: string,
+    pathImage3: string,
+    pathImage4: string,
+    departmentId: number,
+    categoryId: number,
+    brandId: number,
+    offersId: number
   ) {
     this.id = id;
     this.name = name;
@@ -43,17 +43,18 @@ export default class Product {
     this.price = price;
     this.code = code;
     this.discount = discount;
-    this.reward_points = reward_points;
+    this.rewardPoints = rewardPoints;
     this.model = model;
-    this.path_image1 = path_image1;
-    this.path_image2 = path_image2;
-    this.path_image3 = path_image3;
-    this.path_image4 = path_image4;
-    this.department_id = department_id;
-    this.category_id = category_id;
-    this.brand_id = brand_id;
-    this.offers_id = offers_id;
+    this.pathImage1 = pathImage1;
+    this.pathImage2 = pathImage2;
+    this.pathImage3 = pathImage3;
+    this.pathImage4 = pathImage4;
+    this.departmentId = departmentId;
+    this.categoryId = categoryId;
+    this.brandId = brandId;
+    this.offersId = offersId;
   }
+
   serialize() {
     return {
       id: this.id,
@@ -63,16 +64,16 @@ export default class Product {
       price: this.price,
       code: this.code,
       discount: this.discount,
-      reward_points: this.reward_points,
+      rewardPoints: this.rewardPoints,
       model: this.model,
-      path_image1: this.path_image1,
-      path_image2: this.path_image2,
-      path_image3: this.path_image3,
-      path_image4: this.path_image4,
-      department_id: this.department_id,
-      category_id: this.category_id,
-      brand_id: this.brand_id,
-      offers_id: this.offers_id
+      pathImage1: this.pathImage1,
+      pathImage2: this.pathImage2,
+      pathImage3: this.pathImage3,
+      pathImage4: this.pathImage4,
+      departmentId: this.departmentId,
+      categoryId: this.categoryId,
+      brandId: this.brandId,
+      offersId: this.offersId
     };
   }
 }

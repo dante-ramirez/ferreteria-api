@@ -20,7 +20,7 @@ export default async function (req: _Request, res: any) {
   );
 
   try {
-    wallet = await database.wallet.create(wallet);
+    wallet = await database.wallets.create(wallet);
   } catch (error) {
     let errorCode = 'UNEXPECTED_ERROR';
     let statusCode = 500;

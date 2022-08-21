@@ -34,7 +34,7 @@ export interface InvoicesFilter{
 }
 
 export interface FavoritesFilter{
-  user_id: Filter
+  userId: Filter
 }
 
 export interface SalesFilter{
@@ -44,8 +44,8 @@ export interface SalesFilter{
 
 export interface SaleDetailsFilter{
   id: Filter,
-  sales_id: Filter,
-  product_id: Filter
+  salesId: Filter,
+  productId: Filter
 }
 
 export interface ProductsFilter{
@@ -54,12 +54,3 @@ export interface ProductsFilter{
   code: Filter,
   model: Filter
 }
-
-// export interface ProductsFilter {
-//   description: Filter,
-//   userId: Filter
-// }
-
-// export interface PacksFilter {
-//   filter: Filter
-// }
