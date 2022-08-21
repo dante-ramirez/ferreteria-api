@@ -1,6 +1,9 @@
 import Favorite from '../../entities/Favorite';
+import FavoriteProduct from '../../entities/FavoriteProduct';
+import Product from '../../entities/Product';
 import { ItemAlreadyExist, ItemNotFound } from '../errors';
 import FavoritesStore from '../generic/FavoritesStore';
+import ProductsStore from './ProductsStore';
 import {
   Pagination as _Pagination,
   FavoritesFilter as _Filters
@@ -14,18 +17,18 @@ import {
   DUPLICATED_KEY_ERROR
 } from './errors';
 
-export default class SQLDepartmentsStore extends FavoritesStore {
-  // constructor(connection: any, table: string) {
-  //   super(connection, table);
-  //   // this.packs = new UsersPacksStore(connection, 'users_packs');
-  // }
+export default class SQLFavoritesStore extends FavoritesStore {
+  constructor(connection: any, table: string) {
+    super(connection, table);
+    this.products = new ProductsStore(connection, 'products');
+  }
 
   async create(favorite: Favorite): Promise<Favorite> {
     try {
       const [newFavorite] = await this.connection(this.table)
         .insert({
-          user_id: favorite.user_id,
-          product_id: favorite.product_id
+          user_id: favorite.userId,
+          product_id: favorite.productId
         })
         .returning('*');
 
@@ -68,7 +71,7 @@ export default class SQLDepartmentsStore extends FavoritesStore {
     return this.softFormatFavorite(favorite);
   }
 
-  async getByID(id: number): Promise<Favorite> {
+  async getById(id: number): Promise<Favorite> {
     let favorite: any;
 
     try {
@@ -102,10 +105,11 @@ export default class SQLDepartmentsStore extends FavoritesStore {
     }
   }
 
-  async get(filters: _Filters, pagination: _Pagination): Promise<Favorite[]> {
+  async get(filters: _Filters, pagination: _Pagination): Promise<FavoriteProduct[]> {
     let favorites: any[] = [];
-    let query = this.connection(this.table).select('*');
+    const favoriteProducts: any[] = [];
 
+    let query = this.connection(this.table).select('*');
     query = this.applyFilters(query, filters);
     query = this.applyPagination(query, pagination);
 
@@ -119,7 +123,29 @@ export default class SQLDepartmentsStore extends FavoritesStore {
       throw new ItemNotFound(this.table);
     }
 
-    return favorites.map((favorite: any) => this.softFormatFavorite(favorite));
+    favorites.map(async (favorite: any) => {
+      let product: Product;
+
+      try {
+        product = await this.products.getById(favorite.product_id);
+      } catch (error) {
+        if (error instanceof ItemNotFound) {
+          product = new Product(0, '', '', 0, 0, '', 0, 0, '', '', '', '', '', 0, 0, 0, 0);
+        } else {
+          throw error;
+        }
+      }
+
+      const favoriteProduct = new FavoriteProduct(
+        Number(favorite.id),
+        Number(favorite.user_id),
+        product
+      );
+
+      favoriteProducts.push(favoriteProduct);
+    });
+
+    return favoriteProducts;
   }
 
   private softFormatFavorite(favorite: any): Favorite {

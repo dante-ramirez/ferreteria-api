@@ -20,13 +20,13 @@ export default async function (req:_Request, res:any) {
   let saleDetailToUpdate: _SaleDetail;
 
   try {
-    saleDetailToUpdate = await database.saleDetail.getByID(Number(id));
+    saleDetailToUpdate = await database.saleDetails.getById(Number(id));
     saleDetailToUpdate.amount = amount;
     saleDetailToUpdate.sale_price = salePrice;
     saleDetailToUpdate.sales_id = salesId;
     saleDetailToUpdate.product_id = productId;
 
-    await database.saleDetail.update(saleDetailToUpdate);
+    await database.saleDetails.update(saleDetailToUpdate);
   } catch (error) {
     let errorCode = 'UNEXPECTED_ERROR';
     let statusCode = 500;

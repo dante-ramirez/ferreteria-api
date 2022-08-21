@@ -15,7 +15,7 @@ export default async function (req:_Request, res:any) {
   let invoice: _Invoice;
 
   try {
-    invoice = await database.invoice.getByID(Number(invoiceId));
+    invoice = await database.invoices.getById(Number(invoiceId));
   } catch (error) {
     let statusCode = 500;
     let errorCode = 'UNEXPECTED_ERROR';

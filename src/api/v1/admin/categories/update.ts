@@ -18,7 +18,7 @@ export default async function (req:_Request, res:any) {
   let categoryToUpdate: _Category;
 
   try {
-    categoryToUpdate = await database.categories.getByID(Number(id));
+    categoryToUpdate = await database.categories.getById(Number(id));
     categoryToUpdate.name = name;
     categoryToUpdate.discount = discount;
 

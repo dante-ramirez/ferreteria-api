@@ -15,8 +15,8 @@ export default async function (req:_Request, res:any) {
   let invoiceToDelete: _Invoice;
 
   try {
-    invoiceToDelete = await database.invoice.getByID(Number(invoiceId));
-    await database.invoice.delete(Number(invoiceToDelete.id));
+    invoiceToDelete = await database.invoices.getById(Number(invoiceId));
+    await database.invoices.delete(Number(invoiceToDelete.id));
   } catch (error) {
     let statusCode = 500;
     let errorCode = 'UNEXPECTED_ERROR';

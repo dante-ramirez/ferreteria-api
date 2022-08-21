@@ -5,7 +5,7 @@ export default class Offer {
   name: string;
   discount: number;
   type: string;
-  finish_at: string;
+  finishAt: string;
 
   constructor(
     id: number,
@@ -18,7 +18,7 @@ export default class Offer {
     this.name = name;
     this.discount = discount;
     this.type = type;
-    this.finish_at = finishAt;
+    this.finishAt = finishAt;
   }
 
   serialize() {
@@ -27,7 +27,7 @@ export default class Offer {
       name: this.name,
       discount: this.discount,
       type: this.type,
-      finish_at: this.finish_at
+      finishAt: this.finishAt
     };
   }
 }

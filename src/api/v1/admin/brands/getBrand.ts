@@ -15,7 +15,7 @@ export default async function (req:_Request, res:any) {
   let Brand: _Brand;
 
   try {
-    Brand = await database.brands.getByID(Number(brandId));
+    Brand = await database.brands.getById(Number(brandId));
   } catch (error) {
     let statusCode = 500;
     let errorCode = 'UNEXPECTED_ERROR';

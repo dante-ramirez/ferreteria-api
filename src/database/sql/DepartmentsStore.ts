@@ -72,7 +72,7 @@ export default class SQLDepartmentsStore extends DepartmentsStore {
     }
   }
 
-  async getByID(id: number): Promise<Department> {
+  async getById(id: number): Promise<Department> {
     let department: any;
 
     try {

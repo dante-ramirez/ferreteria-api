@@ -16,11 +16,11 @@ export default async function (req:_Request, res:any) {
   let wallet: _Wallet;
 
   try {
-    wallet = await database.wallet.getByUserId(user.id);
+    wallet = await database.wallets.getByUserId(user.id);
 
     wallet.amount = amount;
 
-    await database.wallet.update(wallet);
+    await database.wallets.update(wallet);
   } catch (error) {
     let errorCode = 'UNEXPECTED_ERROR';
     let statusCode = 500;

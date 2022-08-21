@@ -20,11 +20,11 @@ export default async function (req:_Request, res:any) {
   let offerToUpdate: _Offer;
 
   try {
-    offerToUpdate = await database.offers.getByID(Number(id));
+    offerToUpdate = await database.offers.getById(Number(id));
     offerToUpdate.name = name;
     offerToUpdate.discount = discount;
     offerToUpdate.type = type;
-    offerToUpdate.finish_at = finishAt;
+    offerToUpdate.finishAt = finishAt;
 
     await database.offers.update(offerToUpdate);
   } catch (error) {

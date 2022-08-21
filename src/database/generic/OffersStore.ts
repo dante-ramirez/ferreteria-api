@@ -15,7 +15,7 @@ export default class OffersStore extends BaseStore {
   }
 
   async create(_offer: Offer): Promise<Offer> { return this.offer; }
-  async getByID(_id: number): Promise<Offer> { return this.offer; }
+  async getById(_id: number): Promise<Offer> { return this.offer; }
   async update(_offer: Offer): Promise<Offer> { return this.offer; }
   async delete(_id: number): Promise<boolean> { return true; }
   async get(_filters: _Filters, _pagination: _Pagination): Promise<Offer[]> { return [this.offer]; }

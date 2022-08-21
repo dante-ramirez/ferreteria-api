@@ -21,12 +21,12 @@ export default interface Request {
     departments: _departmentsStore
     categories: _categoriesStore
     brands: _brandsStore
-    wallet: _walletsStore
-    invoice: _invoiceStore
-    favorite: _favoritesStore
-    sale: _salesStore
-    saleDetail: _saleDetailsStore
-    product: _ProductsStore
+    wallets: _walletsStore
+    invoices: _invoiceStore
+    favorites: _favoritesStore
+    sales: _salesStore
+    saleDetails: _saleDetailsStore
+    products: _ProductsStore
   },
   user: {
     id: number,

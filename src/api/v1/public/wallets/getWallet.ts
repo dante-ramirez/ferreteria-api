@@ -12,7 +12,7 @@ export default async function (req:_Request, res:any) {
   let wallet: _Wallet;
 
   try {
-    wallet = await database.wallet.getByUserId(Number(user.id));
+    wallet = await database.wallets.getByUserId(Number(user.id));
   } catch (error) {
     let statusCode = 500;
     let errorCode = 'UNEXPECTED_ERROR';

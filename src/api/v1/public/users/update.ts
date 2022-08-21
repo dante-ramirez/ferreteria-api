@@ -19,7 +19,7 @@ export default async function (req:_Request, res:any) {
   let userToUpdate: _User;
 
   try {
-    userToUpdate = await database.users.getByID(user.id);
+    userToUpdate = await database.users.getById(user.id);
 
     userToUpdate.name = name;
     userToUpdate.lastName = lastName;

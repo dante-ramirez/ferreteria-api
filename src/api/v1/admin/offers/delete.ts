@@ -15,7 +15,7 @@ export default async function (req:_Request, res:any) {
   let offerToDelete: _Offer;
 
   try {
-    offerToDelete = await database.offers.getByID(Number(offerId));
+    offerToDelete = await database.offers.getById(Number(offerId));
     await database.offers.delete(Number(offerToDelete.id));
   } catch (error) {
     let statusCode = 500;

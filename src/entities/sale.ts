@@ -4,7 +4,7 @@ export default class Sale {
   date: string;
   total: number;
   subtotal: number;
-  user_id: number;
+  userId: number;
 
   constructor(
     id: number,
@@ -19,7 +19,7 @@ export default class Sale {
     this.date = date;
     this.total = total;
     this.subtotal = subtotal;
-    this.user_id = userId;
+    this.userId = userId;
   }
 
   serialize() {
@@ -29,7 +29,7 @@ export default class Sale {
       date: this.date,
       total: this.total,
       subtotal: this.subtotal,
-      user_id: this.user_id
+      userId: this.userId
     };
   }
 }

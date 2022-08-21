@@ -14,7 +14,7 @@ import {
   DUPLICATED_KEY_ERROR
 } from './errors';
 
-export default class SQLDepartmentsStore extends ProductsStore {
+export default class SQLProductsStore extends ProductsStore {
   // constructor(connection: any, table: string) {
   //   super(connection, table);
   //   // this.packs = new UsersPacksStore(connection, 'users_packs');
@@ -30,16 +30,16 @@ export default class SQLDepartmentsStore extends ProductsStore {
           price: product.price,
           code: product.code,
           discount: product.discount,
-          reward_points: product.reward_points,
+          reward_points: product.rewardPoints,
           model: product.model,
-          path_image1: product.path_image1,
-          path_image2: product.path_image2,
-          path_image3: product.path_image3,
-          path_image4: product.path_image4,
-          department_id: product.department_id,
-          category_id: product.category_id,
-          brand_id: product.brand_id,
-          offers_id: product.offers_id
+          path_image1: product.pathImage1,
+          path_image2: product.pathImage2,
+          path_image3: product.pathImage3,
+          path_image4: product.pathImage4,
+          department_id: product.departmentId,
+          category_id: product.categoryId,
+          brand_id: product.brandId,
+          offers_id: product.offersId
         })
         .returning('*');
 
@@ -72,16 +72,16 @@ export default class SQLDepartmentsStore extends ProductsStore {
           price: product.price,
           code: product.code,
           discount: product.discount,
-          reward_points: product.reward_points,
+          reward_points: product.rewardPoints,
           model: product.model,
-          path_image1: product.path_image1,
-          path_image2: product.path_image2,
-          path_image3: product.path_image3,
-          path_image4: product.path_image4,
-          department_id: product.department_id,
-          category_id: product.category_id,
-          brand_id: product.brand_id,
-          offers_id: product.offers_id,
+          path_image1: product.pathImage1,
+          path_image2: product.pathImage2,
+          path_image3: product.pathImage3,
+          path_image4: product.pathImage4,
+          department_id: product.departmentId,
+          category_id: product.categoryId,
+          brand_id: product.brandId,
+          offers_id: product.offersId,
           updated_at: timestamp
         })
         .returning('*');
@@ -100,7 +100,7 @@ export default class SQLDepartmentsStore extends ProductsStore {
     }
   }
 
-  async getByID(id: number): Promise<Product> {
+  async getById(id: number): Promise<Product> {
     let product: any;
 
     try {
