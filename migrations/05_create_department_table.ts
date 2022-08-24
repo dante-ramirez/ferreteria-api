@@ -5,7 +5,9 @@ export async function up(knex: _Knex): Promise<void> {
     .createTable('department', (table: any) => {
       table.increments('id').primary().notNull();
       table.string('name').notNull();
-      table.float('discount').defaultTo(-1);
+      table.integer('offers_id').references('offer.id').notNull();
+      table.timestamp('begin_at').defaultTo(knex.fn.now());
+      table.timestamp('finish_at').defaultTo(knex.fn.now());
       table.timestamp('created_at').defaultTo(knex.fn.now());
       table.timestamp('updated_at').defaultTo(knex.fn.now());
     });
