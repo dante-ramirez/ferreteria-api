@@ -4,8 +4,8 @@ export async function up(knex: _Knex): Promise<void> {
   return knex.schema
     .createTable('wallet', (table: any) => {
       table.increments('id').primary().notNull();
-      table.float('amount').defaultTo(-1);
       table.integer('user_id').references('users.id').notNull();
+      table.float('amount').defaultTo(-1);
       table.timestamp('created_at').defaultTo(knex.fn.now());
       table.timestamp('updated_at').defaultTo(knex.fn.now());
     });
