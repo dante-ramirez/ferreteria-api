@@ -24,8 +24,8 @@ export default class SQLWalletsStore extends WalletsStore {
     try {
       const [newWallet] = await this.connection(this.table)
         .insert({
-          amount: wallet.amount,
-          user_id: wallet.userId
+          user_id: wallet.userId,
+          amount: wallet.amount
         })
         .returning('*');
 
@@ -114,8 +114,8 @@ export default class SQLWalletsStore extends WalletsStore {
   private softFormatWallet(wallet: any): Wallet {
     return new Wallet(
       Number(wallet.id),
-      wallet.amount,
-      Number(wallet.user_id)
+      Number(wallet.user_id),
+      wallet.amount
     );
   }
 }

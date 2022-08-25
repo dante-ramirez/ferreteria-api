@@ -1,4 +1,4 @@
-// import _UserPack from './UserPack';
+import _Wallet from './Wallet';
 
 export type userRole = 'administrator' | 'client';
 
@@ -12,7 +12,7 @@ export default class User {
   // mercadoPagoId: string | null
   verified: boolean;
   suspended: boolean;
-  // pack: _UserPack
+  wallet: _Wallet;
 
   constructor(
     id: number,
@@ -23,8 +23,8 @@ export default class User {
     role: userRole,
     // mercadoPagoId: string | null,
     verified: boolean,
-    suspended: boolean
-    // pack: _UserPack
+    suspended: boolean,
+    wallet: _Wallet
   ) {
     this.id = id;
     this.name = name;
@@ -35,7 +35,7 @@ export default class User {
     // this.mercadoPagoId = mercadoPagoId;
     this.verified = verified;
     this.suspended = suspended;
-    // this.pack = pack;
+    this.wallet = wallet;
   }
 
   serialize() {
@@ -46,8 +46,8 @@ export default class User {
       email: this.email,
       role: this.role,
       verified: this.verified,
-      suspended: this.suspended
-      // pack: this.pack.serialize()
+      suspended: this.suspended,
+      wallet: this.wallet.serialize()
     };
   }
 }

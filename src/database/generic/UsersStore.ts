@@ -1,8 +1,8 @@
 import BaseStore from './BaseStore';
-// import UsersPacksStore from './UsersPacksStore';
+import WalletsStore from './WalletsStore';
 // import UsersCardsStore from './UsersCardsStore';
 import User from '../../entities/User';
-// import UserPack from '../../entities/UserPack';
+import Wallet from '../../entities/Wallet';
 import {
   Pagination as _Pagination,
   UsersFilter as _Filters
@@ -10,15 +10,15 @@ import {
 
 export default class UsersStore extends BaseStore {
   protected connection: any;
-  // public packs: UsersPacksStore
+  public wallet: WalletsStore;
   // public cards: UsersCardsStore
   private user: User;
 
   constructor(connection: any, table: string) {
     super(connection, table);
-    // this.packs = new UsersPacksStore(connection, 'users_packs');
+    this.wallet = new WalletsStore(connection, 'wallet');
     // this.cards = new UsersCardsStore(connection, 'users_cards');
-    this.user = new User(0, '', '', '', '', 'client', false, false);
+    this.user = new User(0, '', '', '', '', 'client', false, false, new Wallet(-1, -1, -1));
   }
 
   async create(_user: User): Promise<User> { return this.user; }

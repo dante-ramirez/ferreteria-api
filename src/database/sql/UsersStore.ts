@@ -1,7 +1,7 @@
 import User from '../../entities/User';
-// import UserPack from '../../entities/UserPack';
+import Wallet from '../../entities/Wallet';
 import { ItemAlreadyExist, ItemNotFound } from '../errors';
-// import UsersPacksStore from './UsersPacksStore';
+import WalletsStore from './WalletsStore';
 import UsersStore from '../generic/UsersStore';
 import {
   Pagination as _Pagination,
@@ -17,10 +17,10 @@ import {
 } from './errors';
 
 export default class SQLUsersStore extends UsersStore {
-  // constructor(connection: any, table: string) {
-  //   super(connection, table);
-  //   // this.packs = new UsersPacksStore(connection, 'users_packs');
-  // }
+  constructor(connection: any, table: string) {
+    super(connection, table);
+    this.wallet = new WalletsStore(connection, 'wallet');
+  }
 
   async create(user: User): Promise<User> {
     try {
@@ -35,7 +35,7 @@ export default class SQLUsersStore extends UsersStore {
         })
         .returning('*');
 
-      return this.softFormatUser(newUser);
+      return this.formatUser(newUser);
     } catch (error) {
       if ((error as any).code === NULL_VALUE_ERROR) {
         throw new MissingField((error as any).column, this.table);
@@ -66,7 +66,7 @@ export default class SQLUsersStore extends UsersStore {
         })
         .returning('*');
 
-      return this.softFormatUser(userUpdated);
+      return this.formatUser(userUpdated);
     } catch (error) {
       if ((error as any).code === NULL_VALUE_ERROR) {
         throw new MissingField((error as any).column, this.table);
@@ -99,7 +99,7 @@ export default class SQLUsersStore extends UsersStore {
       throw new ItemNotFound(`user with id ${id} `);
     }
 
-    return this.softFormatUser(user);
+    return this.formatUser(user);
   }
 
   async getByEmail(email: string): Promise<User> {
@@ -117,7 +117,7 @@ export default class SQLUsersStore extends UsersStore {
       throw new ItemNotFound(`user with email ${email}`);
     }
 
-    return this.softFormatUser(user);
+    return this.formatUser(user);
   }
 
   async get(filters: _Filters, pagination: _Pagination): Promise<User[]> {
@@ -206,35 +206,35 @@ export default class SQLUsersStore extends UsersStore {
       throw new ItemNotFound(`user with id ${id}`);
     }
 
-    return this.softFormatUser(userUpdated);
+    return this.formatUser(userUpdated);
   }
 
-  // private async formatUser(user: any): Promise<User> {
-  //   let pack: UserPack;
+  private async formatUser(user: any): Promise<User> {
+    let wallet: Wallet;
 
-  //   try {
-  //     pack = await this.packs.getByUserId(user.id);
-  //   } catch (error) {
-  //     if (error instanceof ItemNotFound) {
-  //       pack = new UserPack(0, 0, 0);
-  //     } else {
-  //       throw error;
-  //     }
-  //   }
+    try {
+      wallet = await this.wallet.getByUserId(user.id);
+    } catch (error) {
+      if (error instanceof ItemNotFound) {
+        wallet = new Wallet(0, 0, 0);
+      } else {
+        throw error;
+      }
+    }
 
-  //   return new User(
-  //     Number(user.id),
-  //     user.name,
-  //     user.last_name,
-  //     user.email,
-  //     user.phone,
-  //     user.password,
-  //     user.role,
-  //     user.mercado_pago_id,
-  //     user.verified,
-  //     pack
-  //   );
-  // }
+    return new User(
+      Number(user.id),
+      user.name,
+      user.last_name,
+      user.email,
+      user.password,
+      user.role,
+      // user.mercado_pago_id,
+      user.verified,
+      user.suspended,
+      wallet
+    );
+  }
 
   private softFormatUser(user: any): User {
     return new User(
@@ -246,8 +246,8 @@ export default class SQLUsersStore extends UsersStore {
       user.role,
       // user.mercado_pago_id,
       user.verified,
-      user.suspended
-      // new UserPack(0, 0, 0)
+      user.suspended,
+      new Wallet(0, 0, 0)
     );
   }
 }

@@ -1,10 +1,10 @@
 import _Request from '../../../../definitions/request';
 import { ItemAlreadyExist } from '../../../../database/errors';
 import User from '../../../../entities/User';
-// import UserPack from '../../../../entities/UserPack';
+import Wallet from '../../../../entities/Wallet';
 import passwordHelper from '../../../../helpers/passwords';
-// import mailingService from '../../../../mailing-service';
-// import jwt from '../../../../entities/jwt';
+import mailingService from '../../../../mailing-service';
+import jwt from '../../../../entities/jwt';
 import logger from '../../../../helpers/logger';
 
 export default async function (req: _Request, res: any) {
@@ -27,24 +27,22 @@ export default async function (req: _Request, res: any) {
     passwordHelper.hash(password),
     'client',
     false,
-    false
-    // new UserPack(0, 0, 0)
+    false,
+    new Wallet(0, 0, 0)
   );
 
   try {
     user = await database.users.create(user);
-    // user.pack.userId = user.id;
+    user.wallet.userId = user.id;
 
-    // await database.users.packs.create(user.pack);
+    const mailParams = {
+      receivers: [user.email],
+      attachments: [],
+      receiverName: `${user.name} ${user.lastName}`
+    };
+    const token = jwt.createAccountVerificationToken({ id: user.id });
 
-    // const mailParams = {
-    //   receivers: [user.email],
-    //   attachments: [],
-    //   receiverName: `${user.name} ${user.lastName}`
-    // };
-    // const token = jwt.createAccountVerificationToken({ id: user.id });
-
-    // await mailingService.sendAccountVerificationToken(mailParams, token);
+    await mailingService.sendAccountVerificationToken(mailParams, token);
   } catch (error) {
     let errorCode = 'UNEXPECTED_ERROR';
     let statusCode = 500;
@@ -52,6 +50,21 @@ export default async function (req: _Request, res: any) {
     if (error instanceof ItemAlreadyExist) {
       statusCode = 400;
       errorCode = 'USER_ALREADY_EXIST';
+    }
+
+    logger.log(error);
+    return res.status(statusCode).send({ code: errorCode });
+  }
+
+  try {
+    await database.wallets.create(user.wallet);
+  } catch (error) {
+    let errorCode = 'UNEXPECTED_ERROR';
+    let statusCode = 500;
+
+    if (error instanceof ItemAlreadyExist) {
+      statusCode = 400;
+      errorCode = 'WALLET_ALREADY_EXIST';
     }
 
     logger.log(error);
