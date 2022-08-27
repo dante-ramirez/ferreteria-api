@@ -1,9 +1,9 @@
 export default {
   type: 'object',
   required: [
-    'name', 'description', 'stock', 'price', 'code', 'discount',
-    'reward_points', 'model', 'path_image1', 'path_image2', 'path_image3',
-    'path_image4', 'department_id', 'category_id', 'brand_id', 'offers_id'
+    'name', 'description', 'stock', 'price', 'code', 'finalPrice',
+    'rewardPoints', 'model', 'pathImage1', 'pathImage2', 'pathImage3',
+    'pathImage4', 'departmentId', 'categoryId', 'brandId'
   ],
   properties: {
     name: {
@@ -26,11 +26,11 @@ export default {
       type: 'string',
       minLength: 1
     },
-    discount: {
+    finalPrice: {
       type: 'number',
       minimum: 0
     },
-    reward_points: {
+    rewardPoints: {
       type: 'number',
       minimum: 0
     },
@@ -38,35 +38,31 @@ export default {
       type: 'string',
       minLength: 1
     },
-    path_image1: {
+    pathImage1: {
       type: 'string',
       minLength: 1
     },
-    path_image2: {
+    pathImage2: {
       type: 'string',
       minLength: 1
     },
-    path_image3: {
+    pathImage3: {
       type: 'string',
       minLength: 1
     },
-    path_image4: {
+    pathImage4: {
       type: 'string',
       minLength: 1
     },
-    department_id: {
+    departmentId: {
       type: 'number',
       minimum: 0
     },
-    category_id: {
+    categoryId: {
       type: 'number',
       minimum: 0
     },
-    brand_id: {
-      type: 'number',
-      minimum: 0
-    },
-    offers_id: {
+    brandId: {
       type: 'number',
       minimum: 0
     }

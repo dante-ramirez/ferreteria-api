@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import _Request from '../../../../definitions/request';
 import { ItemAlreadyExist } from '../../../../database/errors';
 import Product from '../../../../entities/Product';
@@ -14,7 +15,7 @@ export default async function (req: _Request, res: any) {
     stock,
     price,
     code,
-    discount,
+    finalPrice,
     rewardPoints,
     model,
     pathImage1,
@@ -23,8 +24,7 @@ export default async function (req: _Request, res: any) {
     pathImage4,
     departmentId,
     categoryId,
-    brandId,
-    offersId
+    brandId
   } = body;
 
   let product = new Product(
@@ -34,7 +34,7 @@ export default async function (req: _Request, res: any) {
     stock,
     price,
     code,
-    discount,
+    finalPrice,
     rewardPoints,
     model,
     pathImage1,
@@ -43,8 +43,7 @@ export default async function (req: _Request, res: any) {
     pathImage4,
     departmentId,
     categoryId,
-    brandId,
-    offersId
+    brandId
   );
 
   try {

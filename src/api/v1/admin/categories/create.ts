@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import _Request from '../../../../definitions/request';
 import { ItemAlreadyExist } from '../../../../database/errors';
 import Category from '../../../../entities/Category';
@@ -10,13 +11,17 @@ export default async function (req: _Request, res: any) {
   } = req;
   const {
     name,
-    discount
+    offersId,
+    beginAt,
+    finishAt
   } = body;
 
   let category = new Category(
     0,
     name,
-    discount
+    offersId,
+    beginAt,
+    finishAt
   );
 
   try {

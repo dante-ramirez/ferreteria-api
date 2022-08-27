@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import { ItemNotFound } from '../../../../database/errors';
 import _Brand from '../../../../entities/Brand';
 import _Request from '../../../../definitions/request';
@@ -11,7 +12,9 @@ export default async function (req:_Request, res:any) {
   } = req;
   const {
     name,
-    discount
+    offersId,
+    beginAt,
+    finishAt
   } = body;
   const { id } = params;
 
@@ -20,7 +23,9 @@ export default async function (req:_Request, res:any) {
   try {
     brandToUpdate = await database.brands.getById(Number(id));
     brandToUpdate.name = name;
-    brandToUpdate.discount = discount;
+    brandToUpdate.offersId = offersId;
+    brandToUpdate.beginAt = beginAt;
+    brandToUpdate.finishAt = finishAt;
 
     await database.brands.update(brandToUpdate);
   } catch (error) {

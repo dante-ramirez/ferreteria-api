@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import { ItemNotFound } from '../../../../database/errors';
 import _Product from '../../../../entities/Product';
 import _Request from '../../../../definitions/request';
@@ -15,7 +16,7 @@ export default async function (req:_Request, res:any) {
     stock,
     price,
     code,
-    discount,
+    finalPrice,
     rewardPoints,
     model,
     pathImage1,
@@ -24,8 +25,7 @@ export default async function (req:_Request, res:any) {
     pathImage4,
     departmentId,
     categoryId,
-    brandId,
-    offersId
+    brandId
   } = body;
   const { id } = params;
 
@@ -38,7 +38,7 @@ export default async function (req:_Request, res:any) {
     product.stock = stock;
     product.price = price;
     product.code = code;
-    product.discount = discount;
+    product.finalPrice = finalPrice;
     product.rewardPoints = rewardPoints;
     product.model = model;
     product.pathImage1 = pathImage1;
@@ -48,7 +48,6 @@ export default async function (req:_Request, res:any) {
     product.departmentId = departmentId;
     product.categoryId = categoryId;
     product.brandId = brandId;
-    product.offersId = offersId;
 
     await database.products.update(product);
   } catch (error) {

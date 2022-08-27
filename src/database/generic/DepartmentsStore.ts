@@ -11,7 +11,7 @@ export default class DepartmentsStore extends BaseStore {
 
   constructor(connection: any, table: string) {
     super(connection, table);
-    this.department = new Department(0, '', 0);
+    this.department = new Department(0, '', 0, '', '');
   }
 
   async create(_department: Department): Promise<Department> { return this.department; }

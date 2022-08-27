@@ -130,7 +130,7 @@ export default class SQLFavoritesStore extends FavoritesStore {
         product = await this.products.getById(favorite.product_id);
       } catch (error) {
         if (error instanceof ItemNotFound) {
-          product = new Product(0, '', '', 0, 0, '', 0, 0, '', '', '', '', '', 0, 0, 0, 0);
+          product = new Product(0, '', '', 0, 0, '', 0, 0, '', '', '', '', '', 0, 0, 0);
         } else {
           throw error;
         }

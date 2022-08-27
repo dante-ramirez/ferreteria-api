@@ -29,7 +29,7 @@ export default class SQLProductsStore extends ProductsStore {
           stock: product.stock,
           price: product.price,
           code: product.code,
-          discount: product.discount,
+          final_price: product.finalPrice,
           reward_points: product.rewardPoints,
           model: product.model,
           path_image1: product.pathImage1,
@@ -38,8 +38,7 @@ export default class SQLProductsStore extends ProductsStore {
           path_image4: product.pathImage4,
           department_id: product.departmentId,
           category_id: product.categoryId,
-          brand_id: product.brandId,
-          offers_id: product.offersId
+          brand_id: product.brandId
         })
         .returning('*');
 
@@ -71,7 +70,7 @@ export default class SQLProductsStore extends ProductsStore {
           stock: product.stock,
           price: product.price,
           code: product.code,
-          discount: product.discount,
+          final_price: product.finalPrice,
           reward_points: product.rewardPoints,
           model: product.model,
           path_image1: product.pathImage1,
@@ -81,7 +80,6 @@ export default class SQLProductsStore extends ProductsStore {
           department_id: product.departmentId,
           category_id: product.categoryId,
           brand_id: product.brandId,
-          offers_id: product.offersId,
           updated_at: timestamp
         })
         .returning('*');
@@ -162,7 +160,7 @@ export default class SQLProductsStore extends ProductsStore {
       product.stock,
       product.price,
       product.code,
-      product.discount,
+      product.final_price,
       product.reward_points,
       product.model,
       product.path_image1,
@@ -171,8 +169,7 @@ export default class SQLProductsStore extends ProductsStore {
       product.path_image4,
       Number(product.department_id),
       Number(product.category_id),
-      Number(product.brand_id),
-      Number(product.offers_id)
+      Number(product.brand_id)
     );
   }
 }

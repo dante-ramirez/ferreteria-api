@@ -25,7 +25,9 @@ export default class SQLBrandsStore extends BrandsStore {
       const [newBrands] = await this.connection(this.table)
         .insert({
           name: brand.name,
-          discount: brand.discount
+          offers_id: brand.offersId,
+          begin_at: brand.beginAt,
+          finish_at: brand.finishAt
         })
         .returning('*');
 
@@ -53,7 +55,9 @@ export default class SQLBrandsStore extends BrandsStore {
         .where('id', brand.id)
         .update({
           name: brand.name,
-          discount: brand.discount,
+          offers_id: brand.offersId,
+          begin_at: brand.beginAt,
+          finish_at: brand.finishAt,
           updated_at: timestamp
         })
         .returning('*');
@@ -148,7 +152,9 @@ export default class SQLBrandsStore extends BrandsStore {
     return new Brand(
       Number(brand.id),
       brand.name,
-      brand.discount
+      Number(brand.offers_id),
+      brand.begin_at,
+      brand.finish_at
     );
   }
 }

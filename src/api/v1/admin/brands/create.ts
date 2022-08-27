@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import _Request from '../../../../definitions/request';
 import { ItemAlreadyExist } from '../../../../database/errors';
 import Brand from '../../../../entities/Brand';
@@ -10,13 +11,17 @@ export default async function (req: _Request, res: any) {
   } = req;
   const {
     name,
-    discount
+    offersId,
+    beginAt,
+    finishAt
   } = body;
 
   let brand = new Brand(
     0,
     name,
-    discount
+    offersId,
+    beginAt,
+    finishAt
   );
 
   try {
