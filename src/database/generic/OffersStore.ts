@@ -11,7 +11,7 @@ export default class OffersStore extends BaseStore {
 
   constructor(connection: any, table: string) {
     super(connection, table);
-    this.offer = new Offer(0, '', 0, '', '');
+    this.offer = new Offer(0, 0);
   }
 
   async create(_offer: Offer): Promise<Offer> { return this.offer; }

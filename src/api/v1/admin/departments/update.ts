@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import { ItemNotFound } from '../../../../database/errors';
 import _Department from '../../../../entities/Department';
 import _Request from '../../../../definitions/request';
@@ -11,7 +12,9 @@ export default async function (req:_Request, res:any) {
   } = req;
   const {
     name,
-    discount
+    offersId,
+    beginAt,
+    finishAt
   } = body;
   const { id } = params;
 
@@ -20,7 +23,9 @@ export default async function (req:_Request, res:any) {
   try {
     departmentToUpdate = await database.departments.getById(Number(id));
     departmentToUpdate.name = name;
-    departmentToUpdate.discount = discount;
+    departmentToUpdate.offersId = offersId;
+    departmentToUpdate.beginAt = beginAt;
+    departmentToUpdate.finishAt = finishAt;
 
     await database.departments.update(departmentToUpdate);
   } catch (error) {

@@ -9,18 +9,12 @@ export default async function (req: _Request, res: any) {
     body
   } = req;
   const {
-    name,
-    discount,
-    type,
-    finishAt
+    discount
   } = body;
 
   let offer = new Offer(
     0,
-    name,
-    discount,
-    type,
-    finishAt
+    discount
   );
 
   try {

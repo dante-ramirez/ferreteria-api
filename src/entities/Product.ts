@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 export default class Product {
   id: number;
   name: string;
@@ -5,7 +6,7 @@ export default class Product {
   stock: number;
   price: number;
   code: string;
-  discount: number;
+  finalPrice: number;
   rewardPoints: number;
   model: string;
   pathImage1: string;
@@ -15,7 +16,6 @@ export default class Product {
   departmentId: number;
   categoryId: number;
   brandId: number;
-  offersId: number;
 
   constructor(
     id: number,
@@ -24,7 +24,7 @@ export default class Product {
     stock: number,
     price: number,
     code: string,
-    discount: number,
+    finalPrice: number,
     rewardPoints: number,
     model: string,
     pathImage1: string,
@@ -33,8 +33,7 @@ export default class Product {
     pathImage4: string,
     departmentId: number,
     categoryId: number,
-    brandId: number,
-    offersId: number
+    brandId: number
   ) {
     this.id = id;
     this.name = name;
@@ -42,7 +41,7 @@ export default class Product {
     this.stock = stock;
     this.price = price;
     this.code = code;
-    this.discount = discount;
+    this.finalPrice = finalPrice;
     this.rewardPoints = rewardPoints;
     this.model = model;
     this.pathImage1 = pathImage1;
@@ -52,7 +51,6 @@ export default class Product {
     this.departmentId = departmentId;
     this.categoryId = categoryId;
     this.brandId = brandId;
-    this.offersId = offersId;
   }
 
   serialize() {
@@ -63,7 +61,7 @@ export default class Product {
       stock: this.stock,
       price: this.price,
       code: this.code,
-      discount: this.discount,
+      finalPrice: this.finalPrice,
       rewardPoints: this.rewardPoints,
       model: this.model,
       pathImage1: this.pathImage1,
@@ -72,8 +70,7 @@ export default class Product {
       pathImage4: this.pathImage4,
       departmentId: this.departmentId,
       categoryId: this.categoryId,
-      brandId: this.brandId,
-      offersId: this.offersId
+      brandId: this.brandId
     };
   }
 }

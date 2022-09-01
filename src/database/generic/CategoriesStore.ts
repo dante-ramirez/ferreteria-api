@@ -11,7 +11,7 @@ export default class CategoriesStore extends BaseStore {
 
   constructor(connection: any, table: string) {
     super(connection, table);
-    this.category = new Category(0, '', 0);
+    this.category = new Category(0, '', 0, '', '');
   }
 
   async create(_category: Category): Promise<Category> { return this.category; }

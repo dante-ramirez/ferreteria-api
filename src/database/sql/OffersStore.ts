@@ -24,10 +24,7 @@ export default class SQLOffersStore extends OffersStore {
     try {
       const [newOffer] = await this.connection(this.table)
         .insert({
-          name: offer.name,
-          discount: offer.discount,
-          type: offer.type,
-          finish_at: offer.finishAt
+          discount: offer.discount
         })
         .returning('*');
 
@@ -54,10 +51,7 @@ export default class SQLOffersStore extends OffersStore {
       const [offerUpdate] = await this.connection(this.table)
         .where('id', offer.id)
         .update({
-          name: offer.name,
           discount: offer.discount,
-          type: offer.type,
-          finish_at: offer.finishAt,
           updated_at: timestamp
         })
         .returning('*');
@@ -133,10 +127,7 @@ export default class SQLOffersStore extends OffersStore {
   private softFormatOffer(offer: any): Offer {
     return new Offer(
       Number(offer.id),
-      offer.name,
-      offer.discount,
-      offer.type,
-      offer.finish_at
+      offer.discount
     );
   }
 }
