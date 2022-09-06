@@ -25,7 +25,9 @@ export default class SQLCategoriesStore extends CategoriesStore {
       const [newCategories] = await this.connection(this.table)
         .insert({
           name: category.name,
-          discount: category.discount
+          offers_id: category.offersId,
+          begin_at: category.beginAt,
+          finish_at: category.finishAt
         })
         .returning('*');
 
@@ -53,7 +55,9 @@ export default class SQLCategoriesStore extends CategoriesStore {
         .where('id', category.id)
         .update({
           name: category.name,
-          discount: category.discount,
+          offers_id: category.offersId,
+          begin_at: category.beginAt,
+          finish_at: category.finishAt,
           updated_at: timestamp
         })
         .returning('*');
@@ -147,7 +151,9 @@ export default class SQLCategoriesStore extends CategoriesStore {
     return new Category(
       Number(category.id),
       category.name,
-      category.discount
+      Number(category.offers_id),
+      category.begin_at,
+      category.finish_at
     );
   }
 }

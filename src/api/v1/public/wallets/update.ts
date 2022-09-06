@@ -10,7 +10,7 @@ export default async function (req:_Request, res:any) {
     body
   } = req;
   const {
-    amount
+    points
   } = body;
 
   let wallet: _Wallet;
@@ -18,7 +18,7 @@ export default async function (req:_Request, res:any) {
   try {
     wallet = await database.wallets.getByUserId(user.id);
 
-    wallet.amount = amount;
+    wallet.points = points;
 
     await database.wallets.update(wallet);
   } catch (error) {

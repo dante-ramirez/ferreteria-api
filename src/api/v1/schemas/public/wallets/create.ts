@@ -1,8 +1,8 @@
 export default {
   type: 'object',
-  required: ['amount'],
+  required: ['points'],
   properties: {
-    amount: {
+    points: {
       type: 'number',
       minimum: 0
     }

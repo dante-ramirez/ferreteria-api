@@ -10,12 +10,12 @@ export default async function (req: _Request, res: any) {
     body
   } = req;
   const {
-    amount
+    points
   } = body;
 
   let wallet = new Wallet(
     0,
-    amount,
+    points,
     user.id
   );
 

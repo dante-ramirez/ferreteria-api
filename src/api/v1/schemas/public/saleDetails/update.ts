@@ -1,8 +1,12 @@
 export default {
   type: 'object',
-  required: ['amount', 'sale_price', 'sales_id', 'product_id'],
+  required: ['sales_id', 'product_id', 'sale_price', 'quantity', 'amount'],
   properties: {
-    amount: {
+    sales_id: {
+      type: 'number',
+      minimum: 0
+    },
+    product_id: {
       type: 'number',
       minimum: 0
     },
@@ -10,11 +14,11 @@ export default {
       type: 'number',
       minimum: 0
     },
-    sales_id: {
+    quantity: {
       type: 'number',
       minimum: 0
     },
-    product_id: {
+    amount: {
       type: 'number',
       minimum: 0
     }

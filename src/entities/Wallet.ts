@@ -1,23 +1,23 @@
 export default class Wallet {
   id: number;
   userId: number;
-  amount: number;
+  points: number;
 
   constructor(
     id: number,
     userId: number,
-    amount: number
+    points: number
   ) {
     this.id = id;
     this.userId = userId;
-    this.amount = amount;
+    this.points = points;
   }
 
   serialize() {
     return {
       id: this.id,
       userId: this.userId,
-      amount: this.amount
+      points: this.points
     };
   }
 }

@@ -1,5 +1,5 @@
 import { ItemNotFound } from '../../../../database/errors';
-import _SaleDetail from '../../../../entities/saleDetail';
+import _SaleDetail from '../../../../entities/SaleDetail';
 import _Request from '../../../../definitions/request';
 import logger from '../../../../helpers/logger';
 

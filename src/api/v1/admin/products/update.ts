@@ -13,9 +13,9 @@ export default async function (req:_Request, res:any) {
     name,
     description,
     stock,
-    price,
     code,
-    discount,
+    price,
+    finalPrice,
     rewardPoints,
     model,
     pathImage1,
@@ -24,8 +24,7 @@ export default async function (req:_Request, res:any) {
     pathImage4,
     departmentId,
     categoryId,
-    brandId,
-    offersId
+    brandId
   } = body;
   const { id } = params;
 
@@ -36,9 +35,9 @@ export default async function (req:_Request, res:any) {
     product.name = name;
     product.description = description;
     product.stock = stock;
-    product.price = price;
     product.code = code;
-    product.discount = discount;
+    product.price = price;
+    product.finalPrice = finalPrice;
     product.rewardPoints = rewardPoints;
     product.model = model;
     product.pathImage1 = pathImage1;
@@ -48,7 +47,6 @@ export default async function (req:_Request, res:any) {
     product.departmentId = departmentId;
     product.categoryId = categoryId;
     product.brandId = brandId;
-    product.offersId = offersId;
 
     await database.products.update(product);
   } catch (error) {

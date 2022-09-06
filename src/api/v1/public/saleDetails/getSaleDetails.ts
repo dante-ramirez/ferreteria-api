@@ -1,7 +1,7 @@
 import { ItemNotFound } from '../../../../database/errors';
-import { SaleDetailsFilter as _SaleDetailsFilter } from '../../../../database/interfaces';
+import { SaleDetailsFilters as _SaleDetailsFilters } from '../../../../database/interfaces';
 import _Request from '../../../../definitions/request';
-import _SaleDetail from '../../../../entities/saleDetail';
+import _SaleDetail from '../../../../entities/SaleDetail';
 import logger from '../../../../helpers/logger';
 
 export default async function (req:_Request, res:any) {
@@ -21,7 +21,7 @@ export default async function (req:_Request, res:any) {
   let TotalCount: number = 0;
 
   try {
-    const filters: _SaleDetailsFilter = {
+    const filters: _SaleDetailsFilters = {
       id: {
         value: id,
         type: 'like'

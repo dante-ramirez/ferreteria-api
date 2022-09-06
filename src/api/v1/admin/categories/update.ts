@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import { ItemNotFound } from '../../../../database/errors';
 import _Category from '../../../../entities/Category';
 import _Request from '../../../../definitions/request';
@@ -11,7 +12,9 @@ export default async function (req:_Request, res:any) {
   } = req;
   const {
     name,
-    discount
+    offersId,
+    beginAt,
+    finishAt
   } = body;
   const { id } = params;
 
@@ -20,7 +23,9 @@ export default async function (req:_Request, res:any) {
   try {
     categoryToUpdate = await database.categories.getById(Number(id));
     categoryToUpdate.name = name;
-    categoryToUpdate.discount = discount;
+    categoryToUpdate.offersId = offersId;
+    categoryToUpdate.beginAt = beginAt;
+    categoryToUpdate.finishAt = finishAt;
 
     await database.categories.update(categoryToUpdate);
   } catch (error) {

@@ -1,9 +1,9 @@
-import SaleDetail from '../../entities/saleDetail';
+import SaleDetail from '../../entities/SaleDetail';
 import { ItemAlreadyExist, ItemNotFound } from '../errors';
 import SaleDetailsStore from '../generic/SaleDetailsStore';
 import {
   Pagination as _Pagination,
-  SaleDetailsFilter as _Filters
+  SaleDetailsFilters as _Filter
 } from '../interfaces';
 import {
   SQLDatabaseError,
@@ -15,19 +15,15 @@ import {
 } from './errors';
 
 export default class SQLSaleDetailsStore extends SaleDetailsStore {
-  // constructor(connection: any, table: string) {
-  //   super(connection, table);
-  //   // this.packs = new UsersPacksStore(connection, 'users_packs');
-  // }
-
   async create(saleDetail: SaleDetail): Promise<SaleDetail> {
     try {
       const [newSaleDetail] = await this.connection(this.table)
         .insert({
-          amount: saleDetail.amount,
-          sale_price: saleDetail.sale_price,
-          sales_id: saleDetail.sales_id,
-          product_id: saleDetail.product_id
+          sales_id: saleDetail.salesId,
+          product_id: saleDetail.productId,
+          sale_price: saleDetail.salePrice,
+          quantity: saleDetail.quantity,
+          amount: saleDetail.amount
         })
         .returning('*');
 
@@ -54,10 +50,11 @@ export default class SQLSaleDetailsStore extends SaleDetailsStore {
       const [offerUpdate] = await this.connection(this.table)
         .where('id', saleDetail.id)
         .update({
+          sales_id: saleDetail.salesId,
+          product_id: saleDetail.productId,
+          sale_price: saleDetail.salePrice,
+          quantity: saleDetail.quantity,
           amount: saleDetail.amount,
-          sale_price: saleDetail.sale_price,
-          sales_id: saleDetail.sales_id,
-          product_id: saleDetail.product_id,
           updated_at: timestamp
         })
         .returning('*');
@@ -110,11 +107,29 @@ export default class SQLSaleDetailsStore extends SaleDetailsStore {
     }
   }
 
-  async get(filters: _Filters, pagination: _Pagination): Promise<SaleDetail[]> {
+  async getBySalesId(id: number): Promise<SaleDetail[]> {
+    let saleDetails: any[] = [];
+
+    try {
+      saleDetails = await this.connection(this.table)
+        .select('*')
+        .where('sales_id', id);
+    } catch (error) {
+      throw new SQLDatabaseError(error);
+    }
+
+    if (!saleDetails.length) {
+      throw new ItemNotFound(this.table);
+    }
+
+    return saleDetails.map((saleDetail: any) => this.softFormatSaleDetail(saleDetail));
+  }
+
+  async get(filter: _Filter, pagination: _Pagination): Promise<SaleDetail[]> {
     let saleDetails: any[] = [];
     let query = this.connection(this.table).select('*');
 
-    query = this.applyFilters(query, filters);
+    query = this.applyFilters(query, filter);
     query = this.applyPagination(query, pagination);
 
     try {
@@ -133,10 +148,11 @@ export default class SQLSaleDetailsStore extends SaleDetailsStore {
   private softFormatSaleDetail(saleDetail: any): SaleDetail {
     return new SaleDetail(
       Number(saleDetail.id),
-      saleDetail.amount,
-      saleDetail.sale_price,
       Number(saleDetail.sales_id),
-      Number(saleDetail.product_id)
+      Number(saleDetail.product_id),
+      saleDetail.sale_price,
+      Number(saleDetail.quantity),
+      saleDetail.amount
     );
   }
 }

@@ -12,9 +12,9 @@ export default async function (req: _Request, res: any) {
     name,
     description,
     stock,
-    price,
     code,
-    discount,
+    price,
+    finalPrice,
     rewardPoints,
     model,
     pathImage1,
@@ -23,8 +23,7 @@ export default async function (req: _Request, res: any) {
     pathImage4,
     departmentId,
     categoryId,
-    brandId,
-    offersId
+    brandId
   } = body;
 
   let product = new Product(
@@ -32,9 +31,9 @@ export default async function (req: _Request, res: any) {
     name,
     description,
     stock,
-    price,
     code,
-    discount,
+    price,
+    finalPrice,
     rewardPoints,
     model,
     pathImage1,
@@ -43,8 +42,7 @@ export default async function (req: _Request, res: any) {
     pathImage4,
     departmentId,
     categoryId,
-    brandId,
-    offersId
+    brandId
   );
 
   try {

@@ -1,6 +1,6 @@
 import _Request from '../../../../definitions/request';
 import { ItemAlreadyExist } from '../../../../database/errors';
-import SaleDetail from '../../../../entities/saleDetail';
+import SaleDetail from '../../../../entities/SaleDetail';
 import logger from '../../../../helpers/logger';
 
 export default async function (req: _Request, res: any) {
@@ -9,18 +9,20 @@ export default async function (req: _Request, res: any) {
     body
   } = req;
   const {
-    amount,
-    salePrice,
     salesId,
-    productId
+    productId,
+    salePrice,
+    quantity,
+    amount
   } = body;
 
   let saleDetail = new SaleDetail(
     0,
-    amount,
-    salePrice,
     salesId,
-    productId
+    productId,
+    salePrice,
+    quantity,
+    amount
   );
 
   try {

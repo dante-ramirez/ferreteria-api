@@ -1,5 +1,5 @@
 import { ItemNotFound } from '../../../../database/errors';
-import { UsersFilter as _UsersFilter } from '../../../../database/interfaces';
+import { UsersFilters as _UsersFilters } from '../../../../database/interfaces';
 import _Request from '../../../../definitions/request';
 import _User from '../../../../entities/User';
 import logger from '../../../../helpers/logger';
@@ -20,7 +20,7 @@ export default async function (req:_Request, res:any) {
   let usersTotalCount: number = 0;
 
   try {
-    const filters: _UsersFilter = {
+    const filters: _UsersFilters = {
       name: {
         value: name,
         type: 'like'

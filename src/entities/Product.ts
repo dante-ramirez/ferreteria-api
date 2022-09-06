@@ -3,9 +3,9 @@ export default class Product {
   name: string;
   description: string;
   stock: number;
-  price: number;
   code: string;
-  discount: number;
+  price: number;
+  finalPrice: number;
   rewardPoints: number;
   model: string;
   pathImage1: string;
@@ -15,16 +15,15 @@ export default class Product {
   departmentId: number;
   categoryId: number;
   brandId: number;
-  offersId: number;
 
   constructor(
     id: number,
     name: string,
     description: string,
     stock: number,
-    price: number,
     code: string,
-    discount: number,
+    price: number,
+    finalPrice: number,
     rewardPoints: number,
     model: string,
     pathImage1: string,
@@ -33,16 +32,15 @@ export default class Product {
     pathImage4: string,
     departmentId: number,
     categoryId: number,
-    brandId: number,
-    offersId: number
+    brandId: number
   ) {
     this.id = id;
     this.name = name;
     this.description = description;
     this.stock = stock;
-    this.price = price;
     this.code = code;
-    this.discount = discount;
+    this.price = price;
+    this.finalPrice = finalPrice;
     this.rewardPoints = rewardPoints;
     this.model = model;
     this.pathImage1 = pathImage1;
@@ -52,7 +50,6 @@ export default class Product {
     this.departmentId = departmentId;
     this.categoryId = categoryId;
     this.brandId = brandId;
-    this.offersId = offersId;
   }
 
   serialize() {
@@ -61,9 +58,9 @@ export default class Product {
       name: this.name,
       description: this.description,
       stock: this.stock,
-      price: this.price,
       code: this.code,
-      discount: this.discount,
+      price: this.price,
+      finalPrice: this.finalPrice,
       rewardPoints: this.rewardPoints,
       model: this.model,
       pathImage1: this.pathImage1,
@@ -72,8 +69,7 @@ export default class Product {
       pathImage4: this.pathImage4,
       departmentId: this.departmentId,
       categoryId: this.categoryId,
-      brandId: this.brandId,
-      offersId: this.offersId
+      brandId: this.brandId
     };
   }
 }

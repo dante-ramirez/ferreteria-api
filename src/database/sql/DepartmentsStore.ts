@@ -25,7 +25,9 @@ export default class SQLDepartmentsStore extends DepartmentsStore {
       const [newDepartment] = await this.connection(this.table)
         .insert({
           name: department.name,
-          discount: department.discount
+          offers_id: department.offersId,
+          begin_at: department.beginAt,
+          finish_at: department.finishAt
         })
         .returning('*');
 
@@ -53,7 +55,9 @@ export default class SQLDepartmentsStore extends DepartmentsStore {
         .where('id', department.id)
         .update({
           name: department.name,
-          discount: department.discount,
+          offers_id: department.offersId,
+          begin_at: department.beginAt,
+          finish_at: department.finishAt,
           updated_at: timestamp
         })
         .returning('*');
@@ -147,7 +151,9 @@ export default class SQLDepartmentsStore extends DepartmentsStore {
     return new Department(
       Number(department.id),
       department.name,
-      department.discount
+      Number(department.offers_id),
+      department.begin_at,
+      department.finish_at
     );
   }
 }

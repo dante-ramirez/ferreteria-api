@@ -3,7 +3,7 @@ import { ItemAlreadyExist, ItemNotFound } from '../errors';
 import WalletsStore from '../generic/WalletsStore';
 import {
   Pagination as _Pagination
-  // UsersFilter as _Filters
+  // UsersFilters as _Filters
 } from '../interfaces';
 import {
   SQLDatabaseError,
@@ -25,7 +25,7 @@ export default class SQLWalletsStore extends WalletsStore {
       const [newWallet] = await this.connection(this.table)
         .insert({
           user_id: wallet.userId,
-          amount: wallet.amount
+          points: wallet.points
         })
         .returning('*');
 
@@ -52,7 +52,7 @@ export default class SQLWalletsStore extends WalletsStore {
       const [walletUpdated] = await this.connection(this.table)
         .where('id', wallet.id)
         .update({
-          amount: wallet.amount,
+          points: wallet.points,
           updated_at: timestamp
         })
         .returning('*');
@@ -115,7 +115,7 @@ export default class SQLWalletsStore extends WalletsStore {
     return new Wallet(
       Number(wallet.id),
       Number(wallet.user_id),
-      wallet.amount
+      wallet.points
     );
   }
 }

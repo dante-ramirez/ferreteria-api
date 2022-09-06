@@ -1,6 +1,7 @@
-export type statusType = 'approved' | 'pending' | 'canceled';
+import _SaleDetail from './SaleDetail';
+import { statusType } from './Sale';
 
-export default class Sale {
+export default class Ticket {
   id: number;
   userId: number;
   code: string;
@@ -9,6 +10,7 @@ export default class Sale {
   discountPoints: number;
   total: number;
   status: statusType;
+  saleDetail: _SaleDetail[];
 
   constructor(
     id: number,
@@ -18,7 +20,8 @@ export default class Sale {
     subtotal: number,
     discountPoints: number,
     total: number,
-    status: statusType
+    status: statusType,
+    saleDetail: _SaleDetail[]
   ) {
     this.id = id;
     this.userId = userId;
@@ -28,6 +31,7 @@ export default class Sale {
     this.discountPoints = discountPoints;
     this.total = total;
     this.status = status;
+    this.saleDetail = saleDetail;
   }
 
   serialize() {
@@ -39,7 +43,8 @@ export default class Sale {
       subtotal: this.subtotal,
       discountPoints: this.discountPoints,
       total: this.total,
-      status: this.status
+      status: this.status,
+      saleDetail: this.saleDetail.map((detail) => detail.serialize())
     };
   }
 }

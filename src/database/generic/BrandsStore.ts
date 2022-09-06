@@ -11,7 +11,7 @@ export default class BrandsStore extends BaseStore {
 
   constructor(connection: any, table: string) {
     super(connection, table);
-    this.brand = new Brand(0, '', 0);
+    this.brand = new Brand(0, '', 0, '', '');
   }
 
   async create(_brand: Brand): Promise<Brand> { return this.brand; }

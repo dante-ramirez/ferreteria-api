@@ -1,5 +1,5 @@
 import { ItemNotFound } from '../../../../database/errors';
-import _SaleDetail from '../../../../entities/saleDetail';
+import _SaleDetail from '../../../../entities/SaleDetail';
 import _Request from '../../../../definitions/request';
 import logger from '../../../../helpers/logger';
 
@@ -10,10 +10,11 @@ export default async function (req:_Request, res:any) {
     params
   } = req;
   const {
-    amount,
-    salePrice,
     salesId,
-    productId
+    productId,
+    salePrice,
+    quantity,
+    amount
   } = body;
   const { id } = params;
 
@@ -21,10 +22,12 @@ export default async function (req:_Request, res:any) {
 
   try {
     saleDetailToUpdate = await database.saleDetails.getById(Number(id));
+
+    saleDetailToUpdate.salesId = salesId;
+    saleDetailToUpdate.productId = productId;
+    saleDetailToUpdate.salePrice = salePrice;
+    saleDetailToUpdate.quantity = quantity;
     saleDetailToUpdate.amount = amount;
-    saleDetailToUpdate.sale_price = salePrice;
-    saleDetailToUpdate.sales_id = salesId;
-    saleDetailToUpdate.product_id = productId;
 
     await database.saleDetails.update(saleDetailToUpdate);
   } catch (error) {

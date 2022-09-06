@@ -7,8 +7,8 @@ export async function up(knex: _Knex): Promise<void> {
       table.string('name').notNull();
       table.string('description').notNull();
       table.integer('stock').notNull();
-      table.float('price').notNull();
       table.string('code').notNull();
+      table.float('price').notNull();
       table.float('final_price').notNull();
       table.float('reward_points').notNull();
       table.string('model').notNull();

@@ -5,7 +5,7 @@ import WalletsStore from './WalletsStore';
 import UsersStore from '../generic/UsersStore';
 import {
   Pagination as _Pagination,
-  UsersFilter as _Filters
+  UsersFilters as _Filters
 } from '../interfaces';
 import {
   SQLDatabaseError,

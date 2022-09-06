@@ -33,7 +33,7 @@ class SQLDatabase {
     this.invoices = new InvoicesStore(connection, 'invoice');
     this.favorites = new FavoritesStore(connection, 'favorites');
     this.sales = new SalesStore(connection, 'sales');
-    this.saleDetails = new SaleDetailsStore(connection, 'sales_detail');
+    this.saleDetails = new SaleDetailsStore(connection, 'sale_detail');
     this.products = new ProductsStore(connection, 'products');
   }
 }

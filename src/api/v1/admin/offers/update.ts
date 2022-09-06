@@ -10,10 +10,7 @@ export default async function (req:_Request, res:any) {
     params
   } = req;
   const {
-    name,
-    discount,
-    type,
-    finishAt
+    discount
   } = body;
   const { id } = params;
 
@@ -21,10 +18,7 @@ export default async function (req:_Request, res:any) {
 
   try {
     offerToUpdate = await database.offers.getById(Number(id));
-    offerToUpdate.name = name;
     offerToUpdate.discount = discount;
-    offerToUpdate.type = type;
-    offerToUpdate.finishAt = finishAt;
 
     await database.offers.update(offerToUpdate);
   } catch (error) {

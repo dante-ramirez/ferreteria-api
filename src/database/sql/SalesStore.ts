@@ -1,9 +1,12 @@
-import Sale from '../../entities/sale';
+import Sale from '../../entities/Sale';
+import SaleDetail from '../../entities/SaleDetail';
+import Ticket from '../../entities/Ticket';
 import { ItemAlreadyExist, ItemNotFound } from '../errors';
 import SalesStore from '../generic/SalesStore';
+import SaleDetailsStore from './SaleDetailsStore';
 import {
   Pagination as _Pagination,
-  SalesFilter as _Filters
+  SalesFilters as _Filters
 } from '../interfaces';
 import {
   SQLDatabaseError,
@@ -15,20 +18,22 @@ import {
 } from './errors';
 
 export default class SQLSalesStore extends SalesStore {
-  // constructor(connection: any, table: string) {
-  //   super(connection, table);
-  //   // this.packs = new UsersPacksStore(connection, 'users_packs');
-  // }
+  constructor(connection: any, table: string) {
+    super(connection, table);
+    this.saleDetails = new SaleDetailsStore(connection, 'sale_detail');
+  }
 
   async create(sale: Sale): Promise<Sale> {
     try {
       const [newSale] = await this.connection(this.table)
         .insert({
           code: sale.code,
+          user_id: sale.userId,
           date: sale.date,
-          total: sale.total,
           subtotal: sale.subtotal,
-          user_id: sale.userId
+          discount_points: sale.discountPoints,
+          total: sale.total,
+          status: sale.status
         })
         .returning('*');
 
@@ -52,18 +57,15 @@ export default class SQLSalesStore extends SalesStore {
   async update(sale: Sale): Promise<Sale> {
     try {
       const timestamp = new Date();
-      const [saleUpdate] = await this.connection(this.table)
+      const [saleUpdated] = await this.connection(this.table)
         .where('id', sale.id)
         .update({
-          code: sale.code,
-          date: sale.date,
-          total: sale.total,
-          subtotal: sale.subtotal,
+          status: sale.status,
           updated_at: timestamp
         })
         .returning('*');
 
-      return this.softFormatSale(saleUpdate);
+      return this.softFormatSale(saleUpdated);
     } catch (error) {
       if ((error as any).code === NULL_VALUE_ERROR) {
         throw new MissingField((error as any).column, this.table);
@@ -111,10 +113,11 @@ export default class SQLSalesStore extends SalesStore {
     }
   }
 
-  async get(filters: _Filters, pagination: _Pagination): Promise<Sale[]> {
+  async get(filters: _Filters, pagination: _Pagination): Promise<Ticket[]> {
     let sales: any[] = [];
-    let query = this.connection(this.table).select('*');
+    const tickets: any[] = [];
 
+    let query = this.connection(this.table).select('*');
     query = this.applyFilters(query, filters);
     query = this.applyPagination(query, pagination);
 
@@ -128,17 +131,47 @@ export default class SQLSalesStore extends SalesStore {
       throw new ItemNotFound(this.table);
     }
 
-    return sales.map((sale: any) => this.softFormatSale(sale));
+    Promise.all(sales.map(async (sale: any) => {
+      let detail: any[];
+
+      try {
+        detail = await this.saleDetails.getBySalesId(sale.id);
+      } catch (error) {
+        if (error instanceof ItemNotFound) {
+          detail = [new SaleDetail(0, 0, 0, 0, 0, 0)];
+        } else {
+          throw error;
+        }
+      }
+
+      const ticket = new Ticket(
+        Number(sale.id),
+        Number(sale.user_id),
+        sale.code,
+        sale.date,
+        sale.subtotal,
+        sale.discount_points,
+        sale.total,
+        sale.status,
+        detail
+      );
+
+      tickets.push(ticket);
+    }));
+
+    return tickets;
   }
 
   private softFormatSale(sale: any): Sale {
     return new Sale(
       Number(sale.id),
+      Number(sale.user_id),
       sale.code,
       sale.date,
-      sale.total,
       sale.subtotal,
-      Number(sale.user_id)
+      sale.discount_points,
+      sale.total,
+      sale.status
     );
   }
 }
