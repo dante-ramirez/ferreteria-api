@@ -17,7 +17,7 @@ export default class FavoritesStore extends BaseStore {
   constructor(connection: any, table: string) {
     super(connection, table);
     this.favorite = new Favorite(0, 0, 0);
-    this.favoriteProduct = new FavoriteProduct(0, 0, new _Product(0, '', '', 0, 0, '', 0, 0, '', '', '', '', '', 0, 0, 0));
+    this.favoriteProduct = new FavoriteProduct(0, 0, new _Product(0, '', '', 0, '', 0, 0, 0, '', '', '', '', '', 0, 0, 0));
     this.products = new Product(connection, 'products');
   }
 

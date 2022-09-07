@@ -4,8 +4,8 @@ export default class Product {
   name: string;
   description: string;
   stock: number;
-  price: number;
   code: string;
+  price: number;
   finalPrice: number;
   rewardPoints: number;
   model: string;
@@ -22,8 +22,8 @@ export default class Product {
     name: string,
     description: string,
     stock: number,
-    price: number,
     code: string,
+    price: number,
     finalPrice: number,
     rewardPoints: number,
     model: string,
@@ -39,8 +39,8 @@ export default class Product {
     this.name = name;
     this.description = description;
     this.stock = stock;
-    this.price = price;
     this.code = code;
+    this.price = price;
     this.finalPrice = finalPrice;
     this.rewardPoints = rewardPoints;
     this.model = model;
@@ -59,8 +59,8 @@ export default class Product {
       name: this.name,
       description: this.description,
       stock: this.stock,
-      price: this.price,
       code: this.code,
+      price: this.price,
       finalPrice: this.finalPrice,
       rewardPoints: this.rewardPoints,
       model: this.model,

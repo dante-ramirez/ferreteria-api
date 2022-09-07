@@ -14,8 +14,8 @@ export default async function (req:_Request, res:any) {
     name,
     description,
     stock,
-    price,
     code,
+    price,
     finalPrice,
     rewardPoints,
     model,
@@ -36,8 +36,8 @@ export default async function (req:_Request, res:any) {
     product.name = name;
     product.description = description;
     product.stock = stock;
-    product.price = price;
     product.code = code;
+    product.price = price;
     product.finalPrice = finalPrice;
     product.rewardPoints = rewardPoints;
     product.model = model;

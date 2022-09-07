@@ -1,7 +1,7 @@
 import { ItemNotFound } from '../../../../database/errors';
-import { SalesFilter as _SalesFilter } from '../../../../database/interfaces';
+import { SalesFilters as _SalesFilters } from '../../../../database/interfaces';
 import _Request from '../../../../definitions/request';
-import _Sale from '../../../../entities/sale';
+import _Ticket from '../../../../entities/Ticket';
 import logger from '../../../../helpers/logger';
 
 export default async function (req:_Request, res:any) {
@@ -11,22 +11,27 @@ export default async function (req:_Request, res:any) {
   } = req;
   const {
     id = 0,
-    date = 0,
+    date = '',
+    status = '',
     perPage = 0,
     currentPage = 0
   } = query;
 
-  let sales: _Sale[];
+  let sales: _Ticket[];
   let TotalCount: number = 0;
 
   try {
-    const filters: _SalesFilter = {
+    const filters: _SalesFilters = {
       id: {
         value: id,
-        type: 'like'
+        type: 'match'
       },
       date: {
         value: date,
+        type: 'like'
+      },
+      status: {
+        value: status,
         type: 'like'
       }
     };

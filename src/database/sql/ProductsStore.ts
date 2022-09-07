@@ -3,7 +3,7 @@ import { ItemAlreadyExist, ItemNotFound } from '../errors';
 import ProductsStore from '../generic/ProductsStore';
 import {
   Pagination as _Pagination,
-  ProductsFilter as _Filters
+  ProductsFilters as _Filters
 } from '../interfaces';
 import {
   SQLDatabaseError,
@@ -27,8 +27,8 @@ export default class SQLProductsStore extends ProductsStore {
           name: product.name,
           description: product.description,
           stock: product.stock,
-          price: product.price,
           code: product.code,
+          price: product.price,
           final_price: product.finalPrice,
           reward_points: product.rewardPoints,
           model: product.model,
@@ -68,11 +68,9 @@ export default class SQLProductsStore extends ProductsStore {
           name: product.name,
           description: product.description,
           stock: product.stock,
-          price: product.price,
           code: product.code,
+          price: product.price,
           final_price: product.finalPrice,
-          reward_points: product.rewardPoints,
-          model: product.model,
           path_image1: product.pathImage1,
           path_image2: product.pathImage2,
           path_image3: product.pathImage3,
@@ -158,8 +156,8 @@ export default class SQLProductsStore extends ProductsStore {
       product.name,
       product.description,
       product.stock,
-      product.price,
       product.code,
+      product.price,
       product.final_price,
       product.reward_points,
       product.model,

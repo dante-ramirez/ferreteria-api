@@ -8,7 +8,7 @@ export interface Pagination {
   offset: number
 }
 
-export interface UsersFilter {
+export interface UsersFilters {
   name: Filter,
   lastName: Filter
 }
@@ -37,18 +37,19 @@ export interface FavoritesFilter{
   userId: Filter
 }
 
-export interface SalesFilter{
+export interface SalesFilters{
   id: Filter,
-  date: Filter
+  date: Filter,
+  status: Filter
 }
 
-export interface SaleDetailsFilter{
+export interface SaleDetailsFilters{
   id: Filter,
   salesId: Filter,
   productId: Filter
 }
 
-export interface ProductsFilter{
+export interface ProductsFilters{
   name: Filter,
   description: Filter,
   code: Filter,

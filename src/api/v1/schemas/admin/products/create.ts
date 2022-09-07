@@ -1,7 +1,7 @@
 export default {
   type: 'object',
   required: [
-    'name', 'description', 'stock', 'price', 'code', 'finalPrice',
+    'name', 'description', 'stock', 'code', 'price', 'finalPrice',
     'rewardPoints', 'model', 'pathImage1', 'pathImage2', 'pathImage3',
     'pathImage4', 'departmentId', 'categoryId', 'brandId'
   ],
@@ -18,13 +18,13 @@ export default {
       type: 'number',
       minimum: 0
     },
-    price: {
-      type: 'number',
-      minimum: 0
-    },
     code: {
       type: 'string',
       minLength: 1
+    },
+    price: {
+      type: 'number',
+      minimum: 0
     },
     finalPrice: {
       type: 'number',

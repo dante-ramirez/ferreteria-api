@@ -6,6 +6,7 @@ export async function up(knex: _Knex): Promise<void> {
       table.increments('id').primary().notNull();
       table.string('path').notNull();
       table.integer('user_id').references('users.id').notNull();
+      // table.integer('sales_id').references('sales.id').notNull();
       table.timestamp('created_at').defaultTo(knex.fn.now());
       table.timestamp('updated_at').defaultTo(knex.fn.now());
     });

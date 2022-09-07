@@ -2,7 +2,7 @@ import BaseStore from './BaseStore';
 import Wallet from '../../entities/Wallet';
 import {
   Pagination as _Pagination
-  // UsersFilter as _Filters
+  // UsersFilters as _Filters
 } from '../interfaces';
 
 export default class WalletsStore extends BaseStore {

@@ -1,5 +1,5 @@
 import { ItemNotFound } from '../../../../database/errors';
-import { ProductsFilter as _ProductsFilter } from '../../../../database/interfaces';
+import { ProductsFilters as _ProductsFilters } from '../../../../database/interfaces';
 import _Request from '../../../../definitions/request';
 import _Product from '../../../../entities/Product';
 import logger from '../../../../helpers/logger';
@@ -22,7 +22,7 @@ export default async function (req:_Request, res:any) {
   let TotalCount: number = 0;
 
   try {
-    const filters: _ProductsFilter = {
+    const filters: _ProductsFilters = {
       name: {
         value: name,
         type: 'like'

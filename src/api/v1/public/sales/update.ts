@@ -1,5 +1,5 @@
 import { ItemNotFound } from '../../../../database/errors';
-import _Sale from '../../../../entities/sale';
+import _Sale from '../../../../entities/Sale';
 import _Request from '../../../../definitions/request';
 import logger from '../../../../helpers/logger';
 
@@ -12,8 +12,9 @@ export default async function (req:_Request, res:any) {
   const {
     code,
     date,
-    total,
-    subtotal
+    subtotal,
+    discountPoints,
+    total
   } = body;
   const { id } = params;
 
@@ -23,8 +24,10 @@ export default async function (req:_Request, res:any) {
     saleToUpdate = await database.sales.getById(Number(id));
     saleToUpdate.code = code;
     saleToUpdate.date = date;
-    saleToUpdate.total = total;
     saleToUpdate.subtotal = subtotal;
+    saleToUpdate.discountPoints = discountPoints;
+    saleToUpdate.total = total;
+    saleToUpdate.status = 'approved';
 
     await database.sales.update(saleToUpdate);
   } catch (error) {

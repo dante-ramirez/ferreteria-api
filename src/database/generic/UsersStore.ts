@@ -5,7 +5,7 @@ import User from '../../entities/User';
 import Wallet from '../../entities/Wallet';
 import {
   Pagination as _Pagination,
-  UsersFilter as _Filters
+  UsersFilters as _Filters
 } from '../interfaces';
 
 export default class UsersStore extends BaseStore {

@@ -1,29 +1,35 @@
 export default class SaleDetail {
   id: number;
+  salesId: number;
+  productId: number;
+  salePrice: number;
+  quantity: number;
   amount: number;
-  sale_price: number;
-  sales_id: number;
-  product_id: number;
+
   constructor(
     id: number,
-    amount: number,
-    salePrice: number,
     salesId: number,
-    productId: number
+    productId: number,
+    salePrice: number,
+    quantity: number,
+    amount: number
   ) {
     this.id = id;
+    this.salesId = salesId;
+    this.productId = productId;
+    this.salePrice = salePrice;
+    this.quantity = quantity;
     this.amount = amount;
-    this.sale_price = salePrice;
-    this.sales_id = salesId;
-    this.product_id = productId;
   }
+
   serialize() {
     return {
       id: this.id,
-      amount: this.amount,
-      sale_price: this.sale_price,
-      sales_id: this.sales_id,
-      product_id: this.product_id
+      salesId: this.salesId,
+      productId: this.productId,
+      salePrice: this.salePrice,
+      quantity: this.quantity,
+      amount: this.amount
     };
   }
 }

@@ -12,38 +12,38 @@ import updateSchema from '../../schemas/public/sales/update';
 
 const express = require('express');
 
-const offersRouter = express.Router();
+const salesRouter = express.Router();
 
-offersRouter.post(
+salesRouter.post(
   '/',
   authorization(['client']),
   schemaValidator(createSaleSchema),
   create
 );
 
-offersRouter.put(
+salesRouter.put(
   '/:id',
   authorization(['administrator']),
   schemaValidator(updateSchema),
   update
 );
 
-offersRouter.delete(
+salesRouter.delete(
   '/:salesId',
   authorization(['administrator']),
   deleteSale
 );
 
-offersRouter.get(
+salesRouter.get(
   '/:salesId',
   authorization(['administrator']),
   getSale
 );
 
-offersRouter.get(
+salesRouter.get(
   '/',
   authorization(['administrator']),
   getSales
 );
 
-export default offersRouter;
+export default salesRouter;

@@ -1,6 +1,6 @@
 export default {
   type: 'object',
-  required: ['code', 'date', 'total', 'subtotal'],
+  required: ['code', 'date', 'subtotal', 'discountPoints', 'total', 'status'],
   properties: {
     code: {
       type: 'string',
@@ -10,13 +10,21 @@ export default {
       type: 'string',
       minLength: 1
     },
+    subtotal: {
+      type: 'number',
+      minimum: 0
+    },
+    discountPoints: {
+      type: 'number',
+      minimum: 0
+    },
     total: {
       type: 'number',
       minimum: 0
     },
-    subtotal: {
-      type: 'number',
-      minimum: 0
+    status: {
+      type: 'string',
+      minLength: 1
     }
   }
 };
