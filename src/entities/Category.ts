@@ -1,4 +1,3 @@
-/* eslint-disable camelcase */
 export default class Category {
   id: number;
   name: string;

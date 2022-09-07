@@ -1,4 +1,3 @@
-/* eslint-disable camelcase */
 import { ItemNotFound } from '../../../../database/errors';
 import _Department from '../../../../entities/Department';
 import _Request from '../../../../definitions/request';
