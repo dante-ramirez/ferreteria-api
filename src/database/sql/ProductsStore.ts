@@ -71,8 +71,6 @@ export default class SQLProductsStore extends ProductsStore {
           code: product.code,
           price: product.price,
           final_price: product.finalPrice,
-          reward_points: product.rewardPoints,
-          model: product.model,
           path_image1: product.pathImage1,
           path_image2: product.pathImage2,
           path_image3: product.pathImage3,

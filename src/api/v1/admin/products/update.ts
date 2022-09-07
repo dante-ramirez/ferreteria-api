@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import { ItemNotFound } from '../../../../database/errors';
 import _Product from '../../../../entities/Product';
 import _Request from '../../../../definitions/request';

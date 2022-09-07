@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 export default class Product {
   id: number;
   name: string;

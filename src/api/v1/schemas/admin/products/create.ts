@@ -1,7 +1,7 @@
 export default {
   type: 'object',
   required: [
-    'name', 'description', 'stock', 'price', 'code', 'finalPrice',
+    'name', 'description', 'stock', 'code', 'price', 'finalPrice',
     'rewardPoints', 'model', 'pathImage1', 'pathImage2', 'pathImage3',
     'pathImage4', 'departmentId', 'categoryId', 'brandId'
   ],
