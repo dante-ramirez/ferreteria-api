@@ -1,4 +1,3 @@
-/* eslint-disable camelcase */
 import _Request from '../../../../definitions/request';
 import { ItemAlreadyExist } from '../../../../database/errors';
 import Department from '../../../../entities/Department';
