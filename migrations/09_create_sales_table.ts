@@ -11,7 +11,7 @@ export async function up(knex: _Knex): Promise<void> {
       table.float('discount_points').notNull();
       table.float('total').notNull();
       table.string('status').notNull();
-      // table.boolean('request').notNull().defaultTo(false);
+      table.boolean('request').notNull().defaultTo(false);
       table.timestamp('created_at').defaultTo(knex.fn.now());
       table.timestamp('updated_at').defaultTo(knex.fn.now());
     });

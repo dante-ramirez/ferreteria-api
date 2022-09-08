@@ -28,7 +28,8 @@ export default async function (req: _Request, res: any) {
     subtotal,
     discountPoints,
     total,
-    'pending'
+    'pending',
+    false
   );
 
   try {

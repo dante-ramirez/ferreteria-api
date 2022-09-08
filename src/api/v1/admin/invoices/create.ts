@@ -10,13 +10,15 @@ export default async function (req: _Request, res: any) {
     body
   } = req;
   const {
-    path
+    path,
+    salesId
   } = body;
 
   let invoice = new Invoice(
     0,
     path,
-    user.id
+    user.id,
+    salesId
   );
 
   try {
