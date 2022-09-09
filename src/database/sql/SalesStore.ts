@@ -33,7 +33,8 @@ export default class SQLSalesStore extends SalesStore {
           subtotal: sale.subtotal,
           discount_points: sale.discountPoints,
           total: sale.total,
-          status: sale.status
+          status: sale.status,
+          request: sale.request
         })
         .returning('*');
 
@@ -61,6 +62,7 @@ export default class SQLSalesStore extends SalesStore {
         .where('id', sale.id)
         .update({
           status: sale.status,
+          request: sale.request,
           updated_at: timestamp
         })
         .returning('*');
@@ -171,7 +173,8 @@ export default class SQLSalesStore extends SalesStore {
       sale.subtotal,
       sale.discount_points,
       sale.total,
-      sale.status
+      sale.status,
+      sale.request
     );
   }
 }

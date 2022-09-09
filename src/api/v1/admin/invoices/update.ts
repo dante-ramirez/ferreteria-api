@@ -11,7 +11,8 @@ export default async function (req:_Request, res:any) {
     params
   } = req;
   const {
-    path
+    path,
+    salesId
   } = body;
   const { id } = params;
 
@@ -21,6 +22,7 @@ export default async function (req:_Request, res:any) {
     invoice = await database.invoices.getById(Number(id));
     invoice.path = path;
     invoice.userId = user.id;
+    invoice.salesId = salesId;
 
     await database.invoices.update(invoice);
   } catch (error) {

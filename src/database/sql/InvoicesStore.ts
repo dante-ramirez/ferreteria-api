@@ -25,7 +25,8 @@ export default class SQLInvoicesStore extends InvoicesStore {
       const [newInvoice] = await this.connection(this.table)
         .insert({
           path: invoice.path,
-          user_id: invoice.userId
+          user_id: invoice.userId,
+          sales_id: invoice.salesId
         })
         .returning('*');
 
@@ -54,6 +55,7 @@ export default class SQLInvoicesStore extends InvoicesStore {
         .update({
           path: invoice.path,
           user_id: invoice.userId,
+          sales_id: invoice.salesId,
           updated_at: timestamp
         })
         .returning('*');
@@ -152,7 +154,8 @@ export default class SQLInvoicesStore extends InvoicesStore {
     return new Invoice(
       Number(invoice.id),
       invoice.path,
-      Number(invoice.user_id)
+      Number(invoice.user_id),
+      Number(invoice.sales_id)
     );
   }
 }

@@ -28,6 +28,7 @@ export default async function (req:_Request, res:any) {
     saleToUpdate.discountPoints = discountPoints;
     saleToUpdate.total = total;
     saleToUpdate.status = 'approved';
+    saleToUpdate.request = true;
 
     await database.sales.update(saleToUpdate);
   } catch (error) {

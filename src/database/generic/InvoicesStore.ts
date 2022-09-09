@@ -11,7 +11,7 @@ export default class InvoicesStore extends BaseStore {
 
   constructor(connection: any, table: string) {
     super(connection, table);
-    this.invoice = new Invoice(0, '', 0);
+    this.invoice = new Invoice(0, '', 0, 0);
   }
 
   async create(_invoice: Invoice): Promise<Invoice> { return this.invoice; }
