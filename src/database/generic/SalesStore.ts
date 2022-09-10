@@ -18,7 +18,7 @@ export default class SalesStore extends BaseStore {
     super(connection, table);
     this.sale = new Sale(0, 0, '', '', 0, 0, 0, 'pending', false);
     this.saleDetails = new SaleDetail(connection, 'sale_detail');
-    this.ticket = new Ticket(0, 0, '', '', 0, 0, 0, 'pending', [new Detail(0, 0, 0, 0, 0, 0)]);
+    this.ticket = new Ticket(0, 0, '', '', 0, 0, 0, 'pending', false, [new Detail(0, 0, 0, 0, 0, 0)]);
   }
 
   async create(_sale: Sale): Promise<Sale> { return this.sale; }

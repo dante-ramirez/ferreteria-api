@@ -113,6 +113,7 @@ export default async function (req:_Request, res:any) {
       tickets[index].discountPoints,
       tickets[index].total,
       tickets[index].status,
+      tickets[index].request,
       tickets[index].saleDetail,
       products[index]
     );

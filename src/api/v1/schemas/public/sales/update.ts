@@ -26,7 +26,7 @@ export default {
       type: 'string',
       minLength: 1
     },
-    requets: {
+    request: {
       type: 'boolean'
     }
   }

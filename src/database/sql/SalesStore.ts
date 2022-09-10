@@ -155,6 +155,7 @@ export default class SQLSalesStore extends SalesStore {
         sale.discount_points,
         sale.total,
         sale.status,
+        sale.request,
         detail
       );
 

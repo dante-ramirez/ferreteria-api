@@ -13,6 +13,7 @@ export default class Sales {
   discountPoints: number;
   total: number;
   status: statusType;
+  request: boolean;
   saleDetail: _SaleDetail[];
   products: _Products[];
 
@@ -26,6 +27,7 @@ export default class Sales {
     discountPoints: number,
     total: number,
     status: statusType,
+    request: boolean,
     saleDetail: _SaleDetail[],
     products: _Products[]
   ) {
@@ -38,6 +40,7 @@ export default class Sales {
     this.discountPoints = discountPoints;
     this.total = total;
     this.status = status;
+    this.request = request;
     this.saleDetail = saleDetail;
     this.products = products;
   }
@@ -53,6 +56,7 @@ export default class Sales {
       discountPoints: this.discountPoints,
       total: this.total,
       status: this.status,
+      request: this.request,
       saleDetail: this.saleDetail.map((detail) => detail.serialize()),
       products: this.products.map((product) => product.serialize())
     };
