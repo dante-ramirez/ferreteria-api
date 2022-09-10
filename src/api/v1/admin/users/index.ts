@@ -1,4 +1,4 @@
-import authorization from '../../../../middlewares/authorization';
+import authorization from '../../../../middleware/authorization';
 
 import getUsers from './getUsers';
 import getUser from './getUser';

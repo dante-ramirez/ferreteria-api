@@ -1,4 +1,4 @@
-import schemaValidator from '../../../../middlewares/jsonSchemaValidator';
+import schemaValidator from '../../../../middleware/jsonSchemaValidator';
 
 import login from './login';
 
