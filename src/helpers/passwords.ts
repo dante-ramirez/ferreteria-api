@@ -1,4 +1,4 @@
-const bycript = require('bcryptjs');
+const bcrypt = require('bcryptjs');
 
 class Password {
   saltRounds:number;
@@ -8,11 +8,11 @@ class Password {
   }
 
   hash(password:string):string {
-    return bycript.hashSync(password, this.saltRounds);
+    return bcrypt.hashSync(password, this.saltRounds);
   }
 
   async isPasswordCorrect(password:string, hash:string): Promise<boolean> {
-    return bycript.compare(password, hash);
+    return bcrypt.compare(password, hash);
   }
 
   generate(length: number) {

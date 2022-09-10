@@ -10,6 +10,7 @@ export default class Ticket {
   discountPoints: number;
   total: number;
   status: statusType;
+  request: boolean;
   saleDetail: _SaleDetail[];
 
   constructor(
@@ -21,6 +22,7 @@ export default class Ticket {
     discountPoints: number,
     total: number,
     status: statusType,
+    request: boolean,
     saleDetail: _SaleDetail[]
   ) {
     this.id = id;
@@ -31,6 +33,7 @@ export default class Ticket {
     this.discountPoints = discountPoints;
     this.total = total;
     this.status = status;
+    this.request = request;
     this.saleDetail = saleDetail;
   }
 
@@ -44,6 +47,7 @@ export default class Ticket {
       discountPoints: this.discountPoints,
       total: this.total,
       status: this.status,
+      request: this.request,
       saleDetail: this.saleDetail.map((detail) => detail.serialize())
     };
   }

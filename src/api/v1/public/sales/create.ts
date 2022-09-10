@@ -85,6 +85,7 @@ export default async function (req: _Request, res: any) {
     sale.discountPoints,
     sale.total,
     sale.status,
+    sale.request,
     saleDetails
   );
 
