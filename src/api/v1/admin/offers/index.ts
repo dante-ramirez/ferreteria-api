@@ -1,5 +1,5 @@
-import schemaValidator from '../../../../middlewares/jsonSchemaValidator';
-import authorization from '../../../../middlewares/authorization';
+import schemaValidator from '../../../../middleware/jsonSchemaValidator';
+import authorization from '../../../../middleware/authorization';
 
 import create from './create';
 import update from './update';
