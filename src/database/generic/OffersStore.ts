@@ -1,8 +1,7 @@
 import BaseStore from './BaseStore';
 import Offer from '../../entities/Offer';
 import {
-  Pagination as _Pagination,
-  OffersFilter as _Filters
+  Pagination as _Pagination
 } from '../interfaces';
 
 export default class OffersStore extends BaseStore {
@@ -18,5 +17,5 @@ export default class OffersStore extends BaseStore {
   async getById(_id: number): Promise<Offer> { return this.offer; }
   async update(_offer: Offer): Promise<Offer> { return this.offer; }
   async delete(_id: number): Promise<boolean> { return true; }
-  async get(_filters: _Filters, _pagination: _Pagination): Promise<Offer[]> { return [this.offer]; }
+  async get(): Promise<Offer[]> { return [this.offer]; }
 }

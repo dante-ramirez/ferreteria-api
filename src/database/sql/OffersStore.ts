@@ -2,8 +2,7 @@ import Offer from '../../entities/Offer';
 import { ItemAlreadyExist, ItemNotFound } from '../errors';
 import OffersStore from '../generic/OffersStore';
 import {
-  Pagination as _Pagination,
-  OffersFilter as _Filters
+  Pagination as _Pagination
 } from '../interfaces';
 import {
   SQLDatabaseError,
@@ -104,15 +103,11 @@ export default class SQLOffersStore extends OffersStore {
     }
   }
 
-  async get(filters: _Filters, pagination: _Pagination): Promise<Offer[]> {
+  async get(): Promise<Offer[]> {
     let offers: any[] = [];
-    let query = this.connection(this.table).select('*');
-
-    query = this.applyFilters(query, filters);
-    query = this.applyPagination(query, pagination);
 
     try {
-      offers = await query;
+      offers = await this.connection(this.table).select('*');
     } catch (error) {
       throw new SQLDatabaseError(error);
     }

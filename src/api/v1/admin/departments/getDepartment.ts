@@ -12,10 +12,10 @@ export default async function (req:_Request, res:any) {
     departmentId
   } = params;
 
-  let Department: _Department;
+  let department: _Department;
 
   try {
-    Department = await database.departments.getById(Number(departmentId));
+    department = await database.departments.getById(Number(departmentId));
   } catch (error) {
     let statusCode = 500;
     let errorCode = 'UNEXPECTED_ERROR';
@@ -29,5 +29,5 @@ export default async function (req:_Request, res:any) {
     return res.status(statusCode).send({ code: errorCode });
   }
 
-  return res.status(200).send(Department.serialize());
+  return res.status(200).send(department.serialize());
 }
