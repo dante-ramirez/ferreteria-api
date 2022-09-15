@@ -25,10 +25,6 @@ export interface CategoriesFilter {
   name: Filter
 }
 
-export interface OffersFilter {
-  name: Filter
-}
-
 export interface InvoicesFilter{
   path: Filter
 }

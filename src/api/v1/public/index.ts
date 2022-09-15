@@ -4,6 +4,7 @@ import walletsRouter from './wallets';
 import favoritesRouter from './favorites';
 import salesRouter from './sales';
 import saleDetailsRouter from './saleDetails';
+import productsRouter from './products';
 
 import healthCheck from './healthCheck';
 
@@ -17,6 +18,7 @@ publicRouter.use('/wallets', walletsRouter);
 publicRouter.use('/favorites', favoritesRouter);
 publicRouter.use('/sales', salesRouter);
 publicRouter.use('/saleDetails', saleDetailsRouter);
+publicRouter.use('/products', productsRouter);
 publicRouter.get('', healthCheck);
 
 export default publicRouter;

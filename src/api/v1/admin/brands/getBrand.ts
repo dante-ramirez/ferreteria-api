@@ -12,10 +12,10 @@ export default async function (req:_Request, res:any) {
     brandId
   } = params;
 
-  let Brand: _Brand;
+  let brand: _Brand;
 
   try {
-    Brand = await database.brands.getById(Number(brandId));
+    brand = await database.brands.getById(Number(brandId));
   } catch (error) {
     let statusCode = 500;
     let errorCode = 'UNEXPECTED_ERROR';
@@ -29,5 +29,5 @@ export default async function (req:_Request, res:any) {
     return res.status(statusCode).send({ code: errorCode });
   }
 
-  return res.status(200).send(Brand.serialize());
+  return res.status(200).send(brand.serialize());
 }
