@@ -8,15 +8,16 @@ export default async function (req:_Request, res:any) {
     database,
     params
   } = req;
-  const {
-    salesId
-  } = params;
 
-  let saleToDelete: _Sale;
+  const { salesId } = params;
+
+  let sale: _Sale;
 
   try {
-    saleToDelete = await database.sales.getById(Number(salesId));
-    await database.sales.delete(Number(saleToDelete.id));
+    sale = await database.sales.getById(Number(salesId));
+    sale.request = true;
+
+    sale = await database.sales.update(sale);
   } catch (error) {
     let statusCode = 500;
     let errorCode = 'UNEXPECTED_ERROR';
@@ -30,5 +31,5 @@ export default async function (req:_Request, res:any) {
     return res.status(statusCode).send({ code: errorCode });
   }
 
-  return res.status(200).send();
+  return res.status(200).send(sale.serialize());
 }

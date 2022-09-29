@@ -39,6 +39,12 @@ export interface SalesFilters{
   status: Filter
 }
 
+export interface PurchasesFilters{
+  date: Filter,
+  status: Filter,
+  userId: Filter
+}
+
 export interface SaleDetailsFilters{
   id: Filter,
   salesId: Filter,
