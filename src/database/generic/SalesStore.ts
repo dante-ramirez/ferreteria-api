@@ -5,7 +5,8 @@ import Detail from '../../entities/SaleDetail';
 import SaleDetail from './SaleDetailsStore';
 import {
   Pagination as _Pagination,
-  SalesFilters as _Filters
+  SalesFilters as _SalesFilters,
+  PurchasesFilters as _PurchasesFilters
 } from '../interfaces';
 
 export default class SalesStore extends BaseStore {
@@ -25,5 +26,6 @@ export default class SalesStore extends BaseStore {
   async getById(_id: number): Promise<Sale> { return this.sale; }
   async update(_sale: Sale): Promise<Sale> { return this.sale; }
   async delete(_id: number): Promise<boolean> { return true; }
-  async get(_filters: _Filters, _pagination: _Pagination): Promise<Ticket[]> { return [this.ticket]; }
+  async get(_filters: _SalesFilters, _pagination: _Pagination): Promise<Ticket[]> { return [this.ticket]; }
+  async getPurchases(_filters: _PurchasesFilters, _pagination: _Pagination): Promise<Ticket[]> { return [this.ticket]; }
 }

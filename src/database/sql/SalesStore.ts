@@ -6,7 +6,8 @@ import SalesStore from '../generic/SalesStore';
 import SaleDetailsStore from './SaleDetailsStore';
 import {
   Pagination as _Pagination,
-  SalesFilters as _Filters
+  SalesFilters as _SalesFilters,
+  PurchasesFilters as _PurchasesFilters
 } from '../interfaces';
 import {
   SQLDatabaseError,
@@ -115,7 +116,57 @@ export default class SQLSalesStore extends SalesStore {
     }
   }
 
-  async get(filters: _Filters, pagination: _Pagination): Promise<Ticket[]> {
+  async get(filters: _SalesFilters, pagination: _Pagination): Promise<Ticket[]> {
+    let sales: any[] = [];
+    const tickets: any[] = [];
+
+    let query = this.connection(this.table).select('*');
+    query = this.applyFilters(query, filters);
+    query = this.applyPagination(query, pagination);
+
+    try {
+      sales = await query;
+    } catch (error) {
+      throw new SQLDatabaseError(error);
+    }
+
+    if (!sales.length) {
+      throw new ItemNotFound(this.table);
+    }
+
+    Promise.all(sales.map(async (sale: any) => {
+      let detail: any[];
+
+      try {
+        detail = await this.saleDetails.getBySalesId(sale.id);
+      } catch (error) {
+        if (error instanceof ItemNotFound) {
+          detail = [new SaleDetail(0, 0, 0, 0, 0, 0)];
+        } else {
+          throw error;
+        }
+      }
+
+      const ticket = new Ticket(
+        Number(sale.id),
+        Number(sale.user_id),
+        sale.code,
+        sale.date,
+        sale.subtotal,
+        sale.discount_points,
+        sale.total,
+        sale.status,
+        sale.request,
+        detail
+      );
+
+      tickets.push(ticket);
+    }));
+
+    return tickets;
+  }
+
+  async getPurchases(filters: _PurchasesFilters, pagination: _Pagination): Promise<Ticket[]> {
     let sales: any[] = [];
     const tickets: any[] = [];
 
