@@ -3,6 +3,7 @@ import authorization from '../../../../middleware/authorization';
 
 import update from './update';
 import getSales from './getSales';
+import getRequests from './getRequests';
 
 import updateSchema from '../../schemas/admin/sales/update';
 
@@ -21,6 +22,12 @@ salesRouter.get(
   '/',
   authorization(['administrator']),
   getSales
+);
+
+salesRouter.get(
+  '/invoice-requests',
+  authorization(['administrator']),
+  getRequests
 );
 
 export default salesRouter;
