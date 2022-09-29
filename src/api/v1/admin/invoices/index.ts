@@ -3,7 +3,7 @@ import authorization from '../../../../middleware/authorization';
 
 import create from './create';
 import update from './update';
-import deleteOffer from './delete';
+import deleteInvoice from './delete';
 import getInvoice from './getInvoice';
 import getInvoices from './getInvoices';
 
@@ -31,7 +31,7 @@ invoicesRouter.put(
 invoicesRouter.delete(
   '/:invoiceId',
   authorization(['administrator']),
-  deleteOffer
+  deleteInvoice
 );
 
 invoicesRouter.get(

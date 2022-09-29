@@ -216,6 +216,55 @@ export default class SQLSalesStore extends SalesStore {
     return tickets;
   }
 
+  async getInvoiceRequests(pagination: _Pagination): Promise<Ticket[]> {
+    let sales: any[] = [];
+    const tickets: any[] = [];
+
+    let query = this.connection(this.table).select('*').where('request', true);
+    query = this.applyPagination(query, pagination);
+
+    try {
+      sales = await query;
+    } catch (error) {
+      throw new SQLDatabaseError(error);
+    }
+
+    if (!sales.length) {
+      throw new ItemNotFound(this.table);
+    }
+
+    await Promise.all(sales.map(async (sale: any) => {
+      let detail: any[];
+
+      try {
+        detail = await this.saleDetails.getBySalesId(sale.id);
+      } catch (error) {
+        if (error instanceof ItemNotFound) {
+          detail = [new SaleDetail(0, 0, 0, 0, 0, 0)];
+        } else {
+          throw error;
+        }
+      }
+
+      const ticket = new Ticket(
+        Number(sale.id),
+        Number(sale.user_id),
+        sale.code,
+        sale.date,
+        sale.subtotal,
+        sale.discount_points,
+        sale.total,
+        sale.status,
+        sale.request,
+        detail
+      );
+
+      tickets.push(ticket);
+    }));
+
+    return tickets;
+  }
+
   private softFormatSale(sale: any): Sale {
     return new Sale(
       Number(sale.id),
