@@ -18,7 +18,7 @@ export default class UsersStore extends BaseStore {
     super(connection, table);
     this.wallet = new WalletsStore(connection, 'wallet');
     // this.cards = new UsersCardsStore(connection, 'users_cards');
-    this.user = new User(0, '', '', '', '', 'client', false, false, new Wallet(-1, -1, -1));
+    this.user = new User(0, '', '', '', '', 'client', false, false, new Wallet(-1, -1, -1, -1));
   }
 
   async create(_user: User): Promise<User> { return this.user; }

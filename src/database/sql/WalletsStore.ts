@@ -53,6 +53,7 @@ export default class SQLWalletsStore extends WalletsStore {
         .where('id', wallet.id)
         .update({
           points: wallet.points,
+          unavailable_points: wallet.unavailablePoints,
           updated_at: timestamp
         })
         .returning('*');
@@ -115,7 +116,8 @@ export default class SQLWalletsStore extends WalletsStore {
     return new Wallet(
       Number(wallet.id),
       Number(wallet.user_id),
-      wallet.points
+      wallet.points,
+      wallet.unavailable_points
     );
   }
 }

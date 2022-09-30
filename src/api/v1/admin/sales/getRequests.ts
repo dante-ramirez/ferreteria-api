@@ -46,7 +46,7 @@ export default async function (req:_Request, res:any) {
       user = database.users.getById(Number(ticket.userId));
     } catch (error) {
       if (error instanceof ItemNotFound) {
-        user = new _User(0, '', '', '', '', 'client', false, false, new _Wallet(0, 0, 0));
+        user = new _User(0, '', '', '', '', 'client', false, false, new _Wallet(0, 0, 0, 0));
       } else {
         throw error;
       }

@@ -6,6 +6,7 @@ export async function up(knex: _Knex): Promise<void> {
       table.increments('id').primary().notNull();
       table.integer('user_id').references('users.id').notNull();
       table.float('points').defaultTo(-1);
+      table.float('unavailable_points').defaultTo(-1);
       table.timestamp('created_at').defaultTo(knex.fn.now());
       table.timestamp('updated_at').defaultTo(knex.fn.now());
     });

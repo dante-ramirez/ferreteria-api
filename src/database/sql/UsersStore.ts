@@ -216,7 +216,7 @@ export default class SQLUsersStore extends UsersStore {
       wallet = await this.wallet.getByUserId(user.id);
     } catch (error) {
       if (error instanceof ItemNotFound) {
-        wallet = new Wallet(0, 0, 0);
+        wallet = new Wallet(0, 0, 0, 0);
       } else {
         throw error;
       }
@@ -247,7 +247,7 @@ export default class SQLUsersStore extends UsersStore {
       // user.mercado_pago_id,
       user.verified,
       user.suspended,
-      new Wallet(0, 0, 0)
+      new Wallet(0, 0, 0, 0)
     );
   }
 }
