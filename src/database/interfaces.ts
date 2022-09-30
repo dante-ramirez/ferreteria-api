@@ -57,3 +57,7 @@ export interface ProductsFilters{
   code: Filter,
   model: Filter
 }
+
+export interface SurveysFilter{
+  link: Filter
+}

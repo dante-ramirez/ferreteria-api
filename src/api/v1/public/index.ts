@@ -5,6 +5,7 @@ import favoritesRouter from './favorites';
 import purchasesRouter from './purchases';
 import saleDetailsRouter from './saleDetails';
 import productsRouter from './products';
+import surveysRouter from './surveys';
 
 import healthCheck from './healthCheck';
 
@@ -19,6 +20,7 @@ publicRouter.use('/favorites', favoritesRouter);
 publicRouter.use('/purchases', purchasesRouter);
 publicRouter.use('/saleDetails', saleDetailsRouter);
 publicRouter.use('/products', productsRouter);
+publicRouter.use('/surveys', surveysRouter);
 publicRouter.get('', healthCheck);
 
 export default publicRouter;
