@@ -11,7 +11,7 @@ export default class WalletsStore extends BaseStore {
 
   constructor(connection: any, table: string) {
     super(connection, table);
-    this.wallet = new Wallet(0, 0, 0);
+    this.wallet = new Wallet(0, 0, 0, 0);
   }
 
   async create(_wallet: Wallet): Promise<Wallet> { return this.wallet; }

@@ -28,7 +28,7 @@ export default async function (req: _Request, res: any) {
     'client',
     false,
     false,
-    new Wallet(0, 0, 0)
+    new Wallet(0, 0, 0, 0)
   );
 
   try {

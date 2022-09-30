@@ -16,7 +16,8 @@ export default async function (req: _Request, res: any) {
   let wallet = new Wallet(
     0,
     points,
-    user.id
+    user.id,
+    0
   );
 
   try {

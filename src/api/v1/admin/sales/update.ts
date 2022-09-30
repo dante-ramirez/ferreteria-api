@@ -64,7 +64,7 @@ export default async function (req:_Request, res:any) {
       await Promise.all(saleDetails.map(async (detail: any) => {
         product = await database.products.getById(Number(detail.productId));
 
-        rewardPoints += product.rewardPoints;
+        rewardPoints += product.rewardPoints * detail.quantity;
         product.stock -= detail.quantity;
 
         product = await database.products.update(product);
@@ -88,7 +88,8 @@ export default async function (req:_Request, res:any) {
     try {
       wallet = await database.wallets.getByUserId(Number(sale.userId));
 
-      wallet.points = wallet.points - discountPoints + rewardPoints;
+      wallet.points -= discountPoints;
+      wallet.unavailablePoints += rewardPoints;
 
       await database.wallets.update(wallet);
     } catch (error) {
