@@ -1,8 +1,8 @@
 export default {
   service: 'API',
   environment: process.env.APP_ENVIRONMENT || 'develop',
-  webAppBaseUrl: process.env.WEB_APP_BASE_URL || 'http://localhost:3000',
   apiBaseUrl: process.env.API_BASE_URL || 'http://localhost:9000',
+  webAppBaseUrl: process.env.WEB_APP_BASE_URL || 'http://localhost:3000',
   adminWebAppBaseUrl: process.env.ADMIN_WEB_APP_BASE_URL || 'http://localhost:3001',
   // apiBaseUrlMercadoPago: process.env.API_BASE_URL_MERCADO_PAGO || 'https://api.mercadopago.com',
   api: {
