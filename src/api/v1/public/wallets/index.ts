@@ -4,6 +4,7 @@ import authorization from '../../../../middleware/authorization';
 import create from './create';
 import update from './update';
 import getWallet from './getWallet';
+import enablePoints from './enablePoints';
 
 import createSchema from '../../schemas/public/wallets/create';
 import updateSchema from '../../schemas/public/wallets/update';
@@ -30,6 +31,11 @@ walletsRouter.get(
   '/',
   authorization(['client']),
   getWallet
+);
+
+walletsRouter.put(
+  '/enable-points',
+  enablePoints
 );
 
 export default walletsRouter;

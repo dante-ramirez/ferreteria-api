@@ -94,23 +94,49 @@ export default class SQLWalletsStore extends WalletsStore {
     return this.softFormatWallet(wallet);
   }
 
-  // async getByName(name: string): Promise<Wallet> {
-  //   let wallet: any;
+  async get(): Promise<Wallet[]> {
+    let wallets: any[] = [];
 
-  //   try {
-  //     [wallet] = await this.connection(this.table)
-  //       .select('*')
-  //       .where('name', name);
-  //   } catch (error) {
-  //     throw new SQLDatabaseError(error);
-  //   }
+    try {
+      wallets = await this.connection(this.table)
+        .select('*')
+        .where('unavailable_points', '>', 0);
+    } catch (error) {
+      throw new SQLDatabaseError(error);
+    }
 
-  //   if (!wallet) {
-  //     throw new ItemNotFound(`wallet with name ${name}`);
-  //   }
+    if (!wallets.length) {
+      throw new ItemNotFound(this.table);
+    }
 
-  //   return this.softFormatBrand(wallet);
-  // }
+    return wallets.map((wallet) => this.softFormatWallet(wallet));
+  }
+
+  async enablePoints(wallet: Wallet): Promise<Wallet> {
+    try {
+      const timestamp = new Date();
+      const [walletUpdated] = await this.connection(this.table)
+        .where('id', wallet.id)
+        .update({
+          points: wallet.points,
+          unavailable_points: wallet.unavailablePoints,
+          updated_at: timestamp
+        })
+        .returning('*');
+
+      return this.softFormatWallet(walletUpdated);
+    } catch (error) {
+      if ((error as any).code === NULL_VALUE_ERROR) {
+        throw new MissingField((error as any).column, this.table);
+      }
+
+      if ((error as any).code === INVALID_INPUT_SYNTAX_CODE) {
+        throw new InvalidDataType(error);
+      }
+
+      throw new SQLDatabaseError(error);
+    }
+  }
 
   private softFormatWallet(wallet: any): Wallet {
     return new Wallet(

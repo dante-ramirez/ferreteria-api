@@ -1,7 +1,11 @@
+/* eslint-disable no-console */
 class Logger {
   log(message: any) {
-    // eslint-disable-next-line no-console
     console.log(message);
+  }
+
+  error(message: any, error: any) {
+    console.error(message, error);
   }
 }
 

@@ -15,6 +15,8 @@ export default class WalletsStore extends BaseStore {
   }
 
   async create(_wallet: Wallet): Promise<Wallet> { return this.wallet; }
+  async get(): Promise<Wallet[]> { return [this.wallet]; }
   async getByUserId(_userId: number): Promise<Wallet> { return this.wallet; }
   async update(_wallet: Wallet): Promise<Wallet> { return this.wallet; }
+  async enablePoints(_wallet: Wallet): Promise<Wallet> { return this.wallet; }
 }
