@@ -3,7 +3,8 @@ import { ItemAlreadyExist, ItemNotFound } from '../errors';
 import ProductsStore from '../generic/ProductsStore';
 import {
   Pagination as _Pagination,
-  ProductsFilters as _Filters
+  ProductsFilters as _ProductsFilters,
+  RelatedProductsFilters as _RelatedProductsFilters
 } from '../interfaces';
 import {
   SQLDatabaseError,
@@ -130,7 +131,27 @@ export default class SQLProductsStore extends ProductsStore {
     }
   }
 
-  async get(filters: _Filters, pagination: _Pagination): Promise<Product[]> {
+  async get(filters: _ProductsFilters, pagination: _Pagination): Promise<Product[]> {
+    let products: any[] = [];
+    let query = this.connection(this.table).select('*');
+
+    query = this.applyFilters(query, filters);
+    query = this.applyPagination(query, pagination);
+
+    try {
+      products = await query;
+    } catch (error) {
+      throw new SQLDatabaseError(error);
+    }
+
+    if (!products.length) {
+      throw new ItemNotFound(this.table);
+    }
+
+    return products.map((product: any) => this.softFormatProduct(product));
+  }
+
+  async getRelatedProducts(filters: _RelatedProductsFilters, pagination: _Pagination): Promise<Product[]> {
     let products: any[] = [];
     let query = this.connection(this.table).select('*');
 
