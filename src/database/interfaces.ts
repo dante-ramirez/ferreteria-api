@@ -58,6 +58,12 @@ export interface ProductsFilters{
   model: Filter
 }
 
+export interface RelatedProductsFilters{
+  department_id: Filter,
+  category_id: Filter,
+  brand_id: Filter
+}
+
 export interface SurveysFilter{
   link: Filter
 }
