@@ -26,7 +26,7 @@ export interface CategoriesFilter {
 }
 
 export interface InvoicesFilter{
-  path: Filter
+  filename: Filter
 }
 
 export interface FavoritesFilter{

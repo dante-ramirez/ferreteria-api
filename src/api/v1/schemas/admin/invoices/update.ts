@@ -1,10 +1,12 @@
 export default {
   type: 'object',
-  required: ['path'],
+  required: ['file'],
   properties: {
-    path: {
-      type: 'string',
-      minLength: 1
+    file: {
+      filename: {
+        type: 'string',
+        minLength: 1
+      }
     }
   }
 };

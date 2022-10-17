@@ -1,23 +1,25 @@
 export default class Invoice {
   id: number;
-  path: string;
+  filename: string;
   userId: number;
   salesId: number;
+
   constructor(
     id: number,
-    path: string,
+    filename: string,
     userId: number,
     salesId: number
   ) {
     this.id = id;
-    this.path = path;
+    this.filename = filename;
     this.userId = userId;
     this.salesId = salesId;
   }
+
   serialize() {
     return {
       id: this.id,
-      path: this.path,
+      filename: this.filename,
       userId: this.userId,
       salesId: this.salesId
     };

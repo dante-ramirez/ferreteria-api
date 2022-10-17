@@ -1,10 +1,22 @@
 export default {
   type: 'object',
-  required: ['path'],
+  required: ['body', 'file'],
   properties: {
-    path: {
-      type: 'string',
-      minLength: 1
+    body: {
+      userId: {
+        type: 'number',
+        minimum: 0
+      },
+      salesId: {
+        type: 'number',
+        minimum: 0
+      }
+    },
+    file: {
+      filename: {
+        type: 'string',
+        minLength: 1
+      }
     }
   }
 };

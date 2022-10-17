@@ -1,9 +1,10 @@
 import { ItemNotFound } from '../../../../database/errors';
-import _Invoice from '../../../../entities/Invoice';
-import _Request from '../../../../definitions/request';
+import Invoice from '../../../../entities/Invoice';
+import Request from '../../../../definitions/request';
+import file from '../../../../helpers/file';
 import logger from '../../../../helpers/logger';
 
-export default async function (req:_Request, res:any) {
+export default async function (req:Request, res:any) {
   const {
     database,
     params
@@ -12,11 +13,12 @@ export default async function (req:_Request, res:any) {
     invoiceId
   } = params;
 
-  let invoiceToDelete: _Invoice;
+  let invoiceToDelete: Invoice;
 
   try {
     invoiceToDelete = await database.invoices.getById(Number(invoiceId));
     await database.invoices.delete(Number(invoiceToDelete.id));
+    file.delete('uploads/invoices/', invoiceToDelete.filename);
   } catch (error) {
     let statusCode = 500;
     let errorCode = 'UNEXPECTED_ERROR';
@@ -30,5 +32,8 @@ export default async function (req:_Request, res:any) {
     return res.status(statusCode).send({ code: errorCode });
   }
 
-  return res.status(200).send();
+  return res.status(200).send({
+    statusText: 'Success',
+    message: `File with name '${invoiceToDelete.filename}' deleted successfully`
+  });
 }
