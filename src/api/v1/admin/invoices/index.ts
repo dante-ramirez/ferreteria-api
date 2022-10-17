@@ -1,5 +1,6 @@
-import schemaValidator from '../../../../middleware/jsonSchemaValidator';
 import authorization from '../../../../middleware/authorization';
+import schemaValidator from '../../../../middleware/jsonSchemaValidator';
+import multer from '../../../../middleware/multer';
 
 import create from './create';
 import update from './update';
@@ -17,14 +18,16 @@ const invoicesRouter = express.Router();
 invoicesRouter.post(
   '/',
   authorization(['administrator']),
-  schemaValidator(createSchema),
+  multer.uploadInvoice,
+  schemaValidator(createSchema, 'form-data'),
   create
 );
 
 invoicesRouter.put(
   '/:id',
   authorization(['administrator']),
-  schemaValidator(updateSchema),
+  multer.uploadInvoice,
+  schemaValidator(updateSchema, 'form-data'),
   update
 );
 

@@ -29,8 +29,13 @@ export default async function (req:_Request, res:any) {
     tickets = await database.sales.getInvoiceRequests(pagination);
     TotalCount = tickets.length;
   } catch (error) {
-    const statusCode = 500;
-    const errorCode = 'UNEXPECTED_ERROR';
+    let statusCode = 500;
+    let errorCode = 'UNEXPECTED_ERROR';
+
+    if (error instanceof ItemNotFound) {
+      statusCode = 404;
+      errorCode = 'SALES_WITH_REQUESTED_INVOICE_WERE_NOT_FOUND';
+    }
 
     logger.log(error);
     return res.status(statusCode).send({ code: errorCode });

@@ -24,7 +24,7 @@ export default class SQLInvoicesStore extends InvoicesStore {
     try {
       const [newInvoice] = await this.connection(this.table)
         .insert({
-          path: invoice.path,
+          filename: invoice.filename,
           user_id: invoice.userId,
           sales_id: invoice.salesId
         })
@@ -53,9 +53,7 @@ export default class SQLInvoicesStore extends InvoicesStore {
       const [invoiceUpdated] = await this.connection(this.table)
         .where('id', invoice.id)
         .update({
-          path: invoice.path,
-          user_id: invoice.userId,
-          sales_id: invoice.salesId,
+          filename: invoice.filename,
           updated_at: timestamp
         })
         .returning('*');
@@ -83,14 +81,14 @@ export default class SQLInvoicesStore extends InvoicesStore {
         .where('user_id', userId);
     } catch (error) {
       if ((error as any).code === INVALID_INPUT_SYNTAX_CODE) {
-        throw new ItemNotFound(`invoice with user id ${userId} `);
+        throw new ItemNotFound(`invoice with user id ${userId}`);
       }
 
       throw new SQLDatabaseError(error);
     }
 
     if (!invoice) {
-      throw new ItemNotFound(`invoice with user id ${userId} `);
+      throw new ItemNotFound(`invoice with user id ${userId}`);
     }
 
     return this.softFormatInvoice(invoice);
@@ -105,14 +103,14 @@ export default class SQLInvoicesStore extends InvoicesStore {
         .where('id', id);
     } catch (error) {
       if ((error as any).code === INVALID_INPUT_SYNTAX_CODE) {
-        throw new ItemNotFound(`invoice with id ${id} `);
+        throw new ItemNotFound(`invoice with id ${id}`);
       }
 
       throw new SQLDatabaseError(error);
     }
 
     if (!invoice) {
-      throw new ItemNotFound(`invoice with id ${id} `);
+      throw new ItemNotFound(`invoice with id ${id}`);
     }
 
     return this.softFormatInvoice(invoice);
@@ -153,7 +151,7 @@ export default class SQLInvoicesStore extends InvoicesStore {
   private softFormatInvoice(invoice: any): Invoice {
     return new Invoice(
       Number(invoice.id),
-      invoice.path,
+      invoice.filename,
       Number(invoice.user_id),
       Number(invoice.sales_id)
     );

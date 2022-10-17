@@ -17,25 +17,27 @@ import { userRole as _userRole } from '../entities/User';
 
 export default interface Request {
   database: {
-    users: _usersStore
-    offers: _offersStore
-    departments: _departmentsStore
-    categories: _categoriesStore
-    brands: _brandsStore
-    wallets: _walletsStore
-    invoices: _invoiceStore
-    favorites: _favoritesStore
-    sales: _salesStore
-    saleDetails: _saleDetailsStore
-    products: _productsStore
+    users: _usersStore,
+    offers: _offersStore,
+    departments: _departmentsStore,
+    categories: _categoriesStore,
+    brands: _brandsStore,
+    wallets: _walletsStore,
+    invoices: _invoiceStore,
+    favorites: _favoritesStore,
+    sales: _salesStore,
+    saleDetails: _saleDetailsStore,
+    products: _productsStore,
     surveys: _surveysStore
   },
   user: {
     id: number,
     role: _userRole,
     email: string
-  }
+  },
   body: any,
+  file: any,
+  files: any,
   params: any,
   query: any
 };

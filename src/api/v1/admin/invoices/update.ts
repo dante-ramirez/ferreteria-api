@@ -1,29 +1,24 @@
 import { ItemNotFound } from '../../../../database/errors';
-import _Invoice from '../../../../entities/Invoice';
-import _Request from '../../../../definitions/request';
+import Invoice from '../../../../entities/Invoice';
+import Request from '../../../../definitions/request';
+import _file from '../../../../helpers/file';
 import logger from '../../../../helpers/logger';
 
-export default async function (req:_Request, res:any) {
-  const {
-    database,
-    user,
-    body,
-    params
-  } = req;
-  const {
-    path,
-    salesId
-  } = body;
+export default async function (req:Request, res:any) {
+  const { database, file, params } = req;
+  const { filename, destination, path } = file;
   const { id } = params;
 
-  let invoice: _Invoice;
+  let invoice: Invoice;
+  let oldFileName: string;
 
   try {
     invoice = await database.invoices.getById(Number(id));
-    invoice.path = path;
-    invoice.userId = user.id;
-    invoice.salesId = salesId;
 
+    oldFileName = invoice.filename;
+    invoice.filename = filename;
+
+    _file.delete('uploads/invoices/', oldFileName);
     await database.invoices.update(invoice);
   } catch (error) {
     let errorCode = 'UNEXPECTED_ERROR';
@@ -34,9 +29,13 @@ export default async function (req:_Request, res:any) {
       errorCode = 'INVOICE_WAS_NOT_FOUND';
     }
 
+    _file.delete('uploads/invoices/', filename);
+
     logger.log(error);
     return res.status(statusCode).send({ code: errorCode });
   }
 
-  return res.status(200).send(invoice.serialize());
+  return res.status(200).send({
+    statusText: 'Success', filename, destination, path, invoice: invoice.serialize()
+  });
 }

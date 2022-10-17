@@ -220,7 +220,10 @@ export default class SQLSalesStore extends SalesStore {
     let sales: any[] = [];
     const tickets: any[] = [];
 
-    let query = this.connection(this.table).select('*').where('request', true);
+    let query = this.connection(this.table).select('sales.*').from('sales')
+      .leftJoin('invoice', 'sales.id', 'invoice.sales_id')
+      .where('sales.request', true)
+      .whereNull('invoice.sales_id');
     query = this.applyPagination(query, pagination);
 
     try {

@@ -1,23 +1,18 @@
-import _Request from '../../../../definitions/request';
+import Request from '../../../../definitions/request';
 import { ItemAlreadyExist } from '../../../../database/errors';
 import Invoice from '../../../../entities/Invoice';
+import _file from '../../../../helpers/file';
 import logger from '../../../../helpers/logger';
 
-export default async function (req: _Request, res: any) {
-  const {
-    database,
-    user,
-    body
-  } = req;
-  const {
-    path,
-    salesId
-  } = body;
+export default async function (req: Request, res: any) {
+  const { database, body, file } = req;
+  const { userId, salesId } = body;
+  const { filename, destination, path } = file;
 
   let invoice = new Invoice(
     0,
-    path,
-    user.id,
+    filename,
+    userId,
     salesId
   );
 
@@ -32,9 +27,13 @@ export default async function (req: _Request, res: any) {
       errorCode = 'INVOICE_ALREADY_EXIST';
     }
 
+    _file.delete('uploads/invoices/', filename);
+
     logger.log(error);
     return res.status(statusCode).send({ code: errorCode });
   }
 
-  return res.status(201).send(invoice.serialize());
+  return res.status(200).send({
+    statusText: 'Success', filename, destination, path, invoice: invoice.serialize()
+  });
 }

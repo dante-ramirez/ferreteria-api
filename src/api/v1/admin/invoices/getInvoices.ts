@@ -10,7 +10,7 @@ export default async function (req:_Request, res:any) {
     query
   } = req;
   const {
-    path = '',
+    filename = '',
     perPage = 0,
     currentPage = 0
   } = query;
@@ -20,8 +20,8 @@ export default async function (req:_Request, res:any) {
 
   try {
     const filters: _InvoicesFilter = {
-      path: {
-        value: path,
+      filename: {
+        value: filename,
         type: 'like'
       }
     };
