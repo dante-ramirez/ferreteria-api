@@ -268,6 +268,24 @@ export default class SQLSalesStore extends SalesStore {
     return tickets;
   }
 
+  async getInvoiceRequestsCount(): Promise<number> {
+    let result: any = [];
+
+    try {
+      result = await this.connection(this.table).count('*').from('sales')
+        .leftJoin('invoice', 'sales.id', 'invoice.sales_id')
+        .where('sales.request', true)
+        .whereNull('invoice.sales_id');
+    } catch (error) {
+      throw new Error(String(error));
+    }
+
+    const [element = { count: 0 }] = result;
+    const { count } = element;
+
+    return Number(count);
+  }
+
   private softFormatSale(sale: any): Sale {
     return new Sale(
       Number(sale.id),

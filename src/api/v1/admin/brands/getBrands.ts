@@ -12,17 +12,19 @@ export default async function (req:_Request, res:any) {
   const {
     name = '',
     perPage = 0,
-    currentPage = 0
+    currentPage = 0,
+    orderBy = ''
   } = query;
 
   let brands: _Brand[];
-  let brandsTotalCount: number = 0;
+  let totalCount: number = 0;
 
   try {
     const filters: _BrandsFilter = {
       name: {
         value: name,
-        type: 'like'
+        type: 'like',
+        order: orderBy
       }
     };
     const pagination = {
@@ -31,7 +33,7 @@ export default async function (req:_Request, res:any) {
     };
 
     brands = await database.brands.get(filters, pagination);
-    brandsTotalCount = await database.brands.count(filters);
+    totalCount = await database.brands.count(filters);
   } catch (error) {
     let statusCode = 500;
     let errorCode = 'UNEXPECTED_ERROR';
@@ -49,7 +51,7 @@ export default async function (req:_Request, res:any) {
   const paginationResult = {
     currentPage,
     perPage,
-    totalItems: brandsTotalCount
+    totalItems: totalCount
   };
 
   return res.status(200).send({

@@ -9,13 +9,19 @@ export default class BaseStore {
     this.table = table;
   }
 
-  protected applyFilters(query: any, filters: any): any {
+  protected applyFilters(query: any, filters: any, isCalledFromCount: boolean = false): any {
     Object.keys(filters).forEach((key: any) => {
       if (filters[key].value && filters[key].value !== '' && filters[key].value !== -1) {
         if (filters[key].type === 'like') {
           query.where(this.camelToSnakeCase(key), 'like', `%${filters[key].value}%`);
         } else if (filters[key].type === 'match') {
           query.where(this.camelToSnakeCase(key), filters[key].value);
+        }
+      }
+
+      if (!isCalledFromCount) {
+        if (filters[key].order) {
+          query.orderBy(this.camelToSnakeCase(key), filters[key].order);
         }
       }
     });
@@ -27,6 +33,7 @@ export default class BaseStore {
     if (pagination.offset && pagination.offset > 0) {
       query.offset(pagination.offset);
     }
+
     if (pagination.limit && pagination.limit > 0) {
       query.limit(pagination.limit);
     }
@@ -36,14 +43,14 @@ export default class BaseStore {
 
   public async count(filters: any): Promise<number> {
     let result: any = [];
-    let query: any = this.connection(this.table).count('*');
 
-    query = this.applyFilters(query, filters);
+    let query: any = this.connection(this.table).count('*');
+    query = this.applyFilters(query, filters, true);
 
     try {
       result = await query;
     } catch (error) {
-      throw new Error(String(error)); // error
+      throw new Error(String(error));
     }
 
     const [element = { count: 0 }] = result;

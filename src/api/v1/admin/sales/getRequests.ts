@@ -18,7 +18,7 @@ export default async function (req:_Request, res:any) {
   } = query;
 
   let tickets: _Ticket[] = [];
-  let TotalCount: number = 0;
+  let totalCount: number = 0;
 
   try {
     const pagination = {
@@ -27,7 +27,7 @@ export default async function (req:_Request, res:any) {
     };
 
     tickets = await database.sales.getInvoiceRequests(pagination);
-    TotalCount = tickets.length;
+    totalCount = await database.sales.getInvoiceRequestsCount();
   } catch (error) {
     let statusCode = 500;
     let errorCode = 'UNEXPECTED_ERROR';
@@ -104,7 +104,7 @@ export default async function (req:_Request, res:any) {
   const paginationResult = {
     currentPage,
     perPage,
-    totalItems: TotalCount
+    totalItems: totalCount
   };
 
   return res.status(200).send({

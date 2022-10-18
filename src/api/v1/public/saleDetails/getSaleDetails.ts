@@ -18,7 +18,7 @@ export default async function (req:_Request, res:any) {
   } = query;
 
   let saleDetails: _SaleDetail[];
-  let TotalCount: number = 0;
+  let totalCount: number = 0;
 
   try {
     const filters: _SaleDetailsFilters = {
@@ -41,7 +41,7 @@ export default async function (req:_Request, res:any) {
     };
 
     saleDetails = await database.saleDetails.get(filters, pagination);
-    TotalCount = await database.saleDetails.count(filters);
+    totalCount = await database.saleDetails.count(filters);
   } catch (error) {
     let statusCode = 500;
     let errorCode = 'UNEXPECTED_ERROR';
@@ -59,7 +59,7 @@ export default async function (req:_Request, res:any) {
   const paginationResult = {
     currentPage,
     perPage,
-    totalItems: TotalCount
+    totalItems: totalCount
   };
 
   return res.status(200).send({

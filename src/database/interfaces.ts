@@ -1,6 +1,7 @@
 interface Filter {
   value: any,
-  type: 'like' | 'match'
+  type: 'like' | 'match',
+  order?: 'asc' | 'desc'
 }
 
 export interface Pagination {
