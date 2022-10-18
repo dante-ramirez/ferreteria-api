@@ -13,21 +13,24 @@ export default async function (req:_Request, res:any) {
     name = '',
     lastName = '',
     perPage = 0,
-    currentPage = 0
+    currentPage = 0,
+    orderBy = ''
   } = query;
 
   let users: _User[];
-  let usersTotalCount: number = 0;
+  let totalCount: number = 0;
 
   try {
     const filters: _UsersFilters = {
       name: {
         value: name,
-        type: 'like'
+        type: 'like',
+        order: orderBy
       },
       lastName: {
         value: lastName,
-        type: 'like'
+        type: 'like',
+        order: orderBy
       }
     };
     const pagination = {
@@ -36,7 +39,7 @@ export default async function (req:_Request, res:any) {
     };
 
     users = await database.users.get(filters, pagination);
-    usersTotalCount = await database.users.count(filters);
+    totalCount = await database.users.count(filters);
   } catch (error) {
     let statusCode = 500;
     let errorCode = 'UNEXPECTED_ERROR';
@@ -54,7 +57,7 @@ export default async function (req:_Request, res:any) {
   const paginationResult = {
     currentPage,
     perPage,
-    totalItems: usersTotalCount
+    totalItems: totalCount
   };
 
   return res.status(200).send({

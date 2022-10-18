@@ -29,4 +29,5 @@ export default class SalesStore extends BaseStore {
   async get(_filters: _SalesFilters, _pagination: _Pagination): Promise<Ticket[]> { return [this.ticket]; }
   async getPurchases(_filters: _PurchasesFilters, _pagination: _Pagination): Promise<Ticket[]> { return [this.ticket]; }
   async getInvoiceRequests(_pagination: _Pagination): Promise<Ticket[]> { return [this.ticket]; }
+  async getInvoiceRequestsCount(): Promise<number> { return 0; }
 }
