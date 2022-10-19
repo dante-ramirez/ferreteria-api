@@ -12,7 +12,8 @@ export default async function (req:_Request, res:any) {
   const {
     name = '',
     perPage = 0,
-    currentPage = 0
+    currentPage = 0,
+    orderBy = ''
   } = query;
 
   let categories: _Category[];
@@ -22,7 +23,8 @@ export default async function (req:_Request, res:any) {
     const filters: _CategoriesFilter = {
       name: {
         value: name,
-        type: 'like'
+        type: 'like',
+        order: orderBy
       }
     };
     const pagination = {

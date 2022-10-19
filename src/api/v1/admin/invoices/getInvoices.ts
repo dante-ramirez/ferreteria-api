@@ -12,7 +12,8 @@ export default async function (req:_Request, res:any) {
   const {
     filename = '',
     perPage = 0,
-    currentPage = 0
+    currentPage = 0,
+    orderBy = ''
   } = query;
 
   let invoices: _Invoice[];
@@ -22,7 +23,8 @@ export default async function (req:_Request, res:any) {
     const filters: _InvoicesFilter = {
       filename: {
         value: filename,
-        type: 'like'
+        type: 'like',
+        order: orderBy
       }
     };
     const pagination = {

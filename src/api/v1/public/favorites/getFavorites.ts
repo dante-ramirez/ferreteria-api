@@ -12,7 +12,8 @@ export default async function (req:_Request, res:any) {
   } = req;
   const {
     perPage = 0,
-    currentPage = 0
+    currentPage = 0,
+    orderBy = ''
   } = query;
 
   let favorites: _FavoriteProduct[];
@@ -22,7 +23,8 @@ export default async function (req:_Request, res:any) {
     const filters: _FavoritesFilter = {
       userId: {
         value: user.id,
-        type: 'match'
+        type: 'match',
+        order: orderBy
       }
     };
     const pagination = {
