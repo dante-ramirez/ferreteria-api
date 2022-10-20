@@ -14,7 +14,8 @@ export default async function (req:_Request, res:any) {
     salesId = 0,
     productId = 0,
     perPage = 0,
-    currentPage = 0
+    currentPage = 0,
+    orderBy = ''
   } = query;
 
   let saleDetails: _SaleDetail[];
@@ -24,15 +25,18 @@ export default async function (req:_Request, res:any) {
     const filters: _SaleDetailsFilters = {
       id: {
         value: id,
-        type: 'like'
+        type: 'like',
+        order: orderBy
       },
       salesId: {
         value: salesId,
-        type: 'like'
+        type: 'like',
+        order: orderBy
       },
       productId: {
         value: productId,
-        type: 'like'
+        type: 'like',
+        order: orderBy
       }
     };
     const pagination = {

@@ -20,7 +20,8 @@ export default async function (req:_Request, res:any) {
     date = '',
     status = '',
     perPage = 0,
-    currentPage = 0
+    currentPage = 0,
+    orderBy = ''
   } = query;
 
   let tickets: _Ticket[] = [];
@@ -30,15 +31,18 @@ export default async function (req:_Request, res:any) {
     const filters: _SalesFilters = {
       id: {
         value: id,
-        type: 'match'
+        type: 'match',
+        order: orderBy
       },
       date: {
         value: date,
-        type: 'like'
+        type: 'like',
+        order: orderBy
       },
       status: {
         value: status,
-        type: 'like'
+        type: 'like',
+        order: orderBy
       }
     };
     const pagination = {

@@ -12,7 +12,8 @@ export default async function (req:_Request, res:any) {
   const {
     link = '',
     perPage = 0,
-    currentPage = 0
+    currentPage = 0,
+    orderBy = ''
   } = query;
 
   let surveys: _Survey[];
@@ -22,7 +23,8 @@ export default async function (req:_Request, res:any) {
     const filters: _SurveysFilter = {
       link: {
         value: link,
-        type: 'like'
+        type: 'like',
+        order: orderBy
       }
     };
     const pagination = {

@@ -12,7 +12,8 @@ export default async function (req:_Request, res:any) {
   const {
     name = '',
     perPage = 0,
-    currentPage = 0
+    currentPage = 0,
+    orderBy = ''
   } = query;
 
   let departments: _Department[];
@@ -22,7 +23,8 @@ export default async function (req:_Request, res:any) {
     const filters: _DepartmentsFilter = {
       name: {
         value: name,
-        type: 'like'
+        type: 'like',
+        order: orderBy
       }
     };
     const pagination = {
