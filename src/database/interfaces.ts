@@ -1,7 +1,7 @@
 interface Filter {
   value: any,
   type: 'like' | 'match',
-  order?: 'asc' | 'desc'
+  order: 'asc' | 'desc'
 }
 
 export interface Pagination {
@@ -54,7 +54,7 @@ export interface SaleDetailsFilters{
 
 export interface ProductsFilters{
   name: Filter,
-  description: Filter,
+  details: Filter,
   code: Filter,
   model: Filter
 }

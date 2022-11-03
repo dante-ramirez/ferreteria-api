@@ -17,7 +17,9 @@ export default async function (req:Request, res:any) {
 
   try {
     invoiceToDelete = await database.invoices.getById(Number(invoiceId));
+
     await database.invoices.delete(Number(invoiceToDelete.id));
+
     file.delete('uploads/invoices/', invoiceToDelete.filename);
   } catch (error) {
     let statusCode = 500;

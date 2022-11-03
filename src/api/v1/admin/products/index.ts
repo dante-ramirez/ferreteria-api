@@ -1,5 +1,6 @@
 import schemaValidator from '../../../../middleware/jsonSchemaValidator';
 import authorization from '../../../../middleware/authorization';
+import multer from '../../../../middleware/multer';
 
 import create from './create';
 import update from './update';
@@ -17,14 +18,16 @@ const productsRouter = express.Router();
 productsRouter.post(
   '/',
   authorization(['administrator']),
-  schemaValidator(createSchema),
+  multer.uploadProduct,
+  schemaValidator(createSchema, 'form-data'),
   create
 );
 
 productsRouter.put(
   '/:id',
   authorization(['administrator']),
-  schemaValidator(updateSchema),
+  multer.uploadProduct,
+  schemaValidator(updateSchema, 'form-data'),
   update
 );
 

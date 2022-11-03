@@ -21,5 +21,7 @@ export default class ProductsStore extends BaseStore {
   async update(_product: Product): Promise<Product> { return this.product; }
   async delete(_id: number): Promise<boolean> { return true; }
   async get(_filters: _ProductsFilters, _pagination: _Pagination): Promise<Product[]> { return [this.product]; }
-  async getRelatedProducts(_filters: _RelatedProductsFilters, _pagination: _Pagination): Promise<Product[]> { return [this.product]; }
+  async getRelatedProducts(_filters: _RelatedProductsFilters, _pagination: _Pagination): Promise<Product[]> {
+    return [this.product];
+  }
 }

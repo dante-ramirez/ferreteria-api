@@ -33,7 +33,7 @@ export default async function (req: Request, res: any) {
     return res.status(statusCode).send({ code: errorCode });
   }
 
-  return res.status(200).send({
+  return res.status(201).send({
     statusText: 'Success', filename, destination, path, invoice: invoice.serialize()
   });
 }

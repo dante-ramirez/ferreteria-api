@@ -18,8 +18,9 @@ export default async function (req:Request, res:any) {
     oldFileName = invoice.filename;
     invoice.filename = filename;
 
-    _file.delete('uploads/invoices/', oldFileName);
     await database.invoices.update(invoice);
+
+    _file.delete('uploads/invoices/', oldFileName);
   } catch (error) {
     let errorCode = 'UNEXPECTED_ERROR';
     let statusCode = 500;

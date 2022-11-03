@@ -54,7 +54,8 @@ export default async function (req:_Request, res:any) {
     return res.status(statusCode).send({ code: errorCode });
   }
 
-  if (Date.parse(department.beginAt) < Date.parse(currentDate.toString()) && Date.parse(currentDate.toString()) < Date.parse(department.finishAt)) {
+  if (Date.parse(department.beginAt) < Date.parse(currentDate.toString())
+  && Date.parse(currentDate.toString()) < Date.parse(department.finishAt)) {
     try {
       offer = await database.offers.getById(Number(department.offersId));
     } catch (error) {
@@ -98,7 +99,8 @@ export default async function (req:_Request, res:any) {
     return res.status(statusCode).send({ code: errorCode });
   }
 
-  if (Date.parse(category.beginAt) < Date.parse(currentDate.toString()) && Date.parse(currentDate.toString()) < Date.parse(category.finishAt)) {
+  if (Date.parse(category.beginAt) < Date.parse(currentDate.toString())
+  && Date.parse(currentDate.toString()) < Date.parse(category.finishAt)) {
     try {
       offer = await database.offers.getById(Number(category.offersId));
     } catch (error) {
@@ -142,7 +144,8 @@ export default async function (req:_Request, res:any) {
     return res.status(statusCode).send({ code: errorCode });
   }
 
-  if (Date.parse(brand.beginAt) < Date.parse(currentDate.toString()) && Date.parse(currentDate.toString()) < Date.parse(brand.finishAt)) {
+  if (Date.parse(brand.beginAt) < Date.parse(currentDate.toString())
+  && Date.parse(currentDate.toString()) < Date.parse(brand.finishAt)) {
     try {
       offer = await database.offers.getById(Number(brand.offersId));
     } catch (error) {
@@ -195,17 +198,17 @@ export default async function (req:_Request, res:any) {
   const productDiscount = new ProductDiscount(
     product.id,
     product.name,
-    product.description,
+    product.details,
     product.stock,
     product.code,
     product.price,
     product.finalPrice,
     product.rewardPoints,
     product.model,
-    product.pathImage1,
-    product.pathImage2,
-    product.pathImage3,
-    product.pathImage4,
+    product.image1,
+    product.image2,
+    product.image3,
+    product.image4,
     departmentDiscount,
     categoryDiscount,
     brandDiscount

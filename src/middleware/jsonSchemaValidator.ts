@@ -29,7 +29,13 @@ export default (schema: any, type: schemaType = 'json') => (req: any, res: any, 
     if (!validate(data)) {
       const { errors } = validate;
 
-      fs.delete('uploads/invoices/', file.filename);
+      if (file) {
+        fs.delete('uploads/invoices/', file.filename);
+      } else if (files) {
+        for (let index = 0; index < files.length; index += 1) {
+          fs.delete('uploads/products/', files[index].filename);
+        }
+      }
 
       return res.status(400).send({
         code: 'VALIDATION_ERROR',
