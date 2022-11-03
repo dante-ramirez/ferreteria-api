@@ -7,50 +7,58 @@ import Brand from '../../../../entities/Brand';
 import Offer from '../../../../entities/Offer';
 import Discount from '../../../../entities/Discount';
 import ProductDiscount from '../../../../entities/ProductDiscount';
+import _file from '../../../../helpers/file';
 import logger from '../../../../helpers/logger';
 
 export default async function (req: _Request, res: any) {
-  const {
-    database,
-    body
-  } = req;
+  const { database, body, files } = req;
   const {
     name,
-    description,
+    details,
     stock,
     code,
     price,
     rewardPoints,
     model,
-    pathImage1,
-    pathImage2,
-    pathImage3,
-    pathImage4,
     departmentId,
     categoryId,
     brandId
   } = body;
 
+  const filesNames: any[] = [];
+
+  for (let index = 0; index < 4; index += 1) {
+    let filename: string;
+
+    if (files[index]) {
+      filename = files[index].filename;
+    } else {
+      filename = '';
+    }
+
+    filesNames.push(filename);
+  }
+
+  const currentDate = new Date();
+
   let product = new Product(
     0,
     name,
-    description,
+    details,
     stock,
     code,
     price,
     0,
     rewardPoints,
     model,
-    pathImage1,
-    pathImage2,
-    pathImage3,
-    pathImage4,
+    filesNames[0],
+    filesNames[1],
+    filesNames[2],
+    filesNames[3],
     departmentId,
     categoryId,
     brandId
   );
-
-  const currentDate = new Date();
 
   try {
     product = await database.products.create(product);
@@ -61,6 +69,10 @@ export default async function (req: _Request, res: any) {
     if (error instanceof ItemAlreadyExist) {
       statusCode = 400;
       errorCode = 'PRODUCT_ALREADY_EXIST';
+    }
+
+    for (let index = 0; index < files.length; index += 1) {
+      _file.delete('uploads/products/', files[index].filename);
     }
 
     logger.log(error);
@@ -85,7 +97,8 @@ export default async function (req: _Request, res: any) {
     return res.status(statusCode).send({ code: errorCode });
   }
 
-  if (Date.parse(department.beginAt) < Date.parse(currentDate.toString()) && Date.parse(currentDate.toString()) < Date.parse(department.finishAt)) {
+  if (Date.parse(department.beginAt) < Date.parse(currentDate.toString())
+  && Date.parse(currentDate.toString()) < Date.parse(department.finishAt)) {
     try {
       offer = await database.offers.getById(Number(department.offersId));
     } catch (error) {
@@ -129,7 +142,8 @@ export default async function (req: _Request, res: any) {
     return res.status(statusCode).send({ code: errorCode });
   }
 
-  if (Date.parse(category.beginAt) < Date.parse(currentDate.toString()) && Date.parse(currentDate.toString()) < Date.parse(category.finishAt)) {
+  if (Date.parse(category.beginAt) < Date.parse(currentDate.toString())
+  && Date.parse(currentDate.toString()) < Date.parse(category.finishAt)) {
     try {
       offer = await database.offers.getById(Number(category.offersId));
     } catch (error) {
@@ -173,7 +187,8 @@ export default async function (req: _Request, res: any) {
     return res.status(statusCode).send({ code: errorCode });
   }
 
-  if (Date.parse(brand.beginAt) < Date.parse(currentDate.toString()) && Date.parse(currentDate.toString()) < Date.parse(brand.finishAt)) {
+  if (Date.parse(brand.beginAt) < Date.parse(currentDate.toString())
+  && Date.parse(currentDate.toString()) < Date.parse(brand.finishAt)) {
     try {
       offer = await database.offers.getById(Number(brand.offersId));
     } catch (error) {
@@ -226,21 +241,23 @@ export default async function (req: _Request, res: any) {
   const productDiscount = new ProductDiscount(
     product.id,
     product.name,
-    product.description,
+    product.details,
     product.stock,
     product.code,
     product.price,
     product.finalPrice,
     product.rewardPoints,
     product.model,
-    product.pathImage1,
-    product.pathImage2,
-    product.pathImage3,
-    product.pathImage4,
+    product.image1,
+    product.image2,
+    product.image3,
+    product.image4,
     departmentDiscount,
     categoryDiscount,
     brandDiscount
   );
 
-  return res.status(201).send(productDiscount.serialize());
+  return res.status(201).send({
+    statusText: 'Success', destination: files[0].destination, product: productDiscount.serialize()
+  });
 }

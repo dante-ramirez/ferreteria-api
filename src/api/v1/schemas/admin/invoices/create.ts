@@ -3,6 +3,7 @@ export default {
   required: ['body', 'file'],
   properties: {
     body: {
+      required: ['userId', 'salesId'],
       userId: {
         type: 'number',
         minimum: 0
@@ -13,6 +14,7 @@ export default {
       }
     },
     file: {
+      required: ['filename'],
       filename: {
         type: 'string',
         minLength: 1

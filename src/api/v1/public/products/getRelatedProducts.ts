@@ -14,7 +14,8 @@ export default async function (req:_Request, res:any) {
     categoryId = 0,
     brandId = 0,
     perPage = 0,
-    currentPage = 0
+    currentPage = 0,
+    orderBy = ''
   } = query;
 
   let products: _Product[];
@@ -24,15 +25,18 @@ export default async function (req:_Request, res:any) {
     const filters: _RelatedProductsFilters = {
       department_id: {
         value: departmentId,
-        type: 'match'
+        type: 'match',
+        order: orderBy
       },
       category_id: {
         value: categoryId,
-        type: 'match'
+        type: 'match',
+        order: orderBy
       },
       brand_id: {
         value: brandId,
-        type: 'match'
+        type: 'match',
+        order: orderBy
       }
     };
     const pagination = {

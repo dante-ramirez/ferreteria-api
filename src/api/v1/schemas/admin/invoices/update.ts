@@ -3,6 +3,7 @@ export default {
   required: ['file'],
   properties: {
     file: {
+      required: ['filename'],
       filename: {
         type: 'string',
         minLength: 1

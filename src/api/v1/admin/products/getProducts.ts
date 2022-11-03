@@ -17,7 +17,7 @@ export default async function (req:_Request, res:any) {
   } = req;
   const {
     name = '',
-    description = '',
+    details = '',
     code = '',
     model = '',
     perPage = 0,
@@ -36,8 +36,8 @@ export default async function (req:_Request, res:any) {
         type: 'like',
         order: orderBy
       },
-      description: {
-        value: description,
+      details: {
+        value: details,
         type: 'like',
         order: orderBy
       },
@@ -93,7 +93,8 @@ export default async function (req:_Request, res:any) {
       return res.status(statusCode).send({ code: errorCode });
     }
 
-    if (Date.parse(department.beginAt) < Date.parse(currentDate.toString()) && Date.parse(currentDate.toString()) < Date.parse(department.finishAt)) {
+    if (Date.parse(department.beginAt) < Date.parse(currentDate.toString())
+    && Date.parse(currentDate.toString()) < Date.parse(department.finishAt)) {
       try {
         offer = await database.offers.getById(Number(department.offersId));
       } catch (error) {
@@ -137,7 +138,8 @@ export default async function (req:_Request, res:any) {
       return res.status(statusCode).send({ code: errorCode });
     }
 
-    if (Date.parse(category.beginAt) < Date.parse(currentDate.toString()) && Date.parse(currentDate.toString()) < Date.parse(category.finishAt)) {
+    if (Date.parse(category.beginAt) < Date.parse(currentDate.toString())
+    && Date.parse(currentDate.toString()) < Date.parse(category.finishAt)) {
       try {
         offer = await database.offers.getById(Number(category.offersId));
       } catch (error) {
@@ -181,7 +183,8 @@ export default async function (req:_Request, res:any) {
       return res.status(statusCode).send({ code: errorCode });
     }
 
-    if (Date.parse(brand.beginAt) < Date.parse(currentDate.toString()) && Date.parse(currentDate.toString()) < Date.parse(brand.finishAt)) {
+    if (Date.parse(brand.beginAt) < Date.parse(currentDate.toString())
+    && Date.parse(currentDate.toString()) < Date.parse(brand.finishAt)) {
       try {
         offer = await database.offers.getById(Number(brand.offersId));
       } catch (error) {
@@ -235,17 +238,17 @@ export default async function (req:_Request, res:any) {
     const productDiscount = new ProductDiscount(
       productTemp.id,
       productTemp.name,
-      productTemp.description,
+      productTemp.details,
       productTemp.stock,
       productTemp.code,
       productTemp.price,
       productTemp.finalPrice,
       productTemp.rewardPoints,
       productTemp.model,
-      productTemp.pathImage1,
-      productTemp.pathImage2,
-      productTemp.pathImage3,
-      productTemp.pathImage4,
+      productTemp.image1,
+      productTemp.image2,
+      productTemp.image3,
+      productTemp.image4,
       departmentDiscount,
       categoryDiscount,
       brandDiscount
