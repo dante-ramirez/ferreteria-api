@@ -34,7 +34,7 @@ walletsRouter.get(
 );
 
 walletsRouter.put(
-  '/enable-points',
+  '/points/enabled',
   enablePoints
 );
 

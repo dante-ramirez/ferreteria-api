@@ -20,4 +20,5 @@ export default class BrandsStore extends BaseStore {
   async update(_brand: Brand): Promise<Brand> { return this.brand; }
   async delete(_id: number): Promise<boolean> { return true; }
   async get(_filters: _Filters, _pagination: _Pagination): Promise<Brand[]> { return [this.brand]; }
+  async getAllWithOffers(): Promise<Brand[]> { return [this.brand]; }
 }

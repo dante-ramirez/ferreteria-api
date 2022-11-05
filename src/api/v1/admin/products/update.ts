@@ -108,24 +108,28 @@ export default async function (req:_Request, res:any) {
     return res.status(statusCode).send({ code: errorCode });
   }
 
-  if (Date.parse(department.beginAt) < Date.parse(currentDate.toString())
-  && Date.parse(currentDate.toString()) < Date.parse(department.finishAt)) {
-    try {
-      offer = await database.offers.getById(Number(department.offersId));
-    } catch (error) {
-      let statusCode = 500;
-      let errorCode = 'UNEXPECTED_ERROR';
+  if (department.offersId !== 1) {
+    if (Date.parse(department.beginAt) < Date.parse(currentDate.toString())
+    && Date.parse(currentDate.toString()) < Date.parse(department.finishAt)) {
+      try {
+        offer = await database.offers.getById(Number(department.offersId));
+      } catch (error) {
+        let statusCode = 500;
+        let errorCode = 'UNEXPECTED_ERROR';
 
-      if (error instanceof ItemNotFound) {
-        statusCode = 404;
-        errorCode = 'OFFER_WAS_NOT_FOUND';
+        if (error instanceof ItemNotFound) {
+          statusCode = 404;
+          errorCode = 'OFFER_WAS_NOT_FOUND';
+        }
+
+        logger.log(error);
+        return res.status(statusCode).send({ code: errorCode });
       }
-
-      logger.log(error);
-      return res.status(statusCode).send({ code: errorCode });
+    } else {
+      offer = new Offer(0, 0);
     }
   } else {
-    offer = new Offer(0, 0);
+    offer = new Offer(1, 0);
   }
 
   const departmentDiscount = new Discount(
@@ -153,24 +157,28 @@ export default async function (req:_Request, res:any) {
     return res.status(statusCode).send({ code: errorCode });
   }
 
-  if (Date.parse(category.beginAt) < Date.parse(currentDate.toString())
-  && Date.parse(currentDate.toString()) < Date.parse(category.finishAt)) {
-    try {
-      offer = await database.offers.getById(Number(category.offersId));
-    } catch (error) {
-      let statusCode = 500;
-      let errorCode = 'UNEXPECTED_ERROR';
+  if (category.offersId !== 1) {
+    if (Date.parse(category.beginAt) < Date.parse(currentDate.toString())
+    && Date.parse(currentDate.toString()) < Date.parse(category.finishAt)) {
+      try {
+        offer = await database.offers.getById(Number(category.offersId));
+      } catch (error) {
+        let statusCode = 500;
+        let errorCode = 'UNEXPECTED_ERROR';
 
-      if (error instanceof ItemNotFound) {
-        statusCode = 404;
-        errorCode = 'OFFER_WAS_NOT_FOUND';
+        if (error instanceof ItemNotFound) {
+          statusCode = 404;
+          errorCode = 'OFFER_WAS_NOT_FOUND';
+        }
+
+        logger.log(error);
+        return res.status(statusCode).send({ code: errorCode });
       }
-
-      logger.log(error);
-      return res.status(statusCode).send({ code: errorCode });
+    } else {
+      offer = new Offer(0, 0);
     }
   } else {
-    offer = new Offer(0, 0);
+    offer = new Offer(1, 0);
   }
 
   const categoryDiscount = new Discount(
@@ -198,24 +206,28 @@ export default async function (req:_Request, res:any) {
     return res.status(statusCode).send({ code: errorCode });
   }
 
-  if (Date.parse(brand.beginAt) < Date.parse(currentDate.toString())
-  && Date.parse(currentDate.toString()) < Date.parse(brand.finishAt)) {
-    try {
-      offer = await database.offers.getById(Number(brand.offersId));
-    } catch (error) {
-      let statusCode = 500;
-      let errorCode = 'UNEXPECTED_ERROR';
+  if (brand.offersId !== 1) {
+    if (Date.parse(brand.beginAt) < Date.parse(currentDate.toString())
+    && Date.parse(currentDate.toString()) < Date.parse(brand.finishAt)) {
+      try {
+        offer = await database.offers.getById(Number(brand.offersId));
+      } catch (error) {
+        let statusCode = 500;
+        let errorCode = 'UNEXPECTED_ERROR';
 
-      if (error instanceof ItemNotFound) {
-        statusCode = 404;
-        errorCode = 'OFFER_WAS_NOT_FOUND';
+        if (error instanceof ItemNotFound) {
+          statusCode = 404;
+          errorCode = 'OFFER_WAS_NOT_FOUND';
+        }
+
+        logger.log(error);
+        return res.status(statusCode).send({ code: errorCode });
       }
-
-      logger.log(error);
-      return res.status(statusCode).send({ code: errorCode });
+    } else {
+      offer = new Offer(0, 0);
     }
   } else {
-    offer = new Offer(0, 0);
+    offer = new Offer(1, 0);
   }
 
   const brandDiscount = new Discount(
