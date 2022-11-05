@@ -148,6 +148,24 @@ export default class SQLBrandsStore extends BrandsStore {
     return brands.map((brand: any) => this.softFormatBrand(brand));
   }
 
+  async getAllWithOffers(): Promise<Brand[]> {
+    let brands: any[] = [];
+
+    try {
+      brands = await this.connection(this.table)
+        .select('*')
+        .where('offers_id', '>', 1);
+    } catch (error) {
+      throw new SQLDatabaseError(error);
+    }
+
+    if (!brands.length) {
+      throw new ItemNotFound(this.table);
+    }
+
+    return brands.map((brand) => this.softFormatBrand(brand));
+  }
+
   private softFormatBrand(brand: any): Brand {
     return new Brand(
       Number(brand.id),

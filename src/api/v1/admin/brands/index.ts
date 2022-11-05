@@ -6,6 +6,7 @@ import update from './update';
 import deleteBrand from './delete';
 import getBrand from './getBrand';
 import getBrands from './getBrands';
+import verifyOffers from './verifyOffers';
 
 import createBrandSchema from '../../schemas/admin/brands/create';
 import updateSchema from '../../schemas/admin/brands/update';
@@ -44,6 +45,11 @@ brandsRouter.get(
   '/',
   authorization(['administrator']),
   getBrands
+);
+
+brandsRouter.put(
+  '/offers/verified',
+  verifyOffers
 );
 
 export default brandsRouter;
