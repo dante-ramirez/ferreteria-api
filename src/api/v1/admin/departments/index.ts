@@ -6,6 +6,7 @@ import update from './update';
 import deleteDepartment from './delete';
 import getDepartment from './getDepartment';
 import getDepartments from './getDepartments';
+import verifyOffers from './verifyOffers';
 
 import createDepartmentSchema from '../../schemas/admin/departments/create';
 import updateSchema from '../../schemas/admin/departments/update';
@@ -44,6 +45,11 @@ departmentsRouter.get(
   '/',
   authorization(['administrator']),
   getDepartments
+);
+
+departmentsRouter.put(
+  '/offers/verified',
+  verifyOffers
 );
 
 export default departmentsRouter;

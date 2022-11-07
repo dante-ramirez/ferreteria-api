@@ -6,6 +6,7 @@ import update from './update';
 import deleteCategory from './delete';
 import getCategory from './getCategory';
 import getCategories from './getCategories';
+import verifyOffers from './verifyOffers';
 
 import createCategorySchema from '../../schemas/admin/categories/create';
 import updateSchema from '../../schemas/admin/categories/update';
@@ -44,6 +45,11 @@ categoriesRouter.get(
   '/',
   authorization(['administrator']),
   getCategories
+);
+
+categoriesRouter.put(
+  '/offers/verified',
+  verifyOffers
 );
 
 export default categoriesRouter;

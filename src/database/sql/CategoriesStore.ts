@@ -147,6 +147,24 @@ export default class SQLCategoriesStore extends CategoriesStore {
     return categories.map((category: any) => this.softFormatCategory(category));
   }
 
+  async getAllWithOffers(): Promise<Category[]> {
+    let categories: any[] = [];
+
+    try {
+      categories = await this.connection(this.table)
+        .select('*')
+        .where('offers_id', '>', 1);
+    } catch (error) {
+      throw new SQLDatabaseError(error);
+    }
+
+    if (!categories.length) {
+      throw new ItemNotFound(this.table);
+    }
+
+    return categories.map((category) => this.softFormatCategory(category));
+  }
+
   private softFormatCategory(category: any): Category {
     return new Category(
       Number(category.id),
