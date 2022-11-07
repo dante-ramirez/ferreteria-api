@@ -147,6 +147,24 @@ export default class SQLDepartmentsStore extends DepartmentsStore {
     return departments.map((department: any) => this.softFormatDepartment(department));
   }
 
+  async getAllWithOffers(): Promise<Department[]> {
+    let departments: any[] = [];
+
+    try {
+      departments = await this.connection(this.table)
+        .select('*')
+        .where('offers_id', '>', 1);
+    } catch (error) {
+      throw new SQLDatabaseError(error);
+    }
+
+    if (!departments.length) {
+      throw new ItemNotFound(this.table);
+    }
+
+    return departments.map((department) => this.softFormatDepartment(department));
+  }
+
   private softFormatDepartment(department: any): Department {
     return new Department(
       Number(department.id),

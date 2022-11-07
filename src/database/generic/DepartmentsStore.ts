@@ -20,4 +20,5 @@ export default class DepartmentsStore extends BaseStore {
   async update(_department: Department): Promise<Department> { return this.department; }
   async delete(_id: number): Promise<boolean> { return true; }
   async get(_filters: _Filters, _pagination: _Pagination): Promise<Department[]> { return [this.department]; }
+  async getAllWithOffers(): Promise<Department[]> { return [this.department]; }
 }

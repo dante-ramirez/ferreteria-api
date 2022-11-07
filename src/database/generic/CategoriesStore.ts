@@ -20,4 +20,5 @@ export default class CategoriesStore extends BaseStore {
   async update(_category: Category): Promise<Category> { return this.category; }
   async delete(_id: number): Promise<boolean> { return true; }
   async get(_filters: _Filters, _pagination: _Pagination): Promise<Category[]> { return [this.category]; }
+  async getAllWithOffers(): Promise<Category[]> { return [this.category]; }
 }
