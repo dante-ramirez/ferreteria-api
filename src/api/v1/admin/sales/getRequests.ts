@@ -67,7 +67,7 @@ export default async function (req:_Request, res:any) {
         product = await database.products.getById(Number(detail.productId));
       } catch (error) {
         if (error instanceof ItemNotFound) {
-          product = new _Product(0, '', '', 0, '', 0, 0, 0, '', '', '', '', '', 0, 0, 0);
+          product = new _Product(0, '', '', 0, '', 0, 0, 0, '', '', '', '', '', 0, 0, 0, 0);
         } else {
           throw error;
         }

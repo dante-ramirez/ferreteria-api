@@ -5,7 +5,7 @@ export default {
     body: {
       required: [
         'name', 'details', 'stock', 'code', 'price',
-        'rewardPoints', 'model', 'departmentId', 'categoryId', 'brandId'
+        'rewardPoints', 'model', 'departmentId', 'categoryId', 'brandId', 'individualOfferId'
       ],
       name: {
         type: 'string',
@@ -44,6 +44,10 @@ export default {
         minimum: 0
       },
       brandId: {
+        type: 'number',
+        minimum: 0
+      },
+      individualOfferId: {
         type: 'number',
         minimum: 0
       }

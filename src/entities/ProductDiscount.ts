@@ -1,4 +1,5 @@
 import _Discount from './Discount';
+import _IndividualDiscount from './IndividualDiscount';
 
 export default class ProductDiscount {
   id: number;
@@ -17,6 +18,7 @@ export default class ProductDiscount {
   department: _Discount;
   category: _Discount;
   brand: _Discount;
+  individualOffer: _IndividualDiscount;
 
   constructor(
     id: number,
@@ -34,7 +36,8 @@ export default class ProductDiscount {
     image4: string,
     department: _Discount,
     category: _Discount,
-    brand: _Discount
+    brand: _Discount,
+    individualOffer: _IndividualDiscount
   ) {
     this.id = id;
     this.name = name;
@@ -52,6 +55,7 @@ export default class ProductDiscount {
     this.department = department;
     this.category = category;
     this.brand = brand;
+    this.individualOffer = individualOffer;
   }
 
   serialize() {
@@ -71,7 +75,8 @@ export default class ProductDiscount {
       image4: this.image4,
       department: this.department,
       category: this.category,
-      brand: this.brand
+      brand: this.brand,
+      individualOffer: this.individualOffer
     };
   }
 }

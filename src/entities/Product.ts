@@ -15,6 +15,7 @@ export default class Product {
   departmentId: number;
   categoryId: number;
   brandId: number;
+  individualOfferId: number;
 
   constructor(
     id: number,
@@ -32,7 +33,8 @@ export default class Product {
     image4: string,
     departmentId: number,
     categoryId: number,
-    brandId: number
+    brandId: number,
+    individualOfferId: number
   ) {
     this.id = id;
     this.name = name;
@@ -50,6 +52,7 @@ export default class Product {
     this.departmentId = departmentId;
     this.categoryId = categoryId;
     this.brandId = brandId;
+    this.individualOfferId = individualOfferId;
   }
 
   serialize() {
@@ -69,7 +72,8 @@ export default class Product {
       image4: this.image4,
       departmentId: this.departmentId,
       categoryId: this.categoryId,
-      brandId: this.brandId
+      brandId: this.brandId,
+      individualOfferId: this.individualOfferId
     };
   }
 }

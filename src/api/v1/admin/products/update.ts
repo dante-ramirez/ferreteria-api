@@ -3,8 +3,10 @@ import Product from '../../../../entities/Product';
 import Department from '../../../../entities/Department';
 import Category from '../../../../entities/Category';
 import Brand from '../../../../entities/Brand';
+import IndividualOffer from '../../../../entities/IndividualOffer';
 import Offer from '../../../../entities/Offer';
 import Discount from '../../../../entities/Discount';
+import IndividualDiscount from '../../../../entities/IndividualDiscount';
 import ProductDiscount from '../../../../entities/ProductDiscount';
 import _Request from '../../../../definitions/request';
 import _file from '../../../../helpers/file';
@@ -28,7 +30,8 @@ export default async function (req:_Request, res:any) {
     model,
     departmentId,
     categoryId,
-    brandId
+    brandId,
+    individualOfferId
   } = body;
 
   const filesNames: any[] = [];
@@ -77,6 +80,7 @@ export default async function (req:_Request, res:any) {
     product.departmentId = departmentId;
     product.categoryId = categoryId;
     product.brandId = brandId;
+    product.individualOfferId = individualOfferId;
   } catch (error) {
     let errorCode = 'UNEXPECTED_ERROR';
     let statusCode = 500;
@@ -238,7 +242,56 @@ export default async function (req:_Request, res:any) {
     brand.finishAt
   );
 
-  let discount = departmentDiscount.offer.discount + categoryDiscount.offer.discount + brandDiscount.offer.discount;
+  let individualOffer: IndividualOffer;
+
+  try {
+    individualOffer = await database.individualOffers.getById(Number(individualOfferId));
+  } catch (error) {
+    let statusCode = 500;
+    let errorCode = 'UNEXPECTED_ERROR';
+
+    if (error instanceof ItemNotFound) {
+      statusCode = 404;
+      errorCode = 'INDIVIDUAL_OFFER_WAS_NOT_FOUND';
+    }
+
+    logger.log(error);
+    return res.status(statusCode).send({ code: errorCode });
+  }
+
+  if (individualOffer.offersId !== 1) {
+    if (Date.parse(individualOffer.beginAt) < Date.parse(currentDate.toString())
+    && Date.parse(currentDate.toString()) < Date.parse(individualOffer.finishAt)) {
+      try {
+        offer = await database.offers.getById(Number(individualOffer.offersId));
+      } catch (error) {
+        let statusCode = 500;
+        let errorCode = 'UNEXPECTED_ERROR';
+
+        if (error instanceof ItemNotFound) {
+          statusCode = 404;
+          errorCode = 'INDIVIDUAL_OFFER_WAS_NOT_FOUND';
+        }
+
+        logger.log(error);
+        return res.status(statusCode).send({ code: errorCode });
+      }
+    } else {
+      offer = new Offer(0, 0);
+    }
+  } else {
+    offer = new Offer(1, 0);
+  }
+
+  const individualOfferDiscount = new IndividualDiscount(
+    individualOffer.id,
+    offer,
+    individualOffer.beginAt,
+    individualOffer.finishAt
+  );
+
+  let discount = departmentDiscount.offer.discount + categoryDiscount.offer.discount + brandDiscount.offer.discount
+  + individualOfferDiscount.offer.discount;
 
   if (discount >= 1) {
     discount /= 100;
@@ -289,7 +342,8 @@ export default async function (req:_Request, res:any) {
     product.image4,
     departmentDiscount,
     categoryDiscount,
-    brandDiscount
+    brandDiscount,
+    individualOfferDiscount
   );
 
   return res.status(201).send({
