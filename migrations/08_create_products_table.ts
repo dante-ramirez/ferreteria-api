@@ -19,6 +19,7 @@ export async function up(knex: _Knex): Promise<void> {
       table.integer('department_id').references('department.id').notNull();
       table.integer('category_id').references('category.id').notNull();
       table.integer('brand_id').references('brand.id').notNull();
+      table.integer('individualOffer_id').references('individualOffer.id').notNull();
       table.timestamp('created_at').defaultTo(knex.fn.now());
       table.timestamp('updated_at').defaultTo(knex.fn.now());
     });

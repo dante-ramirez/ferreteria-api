@@ -10,6 +10,7 @@ import SalesStore from './SalesStore';
 import SaleDetailsStore from './SaleDetailsStore';
 import ProductsStore from './ProductsStore';
 import SurveysStore from './SurveysStore';
+import IndividualOffersStore from './IndividualOffersStore';
 
 class SQLDatabase {
   public users: UsersStore;
@@ -24,6 +25,7 @@ class SQLDatabase {
   public saleDetails: SaleDetailsStore;
   public products: ProductsStore;
   public surveys: SurveysStore;
+  public individualOffers: IndividualOffersStore;
 
   constructor(connection: any) {
     this.users = new UsersStore(connection, 'users');
@@ -38,6 +40,7 @@ class SQLDatabase {
     this.saleDetails = new SaleDetailsStore(connection, 'sale_detail');
     this.products = new ProductsStore(connection, 'products');
     this.surveys = new SurveysStore(connection, 'surveys');
+    this.individualOffers = new IndividualOffersStore(connection, 'individualOffer');
   }
 }
 

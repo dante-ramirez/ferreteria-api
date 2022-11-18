@@ -12,7 +12,7 @@ export default class ProductsStore extends BaseStore {
 
   constructor(connection: any, table: string) {
     super(connection, table);
-    this.product = new Product(0, '', '', 0, '', 0, 0, 0, '', '', '', '', '', 0, 0, 0);
+    this.product = new Product(0, '', '', 0, '', 0, 0, 0, '', '', '', '', '', 0, 0, 0, 0);
   }
 
   async create(_product: Product): Promise<Product> { return this.product; }

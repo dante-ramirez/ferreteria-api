@@ -39,7 +39,8 @@ export default class SQLProductsStore extends ProductsStore {
           image4: product.image4,
           department_id: product.departmentId,
           category_id: product.categoryId,
-          brand_id: product.brandId
+          brand_id: product.brandId,
+          individualOffer_id: product.individualOfferId
         })
         .returning('*');
 
@@ -79,6 +80,7 @@ export default class SQLProductsStore extends ProductsStore {
           department_id: product.departmentId,
           category_id: product.categoryId,
           brand_id: product.brandId,
+          individualOffer_id: product.individualOfferId,
           updated_at: timestamp
         })
         .returning('*');
@@ -188,7 +190,8 @@ export default class SQLProductsStore extends ProductsStore {
       product.image4,
       Number(product.department_id),
       Number(product.category_id),
-      Number(product.brand_id)
+      Number(product.brand_id),
+      Number(product.individualOffer_id)
     );
   }
 }

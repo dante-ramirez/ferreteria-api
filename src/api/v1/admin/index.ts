@@ -7,6 +7,7 @@ import invoicesRouter from './invoices';
 import productsRouter from './products';
 import salesRouter from './sales';
 import surveysRouter from './surveys';
+import individualOffersRouter from './individualOffers';
 
 const express = require('express');
 
@@ -21,5 +22,6 @@ adminRouter.use('/invoices', invoicesRouter);
 adminRouter.use('/products', productsRouter);
 adminRouter.use('/sales', salesRouter);
 adminRouter.use('/surveys', surveysRouter);
+adminRouter.use('/individualOffers', individualOffersRouter);
 
 export default adminRouter;

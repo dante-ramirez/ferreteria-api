@@ -12,6 +12,7 @@ import _salesStore from '../database/generic/SalesStore';
 import _saleDetailsStore from '../database/generic/SaleDetailsStore';
 import _productsStore from '../database/generic/ProductsStore';
 import _surveysStore from '../database/generic/SurveysStore';
+import _individualOffersStore from '../database/generic/IndividualOffersStore';
 
 import { userRole as _userRole } from '../entities/User';
 
@@ -28,7 +29,8 @@ export default interface Request {
     sales: _salesStore,
     saleDetails: _saleDetailsStore,
     products: _productsStore,
-    surveys: _surveysStore
+    surveys: _surveysStore,
+    individualOffers: _individualOffersStore
   },
   user: {
     id: number,

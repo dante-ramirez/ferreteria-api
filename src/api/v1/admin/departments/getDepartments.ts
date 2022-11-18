@@ -1,7 +1,7 @@
 import { ItemNotFound } from '../../../../database/errors';
 import { DepartmentsFilter as _DepartmentsFilter } from '../../../../database/interfaces';
 import _Request from '../../../../definitions/request';
-import _Department from '../../../../entities/Brand';
+import _Department from '../../../../entities/Department';
 import logger from '../../../../helpers/logger';
 
 export default async function (req:_Request, res:any) {
