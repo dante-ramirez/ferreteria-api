@@ -1,3 +1,4 @@
+import path from 'path';
 import publicRouter from './public';
 import adminRouter from './admin';
 import DatabaseFactory from '../../database/databaseFactory';
@@ -40,6 +41,7 @@ export default async function () {
   app.use('/api/v1/public', publicRouter);
   app.use('/api/v1/admin', adminRouter);
   cron;
+  app.use('/api/v1/uploads', express.static(path.join(__dirname, 'uploads')));
 
   return app;
 }

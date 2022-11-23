@@ -1,14 +1,7 @@
 import NodeMailerService from './services/nodemailer';
 import ConsoleService from './services/console';
-import {
-  MailParams as _MailParams
-} from './interfaces';
-
-import {
-  MailingServiceError,
-  UnsupportedMailingServiceDriver
-} from './errors';
-
+import { MailParams } from './interfaces';
+import { MailingServiceError, UnsupportedMailingServiceDriver } from './errors';
 import configuration from './configuration';
 
 const pug = require('pug');
@@ -41,15 +34,43 @@ export default class MailingService {
     }
   }
 
-  async sendPassword(params: _MailParams, password: string) {
-    const subject = 'Credenciales para la la plataforma Ferre5';
-    const templatePath = `${this.templatesBasePath}/password.pug`;
+  // async sendPassword(params: MailParams, password: string) {
+  //   const subject = 'Credenciales para la la plataforma Ferre5';
+  //   const templatePath = `${this.templatesBasePath}/password.pug`;
+  //   const templateParams = {
+  //     password,
+  //     receiverName: params.receiverName,
+  //     email: params.receivers[0] || '',
+  //     webAppBaseUrl: this.webAppBaseUrl
+  //   };
+
+  //   let template: string;
+
+  //   try {
+  //     template = await pug.renderFile(templatePath, templateParams);
+  //   } catch (error: any) {
+  //     throw new MailingServiceError(error);
+  //   }
+
+  //   try {
+  //     await this.service.send(
+  //       params.receivers,
+  //       subject,
+  //       template
+  //     );
+  //   } catch (error: any) {
+  //     throw new MailingServiceError(error);
+  //   }
+  // }
+
+  async sendAccountVerificationToken(params: MailParams, token: string) {
+    const subject = 'Confirmación de registro en la plataforma Ferre5';
+    const templatePath = `${this.templatesBasePath}/accountVerification.pug`;
     const templateParams = {
-      password,
       receiverName: params.receiverName,
-      email: params.receivers[0] || '',
-      webAppBaseUrl: this.webAppBaseUrl
+      verificationUrl: `${this.apiBaseUrl}/api/v1/public/users/account/verified?token=${token}`
     };
+
     let template: string;
 
     try {
@@ -69,12 +90,11 @@ export default class MailingService {
     }
   }
 
-  async sendAccountVerificationToken(params: _MailParams, token: string) {
-    const subject = 'Confirmación de registro en la plataforma Ferre5';
-    const templatePath = `${this.templatesBasePath}/AccountVerification.pug`;
+  async sendInvoice(params: MailParams) {
+    const subject = 'Factura de compra de la plataforma Ferre5';
+    const templatePath = `${this.templatesBasePath}/invoice.pug`;
     const templateParams = {
-      receiverName: params.receiverName,
-      verificationUrl: `${this.apiBaseUrl}/api/v1/public/users/account/verified?token=${token}`
+      receiverName: params.receiverName
     };
 
     let template: string;
@@ -89,7 +109,8 @@ export default class MailingService {
       await this.service.send(
         params.receivers,
         subject,
-        template
+        template,
+        params.attachments
       );
     } catch (error: any) {
       throw new MailingServiceError(error);

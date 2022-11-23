@@ -1,10 +1,11 @@
 export interface Attachment {
-  filename: string
-  content: Buffer
+  filename: string,
+  path: string,
+  content?: Buffer
 }
 
 export interface MailParams {
-  receivers: string[],
-  attachments: Attachment[],
   receiverName: string,
+  receivers: string[],
+  attachments: Attachment[]
 }
