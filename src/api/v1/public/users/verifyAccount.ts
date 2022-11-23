@@ -67,7 +67,8 @@ export default async function (req: _Request, res: any) {
             </span>
           </div>
         </div>
-        <div style="margin: 15px auto; width: 100%; padding-top: 15px; padding-bottom: 58px; font-size: 32px; color: #ffffff;">
+        <div style="margin: 15px auto; width: 100%; padding-top: 15px;
+        padding-bottom: 58px; font-size: 32px; color: #ffffff;">
           <br/>
             <span style="font-weight: 600;"> 
               <a style="color: #5c5c5c;" name="verify" href="${config.webAppBaseUrl}">
