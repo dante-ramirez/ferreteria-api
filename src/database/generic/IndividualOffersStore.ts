@@ -7,17 +7,17 @@ import {
 
 export default class IndividualOffersStore extends BaseStore {
   protected connection: any;
-  private individialOffer: IndividualOffer;
+  private individualOffer: IndividualOffer;
 
   constructor(connection: any, table: string) {
     super(connection, table);
-    this.individialOffer = new IndividualOffer(0, 0, '', '');
+    this.individualOffer = new IndividualOffer(0, 0, '', '');
   }
 
-  async create(_individualOffer: IndividualOffer): Promise<IndividualOffer> { return this.individialOffer; }
-  async getById(_id: number): Promise<IndividualOffer> { return this.individialOffer; }
-  async update(_individualOffer: IndividualOffer): Promise<IndividualOffer> { return this.individialOffer; }
+  async create(_individualOffer: IndividualOffer): Promise<IndividualOffer> { return this.individualOffer; }
+  async getById(_id: number): Promise<IndividualOffer> { return this.individualOffer; }
+  async update(_individualOffer: IndividualOffer): Promise<IndividualOffer> { return this.individualOffer; }
   async delete(_id: number): Promise<boolean> { return true; }
-  async get(): Promise<IndividualOffer[]> { return [this.individialOffer]; }
-  async getAllWithOffers(): Promise<IndividualOffer[]> { return [this.individialOffer]; }
+  async get(): Promise<IndividualOffer[]> { return [this.individualOffer]; }
+  async getAllWithOffers(): Promise<IndividualOffer[]> { return [this.individualOffer]; }
 }

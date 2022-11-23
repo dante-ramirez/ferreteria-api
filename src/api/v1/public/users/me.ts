@@ -1,30 +1,30 @@
+import User from '../../../../entities/User';
 import { ItemNotFound } from '../../../../database/errors';
-import _Request from '../../../../definitions/request';
+import Request from '../../../../definitions/request';
 import logger from '../../../../helpers/logger';
 
-export default async function (req:_Request, res:any) {
+export default async function (req: Request, res: any) {
   const {
     database,
-    params
+    user
   } = req;
-  const {
-    individualOfferId
-  } = params;
+
+  let me: User;
 
   try {
-    await database.individualOffers.delete(Number(individualOfferId));
+    me = await database.users.getById(user.id);
   } catch (error) {
-    let statusCode = 500;
     let errorCode = 'UNEXPECTED_ERROR';
+    let statusCode = 500;
 
     if (error instanceof ItemNotFound) {
       statusCode = 404;
-      errorCode = 'INDIVIDUAL_OFFER_WAS_NOT_FOUND';
+      errorCode = 'USER_WAS_NOT_FOUND';
     }
 
     logger.log(error);
     return res.status(statusCode).send({ code: errorCode });
   }
 
-  return res.status(200).send();
+  return res.status(200).send(me.serialize());
 }

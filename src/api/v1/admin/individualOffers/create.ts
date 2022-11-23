@@ -29,7 +29,7 @@ export default async function (req: _Request, res: any) {
 
     if (error instanceof ItemAlreadyExist) {
       statusCode = 400;
-      errorCode = 'INDIVIUAL_OFFER_ALREADY_EXIST';
+      errorCode = 'INDIVIDUAL_OFFER_ALREADY_EXIST';
     }
 
     logger.log(error);

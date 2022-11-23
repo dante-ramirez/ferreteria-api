@@ -7,7 +7,7 @@ import update from './update';
 // import restorePassword from './restorePassword';
 import verifyAccount from './verifyAccount';
 import sendAccountVerificationEmail from './sendAccountVerificationEmail';
-// import me from './me';
+import me from './me';
 // import createCard from './createCard';
 // import getCards from './getCards';
 // import deleteCard from './deleteCard';
@@ -56,11 +56,11 @@ usersRouter.post(
   sendAccountVerificationEmail
 );
 
-// usersRouter.get(
-//   '/me',
-//   authorization(['client']),
-//   me
-// );
+usersRouter.get(
+  '/me',
+  authorization(['client']),
+  me
+);
 
 // usersRouter.post(
 //   '/card',
