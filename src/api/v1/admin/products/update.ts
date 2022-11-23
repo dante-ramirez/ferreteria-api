@@ -270,7 +270,7 @@ export default async function (req:_Request, res:any) {
 
         if (error instanceof ItemNotFound) {
           statusCode = 404;
-          errorCode = 'INDIVIDUAL_OFFER_WAS_NOT_FOUND';
+          errorCode = 'OFFER_WAS_NOT_FOUND';
         }
 
         logger.log(error);

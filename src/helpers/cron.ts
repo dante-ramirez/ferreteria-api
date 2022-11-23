@@ -86,6 +86,24 @@ class Cron {
       logger.error('ErrorMessage:', error.message);
     }
 
+    try {
+      res = await axios.put(`${apiBaseUrl}/api/v1/admin/individualOffers/offers/verified`);
+
+      logger.log({ status: res.status, statusText: res.statusText, data: res.data });
+    } catch (error: any) {
+      if (error.response) {
+        logger.error('ErrorResponse:', {
+          status: error.response.status,
+          statusText: error.response.statusText,
+          code: error.response.data.code
+        });
+      } else if (error.request) {
+        logger.error('ErrorRequest:', error.request);
+      }
+
+      logger.error('ErrorMessage:', error.message);
+    }
+
     return logger.log('Offers verified successfully');
   }
 }
