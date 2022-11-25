@@ -1,5 +1,3 @@
-import _Request from '../../../../definitions/request';
-import { ItemAlreadyExist, ItemNotFound } from '../../../../database/errors';
 import Product from '../../../../entities/Product';
 import Department from '../../../../entities/Department';
 import Category from '../../../../entities/Category';
@@ -8,11 +6,13 @@ import Offer from '../../../../entities/Offer';
 import Discount from '../../../../entities/Discount';
 import IndividualDiscount from '../../../../entities/IndividualDiscount';
 import ProductDiscount from '../../../../entities/ProductDiscount';
+import IndividualOffer from '../../../../entities/IndividualOffer';
+import { ItemAlreadyExist, ItemNotFound } from '../../../../database/errors';
+import Request from '../../../../definitions/request';
 import _file from '../../../../helpers/file';
 import logger from '../../../../helpers/logger';
-import IndividualOffer from '../../../../entities/IndividualOffer';
 
-export default async function (req: _Request, res: any) {
+export default async function (req: Request, res: any) {
   const { database, body, files } = req;
   const {
     name,
@@ -24,8 +24,7 @@ export default async function (req: _Request, res: any) {
     model,
     departmentId,
     categoryId,
-    brandId,
-    individualOfferId
+    brandId
   } = body;
 
   const filesNames: any[] = [];
@@ -61,7 +60,7 @@ export default async function (req: _Request, res: any) {
     departmentId,
     categoryId,
     brandId,
-    individualOfferId
+    0
   );
 
   try {
@@ -231,17 +230,25 @@ export default async function (req: _Request, res: any) {
     brand.finishAt
   );
 
-  let individualOffer: IndividualOffer;
+  const timestamp = new Date();
+
+  let individualOffer = new IndividualOffer(
+    0,
+    product.id,
+    1,
+    String(timestamp),
+    String(timestamp)
+  );
 
   try {
-    individualOffer = await database.individualOffers.getById(Number(individualOfferId));
+    individualOffer = await database.individualOffers.create(individualOffer);
   } catch (error) {
-    let statusCode = 500;
     let errorCode = 'UNEXPECTED_ERROR';
+    let statusCode = 500;
 
-    if (error instanceof ItemNotFound) {
-      statusCode = 404;
-      errorCode = 'INDIVIDUAL_OFFER_WAS_NOT_FOUND';
+    if (error instanceof ItemAlreadyExist) {
+      statusCode = 400;
+      errorCode = 'INDIVIDUAL_OFFER_ALREADY_EXIST';
     }
 
     logger.log(error);

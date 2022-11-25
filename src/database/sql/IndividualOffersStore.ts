@@ -24,6 +24,7 @@ export default class SQLBrandsStore extends IndividualOffersStore {
     try {
       const [newIndividualOffers] = await this.connection(this.table)
         .insert({
+          product_id: individualOffer.productId,
           offers_id: individualOffer.offersId,
           begin_at: individualOffer.beginAt,
           finish_at: individualOffer.finishAt
@@ -121,7 +122,7 @@ export default class SQLBrandsStore extends IndividualOffersStore {
       throw new ItemNotFound(this.table);
     }
 
-    return individualOffers.map((individialOffer: any) => this.softFormatIndividualOffer(individialOffer));
+    return individualOffers.map((individualOffer: any) => this.softFormatIndividualOffer(individualOffer));
   }
 
   async getAllWithOffers(): Promise<IndividualOffer[]> {
@@ -145,6 +146,7 @@ export default class SQLBrandsStore extends IndividualOffersStore {
   private softFormatIndividualOffer(individualOffer: any): IndividualOffer {
     return new IndividualOffer(
       Number(individualOffer.id),
+      Number(individualOffer.product_id),
       Number(individualOffer.offers_id),
       individualOffer.begin_at,
       individualOffer.finish_at

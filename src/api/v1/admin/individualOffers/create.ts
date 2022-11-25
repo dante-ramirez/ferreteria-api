@@ -9,6 +9,7 @@ export default async function (req: _Request, res: any) {
     body
   } = req;
   const {
+    productId,
     offersId,
     beginAt,
     finishAt
@@ -16,6 +17,7 @@ export default async function (req: _Request, res: any) {
 
   let individualOffer = new IndividualOffer(
     0,
+    productId,
     offersId,
     beginAt,
     finishAt

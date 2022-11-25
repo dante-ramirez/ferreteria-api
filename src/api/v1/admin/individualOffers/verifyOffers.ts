@@ -18,6 +18,7 @@ export default async function (req: Request, res: any) {
       || Date.parse(currentDate.toString()) > Date.parse(individualOffer.finishAt)) {
         const individualOfferToUpdate = new IndividualOffer(
           individualOffer.id,
+          individualOffer.productId,
           1,
           individualOffer.beginAt,
           individualOffer.finishAt
