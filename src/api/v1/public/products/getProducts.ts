@@ -1,7 +1,7 @@
 import { ItemNotFound } from '../../../../database/errors';
 import { ProductsFilters as _ProductsFilters } from '../../../../database/interfaces';
-import _Request from '../../../../definitions/request';
-import _Product from '../../../../entities/Product';
+import Request from '../../../../definitions/request';
+import Product from '../../../../entities/Product';
 import Department from '../../../../entities/Department';
 import Category from '../../../../entities/Category';
 import Brand from '../../../../entities/Brand';
@@ -12,7 +12,7 @@ import IndividualDiscount from '../../../../entities/IndividualDiscount';
 import ProductDiscount from '../../../../entities/ProductDiscount';
 import logger from '../../../../helpers/logger';
 
-export default async function (req:_Request, res:any) {
+export default async function (req: Request, res: any) {
   const {
     database,
     query
@@ -27,7 +27,7 @@ export default async function (req:_Request, res:any) {
     orderBy = ''
   } = query;
 
-  let products: _Product[];
+  let products: Product[];
   let totalCount: number = 0;
   const currentDate = new Date();
 
