@@ -234,7 +234,6 @@ export default async function (req: Request, res: any) {
 
   let individualOffer = new IndividualOffer(
     0,
-    product.id,
     1,
     String(timestamp),
     String(timestamp)

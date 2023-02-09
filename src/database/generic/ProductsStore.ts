@@ -16,12 +16,13 @@ export default class ProductsStore extends BaseStore {
   }
 
   async create(_product: Product): Promise<Product> { return this.product; }
-  async getByUserId(_userId: number): Promise<Product> { return this.product; }
   async getById(_id: number): Promise<Product> { return this.product; }
+  async getByForeignId(_tableField: string, _id: number): Promise<Product[]> { return [this.product]; }
   async update(_product: Product): Promise<Product> { return this.product; }
   async delete(_id: number): Promise<boolean> { return true; }
   async get(_filters: _ProductsFilters, _pagination: _Pagination): Promise<Product[]> { return [this.product]; }
   async getRelatedProducts(_filters: _RelatedProductsFilters, _pagination: _Pagination): Promise<Product[]> {
     return [this.product];
   }
+  async getAll(): Promise<Product[]> { return [this.product]; }
 }

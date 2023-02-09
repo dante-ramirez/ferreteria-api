@@ -121,6 +121,24 @@ export default class SQLProductsStore extends ProductsStore {
     return this.softFormatProduct(product);
   }
 
+  async getByForeignId(tableField: string, id: number): Promise<Product[]> {
+    let products: any[] = [];
+
+    try {
+      products = await this.connection(this.table)
+        .select('*')
+        .where(tableField, id);
+    } catch (error) {
+      throw new SQLDatabaseError(error);
+    }
+
+    if (!products.length) {
+      throw new ItemNotFound(this.table);
+    }
+
+    return products.map((product: any) => this.softFormatProduct(product));
+  }
+
   async delete(id: number): Promise<boolean> {
     try {
       await this.connection(this.table)
@@ -171,6 +189,23 @@ export default class SQLProductsStore extends ProductsStore {
     }
 
     return products.map((product: any) => this.softFormatProduct(product));
+  }
+
+  async getAll(): Promise<Product[]> {
+    let products: any[] = [];
+
+    try {
+      products = await this.connection(this.table)
+        .select('*');
+    } catch (error) {
+      throw new SQLDatabaseError(error);
+    }
+
+    if (!products.length) {
+      throw new ItemNotFound(this.table);
+    }
+
+    return products.map((product) => this.softFormatProduct(product));
   }
 
   private softFormatProduct(product: any): Product {

@@ -106,6 +106,28 @@ class Cron {
 
     return logger.log('Offers verified successfully');
   }
+
+  static async verifyFinalPrice() {
+    let res: any;
+
+    try {
+      res = await axios.put(`${apiBaseUrl}/api/v1/admin/products/verifyFinalPrice`);
+    } catch (error: any) {
+      if (error.response) {
+        logger.error('ErrorResponse:', {
+          status: error.response.status,
+          statusText: error.response.statusText,
+          code: error.response.data.code
+        });
+      } else if (error.request) {
+        logger.error('ErrorRequest:', error.request);
+      }
+
+      return logger.error('ErrorMessage:', error.message);
+    }
+
+    return logger.log({ status: res.status, statusText: res.statusText, data: res.data });
+  }
 }
 
 cron.schedule('0 0 * * Mon', async () => {
@@ -114,6 +136,10 @@ cron.schedule('0 0 * * Mon', async () => {
 
 cron.schedule('*/30 * * * *', async () => {
   Cron.verifyOffers();
+});
+
+cron.schedule('05,35 * * * *', async () => {
+  Cron.verifyFinalPrice();
 });
 
 export default new Cron();
