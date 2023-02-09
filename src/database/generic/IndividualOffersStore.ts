@@ -11,7 +11,7 @@ export default class IndividualOffersStore extends BaseStore {
 
   constructor(connection: any, table: string) {
     super(connection, table);
-    this.individualOffer = new IndividualOffer(0, 0, 0, '', '');
+    this.individualOffer = new IndividualOffer(0, 0, '', '');
   }
 
   async create(_individualOffer: IndividualOffer): Promise<IndividualOffer> { return this.individualOffer; }
