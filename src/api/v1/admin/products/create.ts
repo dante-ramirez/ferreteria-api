@@ -43,45 +43,6 @@ export default async function (req: Request, res: any) {
 
   const currentDate = new Date();
 
-  let product = new Product(
-    0,
-    name,
-    details,
-    stock,
-    code,
-    price,
-    0,
-    rewardPoints,
-    model,
-    filesNames[0],
-    filesNames[1],
-    filesNames[2],
-    filesNames[3],
-    departmentId,
-    categoryId,
-    brandId,
-    0
-  );
-
-  try {
-    product = await database.products.create(product);
-  } catch (error) {
-    let errorCode = 'UNEXPECTED_ERROR';
-    let statusCode = 500;
-
-    if (error instanceof ItemAlreadyExist) {
-      statusCode = 400;
-      errorCode = 'PRODUCT_ALREADY_EXIST';
-    }
-
-    for (let index = 0; index < files.length; index += 1) {
-      _file.delete('uploads/products/', files[index].filename);
-    }
-
-    logger.log(error);
-    return res.status(statusCode).send({ code: errorCode });
-  }
-
   let offer: Offer;
   let department: Department;
 
@@ -235,8 +196,8 @@ export default async function (req: Request, res: any) {
   let individualOffer = new IndividualOffer(
     0,
     1,
-    String(timestamp),
-    String(timestamp)
+    timestamp.toISOString(),
+    timestamp.toISOString()
   );
 
   try {
@@ -284,6 +245,45 @@ export default async function (req: Request, res: any) {
     individualOffer.beginAt,
     individualOffer.finishAt
   );
+
+  let product = new Product(
+    0,
+    name,
+    details,
+    stock,
+    code,
+    price,
+    0,
+    rewardPoints,
+    model,
+    filesNames[0],
+    filesNames[1],
+    filesNames[2],
+    filesNames[3],
+    departmentId,
+    categoryId,
+    brandId,
+    individualOffer.id
+  );
+
+  try {
+    product = await database.products.create(product);
+  } catch (error) {
+    let errorCode = 'UNEXPECTED_ERROR';
+    let statusCode = 500;
+
+    if (error instanceof ItemAlreadyExist) {
+      statusCode = 400;
+      errorCode = 'PRODUCT_ALREADY_EXIST';
+    }
+
+    for (let index = 0; index < files.length; index += 1) {
+      _file.delete('uploads/products/', files[index].filename);
+    }
+
+    logger.log(error);
+    return res.status(statusCode).send({ code: errorCode });
+  }
 
   let discount = departmentDiscount.offer.discount + categoryDiscount.offer.discount + brandDiscount.offer.discount
   + individualOfferDiscount.offer.discount;
