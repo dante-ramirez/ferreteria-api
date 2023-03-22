@@ -6,16 +6,20 @@ import logger from '../../../../helpers/logger';
 export default async function (req:_Request, res:any) {
   const {
     database,
-    params
+    params,
+    query
   } = req;
   const {
     userId
   } = params;
+  const {
+    isSuspended = false
+  } = query;
 
   let user: _User;
 
   try {
-    user = await database.users.suspend(Number(userId));
+    user = await database.users.suspend(Number(userId), isSuspended);
   } catch (error) {
     let statusCode = 500;
     let errorCode = 'UNEXPECTED_ERROR';

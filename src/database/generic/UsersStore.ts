@@ -26,7 +26,7 @@ export default class UsersStore extends BaseStore {
   async getByEmail(_email: string): Promise<User> { return this.user; }
   async get(_filters: _Filters, _pagination: _Pagination): Promise<User[]> { return [this.user]; }
   async update(_user: User): Promise<User> { return this.user; }
-  async suspend(_id: number): Promise<User> { return this.user; }
+  async suspend(_id: number, _isSuspended: boolean): Promise<User> { return this.user; }
   // async delete(_id: number): Promise<boolean> { return true; }
   async verifyById(_id: number): Promise<User> { return this.user; }
 }

@@ -140,13 +140,13 @@ export default class SQLUsersStore extends UsersStore {
     return users.map((user: any) => this.softFormatUser(user));
   }
 
-  async suspend(id: number): Promise<User> {
+  async suspend(id: number, isSuspended: boolean): Promise<User> {
     try {
       const timestamp = new Date();
       const [user] = await this.connection(this.table)
         .where('id', id)
         .update({
-          suspended: true,
+          suspended: isSuspended,
           updated_at: timestamp
         })
         .returning('*');
