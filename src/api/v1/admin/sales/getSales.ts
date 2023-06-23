@@ -21,7 +21,7 @@ export default async function (req:_Request, res:any) {
     status = '',
     perPage = 0,
     currentPage = 0,
-    orderBy = ''
+    order = ''
   } = query;
 
   let tickets: _Ticket[] = [];
@@ -32,17 +32,17 @@ export default async function (req:_Request, res:any) {
       id: {
         value: id,
         type: 'match',
-        order: orderBy
+        order
       },
       date: {
         value: date,
         type: 'like',
-        order: orderBy
+        order
       },
       status: {
         value: status,
         type: 'like',
-        order: orderBy
+        order
       }
     };
     const pagination = {

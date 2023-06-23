@@ -16,6 +16,14 @@ export default class BaseStore {
           query.where(this.camelToSnakeCase(key), 'like', `%${filters[key].value}%`);
         } else if (filters[key].type === 'match') {
           query.where(this.camelToSnakeCase(key), filters[key].value);
+        } else if (filters[key].type === 'between') {
+          if (Number(filters[key].value.lower) >= 0
+          && Number(filters[key].value.lower) <= Number(filters[key].value.higher)) {
+            query.whereBetween(this.camelToSnakeCase(key), [
+              filters[key].value.lower,
+              filters[key].value.higher
+            ]);
+          }
         }
       }
 
