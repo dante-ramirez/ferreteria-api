@@ -14,7 +14,7 @@ export default async function (req:_Request, res:any) {
     lastName = '',
     perPage = 0,
     currentPage = 0,
-    orderBy = ''
+    order = ''
   } = query;
 
   let users: _User[];
@@ -25,12 +25,12 @@ export default async function (req:_Request, res:any) {
       name: {
         value: name,
         type: 'like',
-        order: orderBy
+        order
       },
       lastName: {
         value: lastName,
         type: 'like',
-        order: orderBy
+        order
       }
     };
     const pagination = {

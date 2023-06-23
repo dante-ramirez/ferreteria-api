@@ -1,6 +1,6 @@
 interface Filter {
   value: any,
-  type: 'like' | 'match',
+  type: 'like' | 'match' | 'between'
   order: 'asc' | 'desc'
 }
 
@@ -56,7 +56,8 @@ export interface ProductsFilters{
   name: Filter,
   details: Filter,
   code: Filter,
-  model: Filter
+  model: Filter,
+  finalPrice: Filter
 }
 
 export interface RelatedProductsFilters{

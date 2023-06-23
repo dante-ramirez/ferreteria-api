@@ -13,7 +13,7 @@ export default async function (req:_Request, res:any) {
     link = '',
     perPage = 0,
     currentPage = 0,
-    orderBy = ''
+    order = ''
   } = query;
 
   let surveys: _Survey[];
@@ -24,7 +24,7 @@ export default async function (req:_Request, res:any) {
       link: {
         value: link,
         type: 'like',
-        order: orderBy
+        order
       }
     };
     const pagination = {

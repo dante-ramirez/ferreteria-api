@@ -13,7 +13,7 @@ export default async function (req:_Request, res:any) {
     name = '',
     perPage = 0,
     currentPage = 0,
-    orderBy = ''
+    order = ''
   } = query;
 
   let brands: _Brand[];
@@ -24,7 +24,7 @@ export default async function (req:_Request, res:any) {
       name: {
         value: name,
         type: 'like',
-        order: orderBy
+        order
       }
     };
     const pagination = {

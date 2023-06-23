@@ -15,7 +15,7 @@ export default async function (req:_Request, res:any) {
     productId = 0,
     perPage = 0,
     currentPage = 0,
-    orderBy = ''
+    order = ''
   } = query;
 
   let saleDetails: _SaleDetail[];
@@ -26,17 +26,17 @@ export default async function (req:_Request, res:any) {
       id: {
         value: id,
         type: 'like',
-        order: orderBy
+        order
       },
       salesId: {
         value: salesId,
         type: 'like',
-        order: orderBy
+        order
       },
       productId: {
         value: productId,
         type: 'like',
-        order: orderBy
+        order
       }
     };
     const pagination = {

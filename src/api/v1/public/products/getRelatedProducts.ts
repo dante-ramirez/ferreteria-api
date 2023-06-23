@@ -15,7 +15,7 @@ export default async function (req:_Request, res:any) {
     brandId = 0,
     perPage = 0,
     currentPage = 0,
-    orderBy = ''
+    order = ''
   } = query;
 
   let products: _Product[];
@@ -26,17 +26,17 @@ export default async function (req:_Request, res:any) {
       department_id: {
         value: departmentId,
         type: 'match',
-        order: orderBy
+        order
       },
       category_id: {
         value: categoryId,
         type: 'match',
-        order: orderBy
+        order
       },
       brand_id: {
         value: brandId,
         type: 'match',
-        order: orderBy
+        order
       }
     };
     const pagination = {
