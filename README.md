@@ -2,7 +2,16 @@
 
 ## 📄 Descripción
 
-Esta API es parte del sistema de gestión para una tienda de ferretería, diseñada para manejar operaciones esenciales como la gestión de productos, inventarios, pedidos y clientes. La API está desarrollada en **Node.js** con **Express** y utiliza **PostgreSQL** como sistema de gestión de bases de datos. El objetivo es proporcionar un backend robusto y escalable que permita a la ferretería automatizar y mejorar sus procesos operativos.
+Ferretería API es una solución backend robusta diseñada para gestionar las operaciones clave de una tienda de ferretería, incluyendo la administración de productos, inventarios, pedidos y clientes. Desarrollada utilizando Node.js y Express, y respaldada por una base de datos PostgreSQL, esta API está optimizada para automatizar y mejorar los procesos comerciales.
+
+Además de las funcionalidades básicas, la API incluye un sistema de puntos de recompensa, que permite a los clientes acumular puntos a través de sus compras y canjearlos por descuentos en futuras transacciones. Este sistema de fidelización está integrado en la lógica de negocio de la API, proporcionando a la tienda una herramienta eficaz para incentivar la lealtad del cliente.
+
+La API también gestiona la automatización del envío de correos electrónicos para notificaciones importantes, como confirmación de correo y envío de factura de compra, utilizando Nodemailer. Esto asegura una comunicación fluida y profesional con los clientes, mejorando la experiencia de usuario.
+
+El proyecto también incorpora la gestión de archivos mediante Multer, seguridad mediante JWT para la autenticación de usuarios, y automatización de tareas con Node-cron. Estas características hacen que la API sea una solución completa y escalable para cualquier tienda de ferretería que busque optimizar sus operaciones digitales.
+
+## 📐 Diagrama de Arquitectura
+![Arquitectura API drawio](https://github.com/user-attachments/assets/429a6d7f-8949-48a5-8972-c6807d87e993)
 
 ## ✨ Características Principales
 
@@ -26,7 +35,7 @@ Esta API es parte del sistema de gestión para una tienda de ferretería, diseñ
 - **Multer**: Middleware para la gestión de archivos en Node.js, utilizado aquí para manejar las imágenes de productos.
 - **Node-cron**: Herramienta para la programación de tareas automatizadas en Node.js.
 - **ESLint**: Herramienta para la identificación y reporte de patrones problemáticos en el código JavaScript/TypeScript.
-- **Nodemailer**: Utilizado para el envío automatizado de correos electrónicos, como confirmaciones de pedidos.
+- **Nodemailer**: Utilizado para el envío automatizado de correos electrónicos.
 - **Knex**: Librería SQL query builder para Node.js, utilizada para interactuar con la base de datos PostgreSQL.
   
 ## ⚠️ Nota
